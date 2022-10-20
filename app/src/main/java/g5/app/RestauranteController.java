@@ -4,8 +4,6 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +31,9 @@ public class RestauranteController {
 		}
 	}
 
-    /* 
-	@PostMapping("/modify")
-	public void modify(@RequestBody Map<String, Object> info) {
+ 
+	@PostMapping("/update")
+	public void update(@RequestBody Map<String, Object> info) {
 		try {
 			JSONObject jso = new JSONObject(info);
 			this.restauranteService.modify(jso);
@@ -44,17 +42,17 @@ public class RestauranteController {
 		}
 	}
 
+   
 
-
-	@PostMapping("/update")
-	public void update(@RequestBody Map<String, Object> info) {
+	@PostMapping("/delete")
+	public void delete(@RequestBody Map<String, Object> info) {
 		try {
 			JSONObject jso = new JSONObject(info);
-			this.restauranteService.update(jso);
+			this.restauranteService.delete(jso);
 
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
 		}
 	}
-    */	
+    
 }
