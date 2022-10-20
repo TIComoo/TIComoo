@@ -10,9 +10,24 @@ public class Restaurante {
     String razon;
     String CIF;
     String direccion;
-    String tlf;
+    Integer tlf;
     String categoria;
     String email;
+
+    public Restaurante(String nombre, String razon, String CIF, String direccion,Integer tlf, String categoria, String email) {
+        this.nombre = nombre;
+        this.razon = razon;
+        this.CIF = CIF;
+        this.direccion = direccion;
+        this.tlf = tlf;
+        this.categoria = categoria;
+        this.email = email;
+    }
+
+    public Restaurante() {
+    }
+
+
 
 
     public String getNombre() {
@@ -39,10 +54,10 @@ public class Restaurante {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public String getTlf() {
+    public Integer getTlf() {
         return tlf;
     }
-    public void setTlf(String tlf) {
+    public void setTlf(Integer tlf) {
         this.tlf = tlf;
     }
     public String getCategoria() {
