@@ -33,5 +33,9 @@ steps:
       
       sonar.projectKey=SergioGarcia52_TIComo
       sonar.projectName=TIComo
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
       
