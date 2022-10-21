@@ -33,6 +33,5 @@ steps:
       
       sonar.projectKey=SergioGarcia52_TIComo
       sonar.projectName=TIComo
-      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
-      sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
+
       
