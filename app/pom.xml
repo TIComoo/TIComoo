@@ -80,51 +80,52 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.9-SNAPSHOT</version>
 			</plugin>
+			<plugin>
+			    <groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>0.6.4</version>
+			    <executions>
+				<!--
+				   Prepara la propiedad para que el agente JaCoCo runtime será pasado
+				   como argumento VM cuando el plugin maven surefire sea ejecutado.
+			       -->
+				<execution>
+				    <id>pre-unit-test</id>
+				    <goals>
+					<goal>prepare-agent</goal>
+				    </goals>
+				    <configuration>
+					<!-- Establece el path al archivo el cual contiene los datos de la ejecución. -->
+					<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+					<!--
+					   Establece el nombre de la propiedad que contiene la configuracion del agente VM runtime JaCoCo.
+				       -->
+					<propertyName>surefireArgLine</propertyName>
+				    </configuration>
+				</execution>
+				<!--
+				   Asegura que el informe de cobertura de codigo para test unitarios es
+				   creado después de ejecutar los test unitarios.
+			       -->
+				<execution>
+				    <id>post-unit-test</id>
+				    <phase>test</phase>
+				    <goals>
+					<goal>report</goal>
+				    </goals>
+				    <configuration>
+					<!-- Establece el path del archivo que contiene los datos de ejecución. -->
+					<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+					<!-- Establece el directorio de salida para los informes de cobertura. -->
+					<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+				    </configuration>
+				</execution>
+			    </executions>
+			</plugin>
 
 			
 		</plugins>
-		<plugin>
-		    <groupId>org.jacoco</groupId>
-		    <artifactId>jacoco-maven-plugin</artifactId>
-		    <version>0.6.4</version>
-		    <executions>
-			<!--
-			   Prepara la propiedad para que el agente JaCoCo runtime será pasado
-			   como argumento VM cuando el plugin maven surefire sea ejecutado.
-		       -->
-			<execution>
-			    <id>pre-unit-test</id>
-			    <goals>
-				<goal>prepare-agent</goal>
-			    </goals>
-			    <configuration>
-				<!-- Establece el path al archivo el cual contiene los datos de la ejecución. -->
-				<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-				<!--
-				   Establece el nombre de la propiedad que contiene la configuracion del agente VM runtime JaCoCo.
-			       -->
-				<propertyName>surefireArgLine</propertyName>
-			    </configuration>
-			</execution>
-			<!--
-			   Asegura que el informe de cobertura de codigo para test unitarios es
-			   creado después de ejecutar los test unitarios.
-		       -->
-			<execution>
-			    <id>post-unit-test</id>
-			    <phase>test</phase>
-			    <goals>
-				<goal>report</goal>
-			    </goals>
-			    <configuration>
-				<!-- Establece el path del archivo que contiene los datos de ejecución. -->
-				<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-				<!-- Establece el directorio de salida para los informes de cobertura. -->
-				<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-			    </configuration>
-			</execution>
-		    </executions>
-		</plugin>
+
 	
 	</profile>
 </project>
