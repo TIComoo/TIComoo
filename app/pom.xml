@@ -90,40 +90,30 @@
 				    <skipTests>false</skipTests>
 				</configuration>
             		</plugin>
-                        <plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.4</version>
-				<configuration>
-				    <skip>false</skip>
-				    <includes></includes>
-				</configuration>
-				<executions>
-				    <execution>
-					<id>default-prepare-agent</id>
-					<goals>
-					    <goal>prepare-agent</goal>
-					</goals>
-				    </execution>
-				    <execution>
-					<configuration>
-						 <! - Especifique la ubicación de generación del informe de cobertura->
-					    <outputDirectory>${basedir}/target/coverage-reports</outputDirectory>
-					</configuration>
-					<id>default-report</id>
-					<phase>prepare-package</phase>
-					<goals>
-					    <goal>report</goal>
-					</goals>
-				    </execution>
-				</executions>
+			<plugin>
+			      <groupId>org.jacoco</groupId>
+			     <artifactId>jacoco-maven-plugin</artifactId>
+			      <version>0.8.7</version>
+			      <executions>
+				<execution>
+				  <id>prepare-agent</id>
+				  <goals>
+				    <goal>prepare-agent</goal>
+				  </goals>
+				</execution>
+				<execution>
+				  <id>report</id>
+				  <goals>
+				    <goal>report</goal>
+				  </goals>
+				  <configuration>
+				    <formats>
+				      <format>XML</format>
+				    </formats>
+				  </configuration>
+				</execution>
+			      </executions>
             		</plugin>
-            		<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-            		</plugin>
-
-
 		</plugins>
 	</build>
 </project>
