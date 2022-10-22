@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,15 +29,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     	g5.app.model.User appUser = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Login Username Invalido."));
 
-        Set<GrantedAuthority> grantList = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> grantList = new HashSet<>();
 
         for (Role role : appUser.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getDescription());
             grantList.add(grantedAuthority);
         }
-        UserDetails user = (UserDetails) new User(username, appUser.getPwd(), grantList);
 
-        return user;
+        return new User(username, appUser.getPwd(), grantList);
     }
 
 }
