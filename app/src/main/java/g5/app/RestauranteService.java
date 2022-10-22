@@ -22,7 +22,7 @@ public class RestauranteService {
 
         
 
-		if (nombre.isEmpty() || razon.isEmpty() || CIF.isEmpty() || direccion.isEmpty()|| tlf==0|| categoria.isEmpty()|| email.isEmpty())
+		if (nombre.isEmpty() || razon.isEmpty() || cif.isEmpty() || direccion.isEmpty()|| tlf==0|| categoria.isEmpty()|| email.isEmpty())
 			throw new Exception("Rellene todos los campos");
 
 		if (this.restauranteDAO.findById(nombre).isPresent())
