@@ -12,7 +12,7 @@ public class RestauranteTest {
     
     String nombre="Domino's ";
     String razon="Pizzerias Ciudad Real";
-    String CIF="1234567CJSh";
+    String CIF="1234567CJS";
     String direccion="C/Alegria";
     Integer tlf=67676767;
     String categoria="Pizzeria";
