@@ -38,7 +38,6 @@ public class RestauranteService {
 			throw new Exception("El correo introducido ya esta asociado a un restaurante");
 
 		}
-        
 
 		Restaurante restaurante = new Restaurante ();
 		restaurante.setNombre(jso.getString("nombre"));
