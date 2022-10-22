@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RestauranteTest {
    
     
-    String nombre="Domino's";
+    String nombre="Domino's ";
     String razon="Pizzerias Ciudad Real";
     String CIF="1234567CJS";
     String direccion="C/Alegria";
