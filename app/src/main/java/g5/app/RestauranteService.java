@@ -14,7 +14,7 @@ public class RestauranteService {
 
 		String nombre = jso.getString("nombre");
 		String razon = jso.getString("razon");
-		String CIF = jso.getString("CIF");
+		String cif = jso.getString("cif");
         String direccion = jso.getString("direccion");
 		Integer tlf = jso.getInt("tlf");
 		String categoria = jso.getString("categoria");
