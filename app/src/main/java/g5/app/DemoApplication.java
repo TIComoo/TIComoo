@@ -1,7 +1,6 @@
 package g5.app;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*@SpringBootApplication
 public class AppApplication {
@@ -13,19 +12,14 @@ public class AppApplication {
 }
 */
 
-import java.util.List;
-import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner{
 	
 	@Autowired
-	private RestauranteRepository restauranteRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
