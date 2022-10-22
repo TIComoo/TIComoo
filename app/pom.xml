@@ -79,49 +79,8 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.9-SNAPSHOT</version>
 			</plugin>
-			<plugin>
-			     <groupId>org.apache.maven.plugins</groupId>
-			     <artifactId>maven-surefire-plugin</artifactId>
-			     <version>2.17</version>
-			     <configuration>
-				 <skipTests>${skipUnitTests}</skipTests>
-				 <argLine>${jacocoArgLine}</argLine>
-			     </configuration>
-			</plugin>
-			 <plugin>
-				   <groupId>org.jacoco</groupId>
-				   <artifactId>jacoco-maven-plugin</artifactId>
-				   <version>0.7.1.201405082137</version>
-				    <executions>
-					  <execution>
-					      <id>prepare-jacoco-4-unit-tests</id>
-					      <goals>
-						   <goal>prepare-agent</goal>
-					      </goals>
-					      <configuration>
-				  <!-- Sets the path to the file which contains the execution data. -->
-				 <destFile>
-				     ${project.build.directory}/coverage-reports/jacoco-unit.exec
-				 </destFile>                                             
-				 <propertyName>jacocoArgLine</propertyName>
-				 </configuration>
-				 </execution>
-
-				    <execution>
-					<id>create-jacoco-reports-4-unit-tests</id>
-					<phase>prepare-package</phase>
-					<goals>
-					    <goal>report</goal>
-					</goals>
-				       <configuration>
-				   <!-- Sets the path to the file which contains the execution data. -->
-				  <dataFile>
-				      ${project.build.directory}/coverage-reports/jacoco-unit.exec
-				  </dataFile>
-				  </configuration>
-				  </execution>
-			  </executions>
-			  </plugin>
+			
+			
 		</plugins>
 	</build>
 
