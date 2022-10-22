@@ -1,14 +1,8 @@
 package g5.app;
 
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.node.NumericNode;
-
-import java.text.NumberFormat;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.schema.TypedJsonSchemaObject.NumericJsonSchemaObject;
 
 @Service
 public class RestauranteService {
