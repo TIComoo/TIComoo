@@ -10,7 +10,8 @@ public class RestauranteService {
     @Autowired
 	private RestauranteRepository restauranteDAO;
 
-	public void register(JSONObject jso) throws Exception {
+
+	public void register(JSONObject jso) {
 
 		String nombre = jso.getString("nombre");
 		String razon = jso.getString("razon");
@@ -23,30 +24,30 @@ public class RestauranteService {
         
 
 		if (nombre.isEmpty() || razon.isEmpty() || cif.isEmpty() || direccion.isEmpty()|| tlf==0|| categoria.isEmpty()|| email.isEmpty())
-			throw new Exception("Rellene todos los campos");
+			throw new IllegalArgumentException("Rellene todos los campos");
 
 		if (this.restauranteDAO.findById(nombre).isPresent())
-			throw new Exception("El restaurante ya existe en el sistema");
+			throw new IllegalArgumentException("El restaurante ya existe en el sistema");
 
 		if (tlf <600000000 && tlf>999999999)
-			throw new Exception("Introduzca un telefono valido");
+			throw new IllegalArgumentException("Introduzca un telefono valido");
 			
 		if (!email.contains("@"))
-			throw new Exception("Introduzca un correo valido");
+			throw new IllegalArgumentException("Introduzca un correo valido");
 
 		if (this.restauranteDAO.findByemail(email).isPresent()) {
-			throw new Exception("El correo introducido ya esta asociado a un restaurante");
+			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
 
 		}
 
 		Restaurante restaurante = new Restaurante ();
-		restaurante.setNombre(jso.getString("nombre"));
-		restaurante.setRazon(jso.getString("razon"));
-		restaurante.setCIF(jso.getString("CIF"));
-		restaurante.setDireccion(jso.getString("direccion"));
-		restaurante.setTlf(jso.getInt("tlf"));
-        restaurante.setCategoria(jso.getString("categoria"));
-        restaurante.setEmail(jso.getString("email"));
+		restaurante.setNombre(nombre);
+		restaurante.setRazon(razon);
+		restaurante.setCIF(cif);		
+		restaurante.setDireccion(direccion);
+		restaurante.setTlf(tlf);
+        restaurante.setCategoria(categoria);
+        restaurante.setEmail(email);
 
 
 		this.restauranteDAO.save(restaurante);
@@ -56,12 +57,12 @@ public class RestauranteService {
 
 	}
 
-	public void modify(JSONObject jso) throws Exception {
+	public void modify(JSONObject jso) {
 
 
 		String nombre = jso.getString("nombre");
 		String razon = jso.getString("razon");
-		String CIF = jso.getString("CIF");
+		String cif = jso.getString("CIF");
         String direccion = jso.getString("direccion");
 		Integer tlf = jso.getInt("tlf");
 		String categoria = jso.getString("categoria");
@@ -73,28 +74,28 @@ public class RestauranteService {
 
 
 		if (!restauranteAux.isPresent())
-			throw new Exception("No hay un restaurante con este nombre en el sistema");	
+			throw new IllegalArgumentException("No hay un restaurante con este nombre en el sistema");	
 
-		if (razon.isEmpty() || CIF.isEmpty() || direccion.isEmpty()|| tlf==0|| categoria.isEmpty()|| email.isEmpty())
-			throw new Exception("Rellene todos los campos");
+		if (razon.isEmpty() || cif.isEmpty() || direccion.isEmpty()|| tlf==0|| categoria.isEmpty()|| email.isEmpty())
+			throw new IllegalArgumentException("Rellene todos los campos");
 
 		if (tlf <600000000 && tlf>999999999)
-			throw new Exception("Introduzca un telefono valido");
+			throw new IllegalArgumentException("Introduzca un telefono valido");
 			
 		if (!email.contains("@"))
-			throw new Exception("Introduzca un correo valido");
+			throw new IllegalArgumentException("Introduzca un correo valido");
 
 		if (emailAux.isPresent() && !(emailAux.get().getEmail().equals(restauranteAux.get().getEmail()))) 
-			throw new Exception("El correo introducido ya esta asociado a un restaurante");
+			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
 
 
 
-			restauranteAux.get().setRazon(jso.getString("razon"));
-			restauranteAux.get().setCIF(jso.getString("CIF"));
-			restauranteAux.get().setDireccion(jso.getString("direccion"));
-			restauranteAux.get().setTlf(jso.getInt("tlf"));
-			restauranteAux.get().setCategoria(jso.getString("categoria"));
-			restauranteAux.get().setEmail(jso.getString("email"));
+			restauranteAux.get().setRazon(razon);
+			restauranteAux.get().setCIF(cif);
+			restauranteAux.get().setDireccion(direccion);
+			restauranteAux.get().setTlf(tlf);
+			restauranteAux.get().setCategoria(categoria);			
+			restauranteAux.get().setEmail(email);
 			this.restauranteDAO.save(restauranteAux.get());
 
 
@@ -102,13 +103,13 @@ public class RestauranteService {
 
 	}
 
-	public void delete(JSONObject jso) throws Exception {
+	public void delete(JSONObject jso) {
 
 		String nombre = jso.getString("nombre");
 		java.util.Optional<Restaurante>  restauranteAux = this.restauranteDAO.findById(nombre);
 
 		if (!restauranteAux.isPresent()){
-			throw new Exception("No hay un restaurante con este nombre en el sistema");	
+			throw new IllegalArgumentException("No hay un restaurante con este nombre en el sistema");	
 
 		}else{
 			this.restauranteDAO.delete(restauranteAux.get());
