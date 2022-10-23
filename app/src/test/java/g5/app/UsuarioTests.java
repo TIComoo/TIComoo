@@ -20,9 +20,8 @@ public class UsuarioTests {
    int telefono = 12345678;
    String email = "johndoe@gmail.com";
    String pwd = "1234";
-   String rol = "Usuario";
-
-   Usuario u = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+   
+   Usuario u = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
 
    @Test
    public void test_CrearObjetoUsuario() {
@@ -37,8 +36,8 @@ public class UsuarioTests {
       int telefono = 12345678;
       String email = "johndoe@gmail.com";
       String pwd = "1234";
-      String rol = "Usuario";
-      Usuario usuario2 = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      
+      Usuario usuario2 = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
 
       System.out.println(usuario.toString());
       System.out.println(usuario2.toString());
@@ -53,7 +52,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setNombre() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setNombre("Jose");
    }
 
@@ -79,7 +78,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setNif() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setNif("12234567");
       assertEquals("12234567", usuario.getNif());
 
@@ -93,7 +92,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setDireccion() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setDireccion("Calle Falsa 321");
       assertEquals(usuario.getDireccion(), "Calle Falsa 321");
 
@@ -107,7 +106,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setTelefono() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setTelefono(87654321);
       assertEquals(87654321, usuario.getTelefono());
    }
@@ -120,7 +119,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setEmail() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setEmail("johndoe24@gmail.com");
       assertEquals("johndoe24@gmail.com", usuario.getEmail());
 
@@ -135,20 +134,8 @@ public class UsuarioTests {
 
    @Test
    public void test_setPwd() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
+      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
       usuario.setPwd("4321");
       assertEquals("4321", usuario.getPwd());
-   }
-
-   @Test
-   public void test_getRol() {
-      String p = u.getRol();
-      assertEquals("Usuario", p);
-   }
-   @Test
-   public void test_setRol() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd, rol);
-      usuario.setRol("usuario");
-      assertEquals("usuario", usuario.getRol());
    }
 }

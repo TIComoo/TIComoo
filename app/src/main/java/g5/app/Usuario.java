@@ -18,10 +18,10 @@ public class Usuario {
     private String direccion;
     private int telefono;
     private String pwd;
-    private String rol;
+    
 
     public Usuario(String nombre, String apellido, String nif, String direccion, int telefono,
-            String email, String pwd, String rol) {
+            String email, String pwd) {
 
         this.nombre = nombre;
         this.apellido = apellido;
@@ -30,9 +30,18 @@ public class Usuario {
         this.telefono = telefono;
         this.email = email;
         this.pwd = pwd;
-        this.rol =rol;
+        
 
     }
+
+    public Usuario(String nombre, String apellido, String nif, String email, String pwd) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nif = nif;
+        this.email = email;
+        this.pwd = pwd;
+    }
+
 
     /*
      * public Usuario() {
@@ -96,12 +105,5 @@ public class Usuario {
         this.pwd = pwd;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
 
 }
