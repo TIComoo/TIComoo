@@ -62,7 +62,7 @@ public class RestauranteService {
 
 		String nombre = jso.getString("nombre");
 		String razon = jso.getString("razon");
-		String cif = jso.getString("CIF");
+		String cif = jso.getString("cif");
         String direccion = jso.getString("direccion");
 		Integer tlf = jso.getInt("tlf");
 		String categoria = jso.getString("categoria");
@@ -87,7 +87,6 @@ public class RestauranteService {
 
 		if (emailAux.isPresent() && !(emailAux.get().getEmail().equals(restauranteAux.get().getEmail()))) 
 			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
-
 
 
 			restauranteAux.get().setRazon(razon);
