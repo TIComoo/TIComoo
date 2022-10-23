@@ -2,10 +2,7 @@ package g5.app;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 

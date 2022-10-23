@@ -8,16 +8,16 @@ public class Restaurante {
     @Id
     String nombre;
     String razon;
-    String CIF;
+    String cif;
     String direccion;
     Integer tlf;
     String categoria;
     String email;
 
-    public Restaurante(String nombre, String razon, String CIF, String direccion,Integer tlf, String categoria, String email) {
+    public Restaurante(String nombre, String razon, String cif, String direccion,Integer tlf, String categoria, String email) {
         this.nombre = nombre;
         this.razon = razon;
-        this.CIF = CIF;
+        this.cif = cif;
         this.direccion = direccion;
         this.tlf = tlf;
         this.categoria = categoria;
@@ -41,10 +41,10 @@ public class Restaurante {
         this.razon = razon;
     }
     public String getCIF() {
-        return CIF;
+        return cif;
     }
-    public void setCIF(String cIF) {
-        CIF = cIF;
+    public void setCIF(String cif) {
+        this.cif = cif;
     }
     public String getDireccion() {
         return direccion;
@@ -74,7 +74,7 @@ public class Restaurante {
 
 @Override
 public String toString() {
-    return nombre + razon + CIF + direccion + tlf + categoria + email;
+    return nombre + razon + cif + direccion + tlf + categoria + email;
 }
     
 
