@@ -22,6 +22,25 @@ public class RestauranteTest {
 
 
     @Test
+    public void test_CrearObjetoRestaurante() {
+ 
+       String nombre="Domino's ";
+       String razon="Pizzerias Ciudad Real";
+       String cif="1234567CJS";
+       String direccion="C/Alegria";
+       Integer tlf=67676767;
+       String categoria="Pizzeria";
+       String email="dominos@domino.com";
+       
+       Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
+ 
+       System.out.println(restauranteAux.toString());
+       System.out.println(restauranteAux1.toString());
+ 
+    }
+
+
+    @Test
     public void test_setNombre() {
        Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
        restauranteAux1.setNombre("nombre");
