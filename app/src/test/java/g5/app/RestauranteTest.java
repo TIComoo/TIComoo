@@ -20,49 +20,7 @@ public class RestauranteTest {
 
     Restaurante restauranteAux=new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
 
- 
-    @Test
-    public void test_getNombre() {
-       String nombre = restauranteAux.getNombre();
-       System.out.println(nombre);
-    }
 
-    @Test
-    public void test_getRazon() {
-       String razon = restauranteAux.getRazon();
-       System.out.println(razon);
-    }
-
-    @Test
-    public void test_getCif() {
-       String cif = restauranteAux.getCIF();
-       System.out.println(cif);
-    }
-
-    @Test
-    public void test_getDireccion() {
-       String direccion = restauranteAux.getDireccion();
-       System.out.println(direccion);
-    }
-
-    @Test
-    public void test_getTlf() {
-       int tlf = restauranteAux.getTlf();
-       System.out.println(tlf);
-    }
-
-    @Test
-    public void test_getCategoria() {
-       String categoria = restauranteAux.getCategoria();
-       System.out.println(categoria);
-    }
-
-    @Test
-    public void test_getEmail() {
-       String email = restauranteAux.getEmail();
-       System.out.println(email);
-    }
-    
     @Test
     public void test_setNombre() {
        Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);

@@ -28,8 +28,6 @@ public class Restaurante {
     }
 
 
-
-
     public String getNombre() {
         return nombre;
     }
