@@ -11,7 +11,7 @@ public class PlatoService {
     @Autowired
    private PlatoRepository platoRepository;
 
-    public void insertPlato(JSONObject json)throws Exception{
+    public void insert(JSONObject json)throws Exception{
 
         String id=json.getString("id");
         String nombre=json.getString("nombre");
@@ -76,7 +76,7 @@ public class PlatoService {
        
     }
     
-    public void updatePlato(JSONObject json)throws Exception{
+    public void update(JSONObject json)throws Exception{
         
         String id=json.getString("id");
         String nombre=json.getString("nombre");
@@ -110,14 +110,7 @@ public class PlatoService {
             throw new Exception("El plato ya existe en el sistema");
         }
 
-        try{
-            if (platoRepository.findById(Integer.parseInt(id)).isPresent()){
-                throw new Exception("El plato ya existe en el sistema");
-            }
-            
-        }catch(NumberFormatException e){
-            throw new Exception("El id no es un dato numerico");
-        }
+       
                 
         Plato plato =new Plato();
 
@@ -142,7 +135,7 @@ public class PlatoService {
 
     }
 
-    public void deletePlato(JSONObject json)throws Exception{
+    public void delete(JSONObject json)throws Exception{
         
         String id=json.getString("id");
         int Id=Integer.parseInt(id);

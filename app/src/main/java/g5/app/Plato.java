@@ -26,7 +26,7 @@ public class Plato {
     }
 
     public Plato(){
-        
+            
     }
 
     public int getId() {
@@ -51,7 +51,7 @@ public class Plato {
         return precio;
     }
 
-    public boolean isAptoVeganos() {
+    public boolean getAptoVeganos() {
         return aptoVeganos;
     }
 

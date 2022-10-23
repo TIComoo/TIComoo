@@ -17,10 +17,10 @@ public class PlatoController {
     PlatoService platoService=new PlatoService();
     
     @PostMapping("/insert")
-	public void register(@RequestBody Map<String, Object> info) {
+	public void insert(@RequestBody Map<String, Object> info) {
 		try {
 			JSONObject jso = new JSONObject(info);
-			platoService.insertPlato(jso);
+			platoService.insert(jso);
 
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
@@ -31,7 +31,7 @@ public class PlatoController {
 	public void update(@RequestBody Map<String, Object> info) {
 		try {
 			JSONObject jso = new JSONObject(info);
-			platoService.updatePlato(jso);
+			platoService.update(jso);
 
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
@@ -43,7 +43,7 @@ public class PlatoController {
 		try {
 			JSONObject jso = new JSONObject(info);
             
-			platoService.deletePlato(jso);
+			platoService.delete(jso);
 
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
