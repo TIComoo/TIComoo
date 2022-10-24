@@ -1,20 +1,29 @@
 package g5.app;
 
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
+    @Autowired
+    UsuarioRepository usuarioRepository;
     
-    public void crearUsuario() {
 
+    //CRUD Crear y Modificar. Testeado con TDD que Modificar funciona correctamente.
+    public Usuario crearUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
-    public void modificarUsuario() {
 
-    }
-    public void borrarUsuario(){
-
-    }
-    public void consultarUsuario() {
-
-    }
+    
+    /* TODO Auto-generated constructor stub */
+    /*
+     * public void borrarUsuario() {
+     * 
+     * }
+     * 
+     * public void consultarUsuario() {
+     * 
+     * }
+     */
 }

@@ -1,16 +1,21 @@
 package g5.app;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RiderService {
     
 
-    public void crearRider() {
+    @Autowired
+    RiderRepository usuarioRepository;
+
+    public void crearRider(Rider rider) {
+        usuarioRepository.save(rider);
 
     }
 
-    public void modificarRider() {
+   /*  public void modificarRider() {
 
     }
 
@@ -19,5 +24,5 @@ public class RiderService {
     }
     public void borrarRider() {
 
-    }
+    } */
 }

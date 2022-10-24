@@ -12,7 +12,7 @@ public interface UsuarioRepository extends MongoRepository<Usuario, String>
 {
 	//public Usuario buscarUsuarioPorId(String email);
 
-	Usuario buscarPorEmail(String email);
+	//Usuario buscarPorEmail(String email);
 	
     
 }
