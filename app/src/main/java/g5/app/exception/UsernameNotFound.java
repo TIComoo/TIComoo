@@ -1,17 +1,17 @@
 package g5.app.exception;
 
-public class UsernameOrIdNotFound extends Exception {
+public class UsernameNotFound extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1668398822129870029L;
 
-	public UsernameOrIdNotFound() {
+	public UsernameNotFound() {
 		super("Usuario o Id no encontrado");
 	}
 	
-	public UsernameOrIdNotFound(String message) {
+	public UsernameNotFound(String message) {
 		super(message);
 	}
 }

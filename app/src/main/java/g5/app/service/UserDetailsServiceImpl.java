@@ -13,30 +13,39 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import g5.app.model.Role;
-import g5.app.dao.UserRepository;
+import g5.app.exception.UsernameNotFound;
 
 @Service
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+	@Autowired
+	UsuarioService service;
+	
+	/*
+	 * Habría que ver qué hacer con este método: si mirar en las 3 tablas o hacer una tabla Login que tenga el
+	 * email, pwd y rol del usuario
+	 * */
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		g5.app.model.Usuario appUser = null;
 
-    	g5.app.model.User appUser = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Login Username Invalido."));
+		try {
+			appUser = service.buscarPorEmail(email);
+		} catch (UsernameNotFound e) {
+			e.printStackTrace();
+		}
 
-        Set<GrantedAuthority> grantList = new HashSet<>();
+		Set<GrantedAuthority> grantList = new HashSet<>();
+		grantList.add(new SimpleGrantedAuthority(appUser.getClass().getSimpleName()));
 
-        for (Role role : appUser.getRoles()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getDescription());
-            grantList.add(grantedAuthority);
-        }
+//        for (Role role : appUser.getRoles()) {
+//            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getDescription());
+//            grantList.add(grantedAuthority);
+//        }
 
-        return new User(username, appUser.getPwd(), grantList);
-    }
+		return new User(email, appUser.getPwd(), grantList);
+	}
 
 }
