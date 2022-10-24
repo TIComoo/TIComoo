@@ -20,21 +20,35 @@ import g5.app.exception.UsernameNotFound;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	UsuarioService service;
-	
+	private UsuarioService usrService;
+
+	@Autowired
+	private RiderService rdrService;
+
+	@Autowired
+	private AdministradorService admService;
+
 	/*
-	 * Habría que ver qué hacer con este método: si mirar en las 3 tablas o hacer una tabla Login que tenga el
-	 * email, pwd y rol del usuario
-	 * */
+	 * Habría que ver qué hacer con este método: si mirar en las 3 tablas o hacer
+	 * una tabla Login que tenga el email, pwd y rol del usuario
+	 */
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		g5.app.model.Usuario appUser = null;
+		g5.app.model.Usuario appUser;
 
 		try {
-			appUser = service.buscarPorEmail(email);
+			appUser = usrService.buscarPorEmail(email);
 		} catch (UsernameNotFound e) {
-			e.printStackTrace();
+			try {
+				appUser = admService.buscarPorEmail(email); // falta agregar método en service y repository
+			} catch (UsernameNotFound e2) {
+				try {
+					appUser = rdrService.buscarPorEmail(email); // falta agregar método en service y repository
+				} catch (Exception e3) {
+					throw new UsernameNotFoundException("El email del usuario no existe.");
+				}
+			}
 		}
 
 		Set<GrantedAuthority> grantList = new HashSet<>();

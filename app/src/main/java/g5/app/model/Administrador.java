@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Administrador")
 public class Administrador extends Usuario {
-	
+
 	/*
 	 * Administrador: encargado de fijar los restaurantes, platos de cada uno de
 	 * ellos, gestionar usuarios y riders, etc.

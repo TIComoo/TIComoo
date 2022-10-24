@@ -10,7 +10,7 @@ import g5.app.model.Administrador;
 public class AdministradorService {
 	
 	@Autowired
-	AdministradorRepository repository;
+	private AdministradorRepository repository;
 
 	public void guardarAdministrador(Administrador adm) {
 		repository.save(adm);
