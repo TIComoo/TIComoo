@@ -77,7 +77,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter
         .logout()
         .permitAll()
         .logoutSuccessUrl("/login?logout");
-        
+        http.headers().httpStrictTransportSecurity().disable();
+
         return http.build();
     }
 

@@ -7,20 +7,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Roles {
 
 	@Id
-	private Long id;
+	private int id;
 	
 	private String nombre;
 	private String descripcion;
-	public Roles(Long id, String nombre, String descripcion) {
+	public Roles(int id, String nombre, String descripcion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNombre() {

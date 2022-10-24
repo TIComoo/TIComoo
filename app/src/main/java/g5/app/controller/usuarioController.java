@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-import java.util.Arrays;
-import java.util.List;
-
 import javax.validation.Valid;
 
-import g5.app.exception.CustomeFieldValidationException;
 import g5.app.dao.RolRepository;
+import g5.app.exception.CustomeFieldValidationException;
 import g5.app.model.Roles;
 import g5.app.model.Usuario;
 import g5.app.service.UsuarioService;
+
 @Controller
 public class usuarioController {
 
@@ -28,23 +26,25 @@ public class usuarioController {
 	@Autowired
 	private UsuarioService uService;
 	
+
 	@GetMapping("/signup")
 	public String signup(Model model) {
-		Roles usuarioRol = rRepository.findByNombre("USUARIO");
-		List<Roles> roles = Arrays.asList(usuarioRol);
+//		Roles usuarioRol = rRepository.findByNombre("USUARIO");
+//		List<Roles> roles = Arrays.asList(usuarioRol);
 		
 		model.addAttribute("signup",true);
 		model.addAttribute("userForm", new Usuario());
-		model.addAttribute("roles",roles);
+//		model.addAttribute("roles",roles);
 		return "user-form/user-signup";
 	}
 	
 	@PostMapping("/signup")
 	public String signupAction(@Valid @ModelAttribute("userForm")Usuario usuario, BindingResult result, ModelMap model) {
 		Roles usuarioRol = rRepository.findByNombre("USUARIO");
-		List<Roles> roles = Arrays.asList(usuarioRol);
+//		List<Roles> roles = Arrays.asList(usuarioRol);
+		usuario.getRoles().add(usuarioRol);
 		model.addAttribute("userForm", usuario);
-		model.addAttribute("roles",roles);
+//		model.addAttribute("roles",roles);
 		model.addAttribute("signup",true);
 		
 		if(result.hasErrors()) {
@@ -52,12 +52,13 @@ public class usuarioController {
 		}else {
 			try {
 				uService.createUser(usuario);
-
+			} catch (CustomeFieldValidationException cfve) {
+				result.rejectValue(cfve.getFieldName(), null, cfve.getMessage());
 			}catch (Exception e) {
 				model.addAttribute("formErrorMessage",e.getMessage());
 			}
 		}
-		return "";
+		return index();
 	}
 	
 	@GetMapping({"/","/login"})
@@ -68,7 +69,7 @@ public class usuarioController {
 	private void baseAttributerForUserForm(Model model, Usuario user,String activeTab) {
 		model.addAttribute("userForm", user);
 		model.addAttribute("userList", uService.getAllUsers());
-		model.addAttribute("roles",rRepository.findAll());
+//		model.addAttribute("roles",rRepository.findAll());
 		model.addAttribute(activeTab,"active");
 	}
 	

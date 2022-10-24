@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import g5.app.dao.UsuarioRepository;
 import  g5.app.exception.CustomeFieldValidationException;
 import g5.app.model.Usuario;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Service
@@ -17,14 +17,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Autowired
 	UsuarioRepository uRepository;
 	
-//	@Autowired
-//	BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
 	public Usuario createUser(Usuario usuario) throws Exception {
 //		&& checkPasswordValid(usuario)
+		Usuario aux=new Usuario();
 		if (checkUsernameAvailable(usuario) ) {
-//			String encodedPassword = bCryptPasswordEncoder.encode(usuario.getPwd());
-//			usuario.setPwd(encodedPassword);
+			aux.setId(GeneradorSecuenciaService.generateSequence(aux.NOMBRE_SECUENCIA));
+			usuario.setId(aux.getId());
+			String encodedPassword = bCryptPasswordEncoder.encode(usuario.getPwd());
+			usuario.setPwd(encodedPassword);
 			usuario = uRepository.save(usuario);
 		}
 		return usuario;

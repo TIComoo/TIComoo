@@ -1,16 +1,20 @@
 package g5.app.model;
 
 
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document(collection="Usuario")
 public class Usuario {
 
+	@Transient
+    public static final String NOMBRE_SECUENCIA  = "seq_usuarios";
+	
 	@Id
 	private int id;
 	
@@ -22,7 +26,7 @@ public class Usuario {
 	private String email;
 	private String pwd;
 	
-	private Set <Roles> roles;
+	private HashSet <Roles> roles = new HashSet<Roles>();
 	
 	public Usuario() {}
 
@@ -102,11 +106,11 @@ public class Usuario {
 		this.pwd = pwd;
 	}
 
-	public Set<Roles> getRoles() {
+	public HashSet<Roles> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Roles> rol) {
+	public void setRoles(HashSet<Roles> rol) {
 		this.roles = rol;
 	}
 
