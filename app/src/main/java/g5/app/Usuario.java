@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "usuario")
+@Document(collection = "Usuario")
 public class Usuario {
     @Id
     private String email;
