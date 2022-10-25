@@ -1,13 +1,17 @@
 package g5.app;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Plato")
 public class Plato {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "platos_sequence";
+
     @Id
-    private int id;
+    private long id;
     private String nombre;
     private String imagen;
     private String descripcion;
@@ -15,9 +19,8 @@ public class Plato {
     private boolean aptoVeganos;
     private String categoria;
 
-    public Plato(int id,String nombre,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
+    public Plato(String nombre,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
         this.categoria=categoria;
-        this.id=id;
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -29,7 +32,7 @@ public class Plato {
             
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getNombre() {
@@ -55,7 +58,7 @@ public class Plato {
         return aptoVeganos;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
        this.id = id;
     }
     public void setNombre(String nombre) {

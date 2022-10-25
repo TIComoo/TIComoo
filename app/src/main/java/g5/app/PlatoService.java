@@ -1,5 +1,7 @@
 package g5.app;
 
+import java.util.Optional;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,7 @@ public class PlatoService {
    private PlatoRepository platoRepository;
 
     public void insert(JSONObject json)throws Exception{
-
-        String id=json.getString("id");
+       
         String nombre=json.getString("nombre");
         String imagen=json.getString("imagen");
         String descripcion=json.getString("descripcion");
@@ -21,7 +22,7 @@ public class PlatoService {
         String aptoVeganos=json.getString("aptoVeganos");
         String categoria=json.getString("categoria");
 
-        if(id.isEmpty()||nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
+        if(nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
             throw new Exception("Rellene todos los campos");
         
         }
@@ -45,18 +46,10 @@ public class PlatoService {
             throw new Exception("El plato ya existe en el sistema");
         }
 
-        try{
-            if (platoRepository.findById(Integer.parseInt(id)).isPresent()){
-                throw new Exception("El plato ya existe en el sistema");
-            }
-            
-        }catch(NumberFormatException e){
-            throw new Exception("El id no es un dato numerico");
-        }
                 
         Plato plato =new Plato();
 
-        plato.setId(Integer.parseInt(id));
+        plato.setId(SequenceGeneratorService.generateSequence(Plato.SEQUENCE_NAME));
         plato.setCategoria(categoria);
         plato.setDescripcion(descripcion);
         plato.setNombre(nombre);
@@ -72,7 +65,8 @@ public class PlatoService {
         }
             
         platoRepository.insert(plato);
-
+        
+        
        
     }
     
@@ -109,27 +103,27 @@ public class PlatoService {
         if (platoRepository.findBynombre(nombre).isPresent()){
             throw new Exception("El plato ya existe en el sistema");
         }
-
+        
+        
        
                 
-        Plato plato =new Plato();
+        Optional<Plato>platoAux=platoRepository.findById(Integer.parseInt(id));
 
-        plato.setId(Integer.parseInt(id));
-        plato.setCategoria(categoria);
-        plato.setDescripcion(descripcion);
-        plato.setNombre(nombre);
-        plato.setPrecio(Double.parseDouble(precio));
-        plato.setImagen(imagen);
+        platoAux.get().setCategoria(categoria);
+        platoAux.get().setDescripcion(descripcion);
+        platoAux.get().setNombre(nombre);
+        platoAux.get().setPrecio(Double.parseDouble(precio));
+        platoAux.get().setImagen(imagen);
 
         if(aptoVeganos.equalsIgnoreCase("si")){
 
-            plato.setAptoVeganos(true); 
+            platoAux.get().setAptoVeganos(true); 
 
         }else{
-            plato.setAptoVeganos(false); 
+            platoAux.get().setAptoVeganos(false); 
         }
             
-        platoRepository.save(plato);
+        platoRepository.save(platoAux.get());
        
        
 

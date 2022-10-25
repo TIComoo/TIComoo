@@ -15,13 +15,10 @@ class PlatoTest {
 
 	@BeforeEach
 	void inicializar(){
-		 plato=new Plato(1,"cocido","primero", "imagen", "Cocido madrileño para dos", 20.0, false);
+		 plato=new Plato("cocido","primero", "imagen", "Cocido madrileño para dos", 20.0, false);
 	}
 
-	@Test
-	void getIdTest(){
-		assertEquals(1, plato.getId());
-	}
+	
 
 	@Test
 	void getNombreTest(){
@@ -54,11 +51,7 @@ class PlatoTest {
 		plato.setAptoVeganos(true);
 		assertTrue(plato.getAptoVeganos());
 	}
-	@Test
-	void setIdTest(){
-		plato.setId(2);
-		assertEquals(2, plato.getId());
-	}
+	
 	@Test
 	void setNombreTest(){
 		plato.setNombre("lentejas");
