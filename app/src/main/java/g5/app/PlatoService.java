@@ -13,7 +13,7 @@ public class PlatoService {
     @Autowired
    private PlatoRepository platoRepository;
 
-    public void insert(JSONObject json)throws Exception{
+    public void insert(JSONObject json)throws IllegalArgumentException{
        
         String nombre=json.getString("nombre");
         String imagen=json.getString("imagen");
@@ -23,7 +23,7 @@ public class PlatoService {
         String categoria=json.getString("categoria");
 
         if(nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
-            throw new Exception("Rellene todos los campos");
+            throw new IllegalArgumentException("Rellene todos los campos");
         
         }
 
@@ -31,19 +31,19 @@ public class PlatoService {
             Double.parseDouble(precio);
             
         } catch (NumberFormatException e){
-            throw new Exception("El precio no es un dato numerico");
+            throw new IllegalArgumentException("El precio no es un dato numerico");
         }
         
         if(!aptoVeganos.equalsIgnoreCase("si") && !aptoVeganos.equalsIgnoreCase("no")){
-            throw new Exception("El valor de apto veganos debe de ser si o no");
+            throw new IllegalArgumentException("El valor de apto veganos debe de ser si o no");
         }
 
         if(!categoria.equalsIgnoreCase("primero") && !categoria.equalsIgnoreCase("segundo") && !categoria.equalsIgnoreCase("postre")){
-            throw new Exception("La categoria del plato debe ser valida: Primero,segundo o postre");
+            throw new IllegalArgumentException("La categoria del plato debe ser valida: Primero,segundo o postre");
         }
 
         if (platoRepository.findBynombre(nombre).isPresent()){
-            throw new Exception("El plato ya existe en el sistema");
+            throw new IllegalArgumentException("El plato ya existe en el sistema");
         }
 
                 
@@ -70,7 +70,7 @@ public class PlatoService {
        
     }
     
-    public void update(JSONObject json)throws Exception{
+    public void update(JSONObject json)throws IllegalArgumentException{
         
         String id=json.getString("id");
         String nombre=json.getString("nombre");
@@ -81,7 +81,7 @@ public class PlatoService {
         String categoria=json.getString("categoria");
 
         if(id.isEmpty()||nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
-            throw new Exception("Campos vacios");
+            throw new IllegalArgumentException("Campos vacios");
         
         }
 
@@ -89,19 +89,19 @@ public class PlatoService {
             Double.parseDouble(precio);
             
         } catch (NumberFormatException e){
-            throw new Exception("El precio no es un dato numerico");
+            throw new IllegalArgumentException("El precio no es un dato numerico");
         }
         
         if(!aptoVeganos.equalsIgnoreCase("si") && !aptoVeganos.equalsIgnoreCase("no")){
-            throw new Exception("El valor de apto veganos debe de ser si o no");
+            throw new IllegalArgumentException("El valor de apto veganos debe de ser si o no");
         }
 
         if(!categoria.equalsIgnoreCase("primero") && !categoria.equalsIgnoreCase("segundo") && !categoria.equalsIgnoreCase("postre")){
-            throw new Exception("La categoria del plato debe ser valida: Primero,segundo o postre");
+            throw new IllegalArgumentException("La categoria del plato debe ser valida: Primero,segundo o postre");
         }
 
         if (platoRepository.findBynombre(nombre).isPresent()){
-            throw new Exception("El plato ya existe en el sistema");
+            throw new IllegalArgumentException("El plato ya existe en el sistema");
         }
         
         
