@@ -1,11 +1,12 @@
-package g5.app;
+package g5.app.service;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import g5.app.dao.*;
+import g5.app.model.*;
 @Service
 public class RestauranteService {
 

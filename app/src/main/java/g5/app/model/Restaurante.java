@@ -1,4 +1,4 @@
-package g5.app;
+package g5.app.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
