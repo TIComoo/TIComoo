@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import g5.app.model.Cliente;
 
 import g5.app.service.ClienteService;
-
+    
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping(value = "/crearUsuario")
+    @PostMapping(value = "/crearCliente")
     public void crearUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
         this.clienteService.crearUsuario(cliente);
     }
 
-    @PostMapping(value = "modificarUsuario")
-    public void modificarUsuario(@RequestBody @ModelAttribute("Usuario") Cliente cliente) {
+    @PostMapping(value = "modificarCliente")
+    public void modificarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
         this.clienteService.modificarUsuario(cliente);
     }
 

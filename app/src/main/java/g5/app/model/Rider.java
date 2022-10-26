@@ -1,6 +1,6 @@
 package g5.app.model;
 
-import org.springframework.data.annotation.Id;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Rider")
@@ -20,22 +20,21 @@ public class Rider extends Usuario {
      */
 
     // Esta clase hereda de usuario, y estos son sus nuevos atributos
-    @Id
-    private String email;
+    
     private String matricula;
     private String carnet;
     private String tipo_vehiculo;
-    private String rol;
+    
 
     public Rider(String nombre, String apellido, String nif, String email, String pwd,
             String tipo_vehiculo, String matricula, String carnet) {
 
         super(email, nombre, apellido, nif,  pwd);
-        this.email = email;
+        
         this.tipo_vehiculo = tipo_vehiculo;
         this.matricula = matricula;
         this.carnet = carnet;
-        this.rol = "RIDER";
+        
     }
 
     public String getMatricula() {
@@ -62,12 +61,6 @@ public class Rider extends Usuario {
         this.tipo_vehiculo = tipo_vehiculo;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public String getRol() {
-        return rol;
-    }
 
 }
