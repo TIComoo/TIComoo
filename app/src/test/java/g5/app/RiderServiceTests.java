@@ -1,7 +1,7 @@
 package g5.app;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,9 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.domain.Example;
 
-import com.mongodb.assertions.Assertions;
+import g5.app.dao.RiderRepository;
+import g5.app.model.Rider;
+import g5.app.service.RiderService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RiderServiceTests {

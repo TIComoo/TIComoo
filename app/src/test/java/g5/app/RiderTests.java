@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import g5.app.model.Rider;
+
 @SpringBootTest
 public class RiderTests {
     

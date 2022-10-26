@@ -1,7 +1,10 @@
-package g5.app;
+package g5.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import g5.app.dao.AdministradorRepository;
+import g5.app.model.Administrador;
 
 @Service
 public class AdministradorService {
@@ -15,6 +18,10 @@ public class AdministradorService {
     
     public void crearAdministrador(Administrador a) {
        adminRepository.save(a);
+    }
+
+
+    public void modificarAdministrador(Administrador admin) {
     }
 
   /*  

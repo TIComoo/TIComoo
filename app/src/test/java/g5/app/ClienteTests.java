@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import g5.app.model.Cliente;
+
 @SpringBootTest
-public class UsuarioTests {
+public class ClienteTests {
    /*
     * TDD 3 PASOS PRINCIPALES
     * - ESCRIBIR LOS TESTS Y PASARLOS CORRECTAMENTE
@@ -17,30 +19,30 @@ public class UsuarioTests {
    String apellido = "Doe";
    String nif = "12345678k";
    String direccion = "Calle Falsa 123";
-   int telefono = 12345678;
+   String telefono = "12345678";
    String email = "johndoe@gmail.com";
    String pwd = "1234";
-   
-   Usuario u = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
+
+   Cliente u = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
 
    @Test
    public void test_CrearObjetoUsuario() {
       // constructor vacio
-      Usuario usuario = new Usuario();
+      Cliente cliente = new Cliente();
 
       // constructor con atributos
       String nombre = "John";
       String apellido = "Doe";
       String nif = "12345678k";
       String direccion = "Calle Falsa 123";
-      int telefono = 12345678;
+      String telefono = "12345678";
       String email = "johndoe@gmail.com";
       String pwd = "1234";
-      
-      Usuario usuario2 = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
 
-      System.out.println(usuario.toString());
-      System.out.println(usuario2.toString());
+      Cliente cliente2 = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+
+      System.out.println(cliente.toString());
+      System.out.println(cliente2.toString());
 
    }
 
@@ -52,8 +54,8 @@ public class UsuarioTests {
 
    @Test
    public void test_setNombre() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
-      usuario.setNombre("Jose");
+      Cliente cliente = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      cliente.setNombre("Jose");
    }
 
    @Test
@@ -78,7 +80,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setNif() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
       usuario.setNif("12234567");
       assertEquals("12234567", usuario.getNif());
 
@@ -92,7 +94,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setDireccion() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
       usuario.setDireccion("Calle Falsa 321");
       assertEquals(usuario.getDireccion(), "Calle Falsa 321");
 
@@ -100,14 +102,14 @@ public class UsuarioTests {
 
    @Test
    public void test_getTelefono() {
-      int telefono = u.getTelefono();
-      assertEquals(telefono, 12345678);
+      String telefono = u.getTelefono();
+      assertEquals(telefono, "12345678");
    }
 
    @Test
    public void test_setTelefono() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
-      usuario.setTelefono(87654321);
+      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      usuario.setTelefono("87654321");
       assertEquals(87654321, usuario.getTelefono());
    }
 
@@ -119,7 +121,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setEmail() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
       usuario.setEmail("johndoe24@gmail.com");
       assertEquals("johndoe24@gmail.com", usuario.getEmail());
 
@@ -134,7 +136,7 @@ public class UsuarioTests {
 
    @Test
    public void test_setPwd() {
-      Usuario usuario = new Usuario(nombre, apellido, nif, direccion, telefono, email, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
       usuario.setPwd("4321");
       assertEquals("4321", usuario.getPwd());
    }
