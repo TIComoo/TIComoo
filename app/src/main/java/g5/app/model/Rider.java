@@ -31,6 +31,15 @@ public class Rider extends Usuario {
 		this.carnet = carnet;
 	}
 
+	// Constructor temporar para probar la aplicación
+
+	public Rider(String email, String pwd) {
+		super(email, pwd);
+	}
+
+	public Rider() {
+	}
+
 	public String getMatricula() {
 		return matricula;
 	}

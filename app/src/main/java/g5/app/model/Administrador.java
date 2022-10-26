@@ -27,8 +27,14 @@ public class Administrador extends Usuario {
 		this.zona = zona;
 	}
 
-//	public Administrador() {
-//	}
+	// Constructor temporar para probar la aplicación
+
+	public Administrador(String email, String pwd) {
+		super(email, pwd);
+	}
+
+	public Administrador() {
+	}
 
 	public String getZona() {
 		return zona;

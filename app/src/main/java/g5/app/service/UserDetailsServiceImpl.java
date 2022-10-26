@@ -41,10 +41,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			appUser = usrService.buscarPorEmail(email);
 		} catch (UsernameNotFound e) {
 			try {
-				appUser = admService.buscarPorEmail(email); // falta agregar método en service y repository
+				appUser = admService.buscarPorEmail(email);
 			} catch (UsernameNotFound e2) {
 				try {
-					appUser = rdrService.buscarPorEmail(email); // falta agregar método en service y repository
+					appUser = rdrService.buscarPorEmail(email);
 				} catch (Exception e3) {
 					throw new UsernameNotFoundException("El email del usuario no existe.");
 				}
@@ -53,11 +53,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		Set<GrantedAuthority> grantList = new HashSet<>();
 		grantList.add(new SimpleGrantedAuthority(appUser.getClass().getSimpleName()));
-
-//        for (Role role : appUser.getRoles()) {
-//            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getDescription());
-//            grantList.add(grantedAuthority);
-//        }
 
 		return new User(email, appUser.getPwd(), grantList);
 	}
