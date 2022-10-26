@@ -1,8 +1,14 @@
 package g5.app;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 
 @Document(collection="Plato")
 public class Plato {
@@ -12,11 +18,27 @@ public class Plato {
 
     @Id
     private long id;
+
+    @NotBlank(message = "Campo requerido")
+    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
     private String nombre;
+
+    @NotBlank(message = "Campo requerido")
     private String imagen;
+
+    @NotBlank(message = "Campo requerido")
+    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
     private String descripcion;
+
+    @NotBlank(message = "Campo requerido")
+    @Digits(integer = 4,fraction = 2,message = "Este campo debe de ser un numero")
     private double precio;
+
+    @NotNull
     private boolean aptoVeganos;
+
+    @NotBlank(message = "Campo requerido")
+    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
     private String categoria;
 
     public Plato(String nombre,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {

@@ -1,8 +1,6 @@
 package g5.app;
 
-import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,130 +11,72 @@ public class PlatoService {
     @Autowired
    private PlatoRepository platoRepository;
 
-    public void insert(JSONObject json)throws IllegalArgumentException{
+   public Boolean validarNombreNoRepe(Plato plato)throws CustomException{
+
+    if(platoRepository.findBynombre(plato.getNombre()).isPresent()){
+
+        throw new CustomException("Nombre no disponible");
+
+    }
+
+    return true;
+   }
+
+   public Boolean categoriaValida(Plato plato) throws CustomException{
+
+    if(!plato.getCategoria().equalsIgnoreCase("primero") && !plato.getCategoria().equalsIgnoreCase("segundo") && !plato.getCategoria().equalsIgnoreCase("postre")
+    && !plato.getCategoria().equalsIgnoreCase("entrante")){
+
+        throw new CustomException("La categoria debe de ser: Entrante,primero,segundo o postre");
+    }
+
+
+    return true;
+   }
+
+    public void insert(Plato plato)throws CustomException{
        
-        String nombre=json.getString("nombre");
-        String imagen=json.getString("imagen");
-        String descripcion=json.getString("descripcion");
-        String precio=json.getString("precio");
-        String aptoVeganos=json.getString("aptoVeganos");
-        String categoria=json.getString("categoria");
 
-        if(nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
-            throw new IllegalArgumentException("Rellene todos los campos");
-        
+        if(validarNombreNoRepe(plato) && categoriaValida(plato)){
+            plato.setId(SequenceGeneratorService.generateSequence(Plato.SEQUENCE_NAME));
+            platoRepository.insert(plato);
         }
-
-        try {
-            Double.parseDouble(precio);
-            
-        } catch (NumberFormatException e){
-            throw new IllegalArgumentException("El precio no es un dato numerico");
-        }
-        
-        if(!aptoVeganos.equalsIgnoreCase("si") && !aptoVeganos.equalsIgnoreCase("no")){
-            throw new IllegalArgumentException("El valor de apto veganos debe de ser si o no");
-        }
-
-        if(!categoria.equalsIgnoreCase("primero") && !categoria.equalsIgnoreCase("segundo") && !categoria.equalsIgnoreCase("postre")){
-            throw new IllegalArgumentException("La categoria del plato debe ser valida: Primero,segundo o postre");
-        }
-
-        if (platoRepository.findBynombre(nombre).isPresent()){
-            throw new IllegalArgumentException("El plato ya existe en el sistema");
-        }
-
-                
-        Plato plato =new Plato();
-
-        plato.setId(SequenceGeneratorService.generateSequence(Plato.SEQUENCE_NAME));
-        plato.setCategoria(categoria);
-        plato.setDescripcion(descripcion);
-        plato.setNombre(nombre);
-        plato.setPrecio(Double.parseDouble(precio));
-        plato.setImagen(imagen);
-
-        if(aptoVeganos.equalsIgnoreCase("si")){
-
-            plato.setAptoVeganos(true); 
-
-        }else{
-            plato.setAptoVeganos(false); 
-        }
-            
-        platoRepository.insert(plato);
-        
-        
+         
        
     }
     
-    public void update(JSONObject json)throws IllegalArgumentException{
-        
-        String id=json.getString("id");
-        String nombre=json.getString("nombre");
-        String imagen=json.getString("imagen");
-        String descripcion=json.getString("descripcion");
-        String precio=json.getString("precio");
-        String aptoVeganos=json.getString("aptoVeganos");
-        String categoria=json.getString("categoria");
+    public void update(Plato fromPlato)throws CustomException{
+         
+        Plato toPlato = this.getPlatorById(fromPlato.getId());
 
-        if(id.isEmpty()||nombre.isEmpty()||imagen.isEmpty()||descripcion.isEmpty()||precio.isEmpty()||aptoVeganos.isEmpty()||categoria.isEmpty()){
-            throw new IllegalArgumentException("Campos vacios");
-        
+		mapUser(fromPlato, toPlato);
+
+        if(validarNombreNoRepe(toPlato) && categoriaValida(toPlato)){
+
+            platoRepository.save(toPlato);
         }
-
-        try {
-            Double.parseDouble(precio);
-            
-        } catch (NumberFormatException e){
-            throw new IllegalArgumentException("El precio no es un dato numerico");
-        }
-        
-        if(!aptoVeganos.equalsIgnoreCase("si") && !aptoVeganos.equalsIgnoreCase("no")){
-            throw new IllegalArgumentException("El valor de apto veganos debe de ser si o no");
-        }
-
-        if(!categoria.equalsIgnoreCase("primero") && !categoria.equalsIgnoreCase("segundo") && !categoria.equalsIgnoreCase("postre")){
-            throw new IllegalArgumentException("La categoria del plato debe ser valida: Primero,segundo o postre");
-        }
-
-        if (platoRepository.findBynombre(nombre).isPresent()){
-            throw new IllegalArgumentException("El plato ya existe en el sistema");
-        }
-        
-        
-       
-                
-        Optional<Plato>platoAux=platoRepository.findById(Integer.parseInt(id));
-
-        platoAux.get().setCategoria(categoria);
-        platoAux.get().setDescripcion(descripcion);
-        platoAux.get().setNombre(nombre);
-        platoAux.get().setPrecio(Double.parseDouble(precio));
-        platoAux.get().setImagen(imagen);
-
-        if(aptoVeganos.equalsIgnoreCase("si")){
-
-            platoAux.get().setAptoVeganos(true); 
-
-        }else{
-            platoAux.get().setAptoVeganos(false); 
-        }
-            
-        platoRepository.save(platoAux.get());
-       
-       
 
     }
 
-    public void delete(JSONObject json)throws Exception{
+    public void delete(Long id)throws CustomException{
         
-        String id=json.getString("id");
-        int Id=Integer.parseInt(id);
-        
-        platoRepository.delete(platoRepository.findById(Id).get());
-            
-       
+        Plato plato=this.getPlatorById(id);
+        platoRepository.delete(plato);
         
     }
+
+   
+	public Plato getPlatorById(Long id) throws CustomException {
+		return platoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del usuario no existe."));
+	}
+
+    protected void mapUser( Plato from,Plato to) {
+		to.setNombre(from.getNombre());
+		to.setAptoVeganos(from.getAptoVeganos());
+		to.setCategoria(from.getCategoria());
+		to.setDescripcion(from.getDescripcion());
+		to.setImagen(from.getImagen());
+        to.setPrecio(from.getPrecio());
+        
+	}
 }
