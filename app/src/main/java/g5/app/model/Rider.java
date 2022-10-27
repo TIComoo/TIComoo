@@ -23,15 +23,15 @@ public class Rider extends Usuario {
     
     private String matricula;
     private String carnet;
-    private String tipo_vehiculo;
+    private String tipoVehiculo; // he cambiado el nombre de tipo_vehiculo a tipoVehiculo por temas de calidad
     
 
     public Rider(String nombre, String apellido, String nif, String email, String pwd,
-            String tipo_vehiculo, String matricula, String carnet) {
+            String tipoVehiculo, String matricula, String carnet) {
 
         super(email, nombre, apellido, nif,  pwd);
         
-        this.tipo_vehiculo = tipo_vehiculo;
+        this.tipoVehiculo = tipoVehiculo;
         this.matricula = matricula;
         this.carnet = carnet;
         
@@ -53,12 +53,12 @@ public class Rider extends Usuario {
         this.carnet = carnet;
     }
 
-    public String getTipo_vehiculo() {
-        return tipo_vehiculo;
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
     }
 
-    public void setTipo_vehiculo(String tipo_vehiculo) {
-        this.tipo_vehiculo = tipo_vehiculo;
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 
 
