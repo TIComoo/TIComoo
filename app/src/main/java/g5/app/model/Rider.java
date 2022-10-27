@@ -21,21 +21,29 @@ public class Rider extends Usuario {
 
     // Esta clase hereda de usuario, y estos son sus nuevos atributos
     
+    private String nif; // faltaba este atributo, que antes estaba en el padre, pero ahora no, así que hay que indicarlo aquí
     private String matricula;
     private String carnet;
     private String tipoVehiculo; // he cambiado el nombre de tipo_vehiculo a tipoVehiculo por temas de calidad
     
+    public Rider(String nombre, String apellido, String email, String pwd, String nif, String tipoVehiculo,
+			String matricula, String carnet) {
 
-    public Rider(String nombre, String apellido, String nif, String email, String pwd,
-            String tipoVehiculo, String matricula, String carnet) {
+		super(nombre, apellido, email, pwd);
+		this.nif = nif;
+		this.tipoVehiculo = tipoVehiculo;
+		this.matricula = matricula;
+		this.carnet = carnet;
+	}
+    
+    // Getter y Setter de nif añadidos
+    public String getNif() {
+		return nif;
+	}
 
-        super(email, nombre, apellido, nif,  pwd);
-        
-        this.tipoVehiculo = tipoVehiculo;
-        this.matricula = matricula;
-        this.carnet = carnet;
-        
-    }
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
 
     public String getMatricula() {
         return matricula;
