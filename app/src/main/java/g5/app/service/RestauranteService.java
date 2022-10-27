@@ -17,14 +17,12 @@ public class RestauranteService {
 
 	public void insert(Restaurante restaurante) {
 
-		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCIF().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf()==0|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
+		
+		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCIF().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf().isEmpty()|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
 			throw new IllegalArgumentException("Rellene todos los campos");
 
 		if (this.restauranteDAO.findById(restaurante.getNombre()).isPresent())
 			throw new IllegalArgumentException("El restaurante ya existe en el sistema");
-
-		if (restaurante.getTlf() <600000000 && restaurante.getTlf()>999999999)
-			throw new IllegalArgumentException("Introduzca un telefono valido");
 			
 		if (!restaurante.getEmail().contains("@"))
 			throw new IllegalArgumentException("Introduzca un correo valido");
@@ -33,6 +31,8 @@ public class RestauranteService {
 			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
 
 		}
+
+		
 
 		restauranteDAO.save(restaurante);
 
@@ -44,7 +44,6 @@ public class RestauranteService {
 	public void update(Restaurante restaurante) {
 
 
-
 		java.util.Optional<Restaurante>  restauranteAux = this.restauranteDAO.findById(restaurante.getNombre());
 		java.util.Optional<Restaurante>  emailAux = this.restauranteDAO.findByemail(restaurante.getEmail());
 
@@ -52,16 +51,14 @@ public class RestauranteService {
 		if (!restauranteAux.isPresent())
 			throw new IllegalArgumentException("No hay un restaurante con este nombre en el sistema");	
 
-		if (restaurante.getTlf() <600000000 && restaurante.getTlf()>999999999)
-			throw new IllegalArgumentException("Introduzca un telefono valido");
 			
 		if (!restaurante.getEmail().contains("@"))
 			throw new IllegalArgumentException("Introduzca un correo valido");
 
-		if (this.restauranteDAO.findByemail(restaurante.getEmail()).isPresent()) {
+		if (emailAux.isPresent() && !(emailAux.get().getEmail().equals(restauranteAux.get().getEmail()))) 
 			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
 
-		}
+		
 
 			this.restauranteDAO.save(restauranteAux.get());		
 
@@ -83,21 +80,10 @@ public class RestauranteService {
 	
 }
 
-	public void list() {
 
-		List<Restaurante>  restauranteAux = this.restauranteDAO.findAll();
-
-		for (int i =0;i<restauranteAux.size();i++){
-
-			System.out.println(restauranteAux.get(i));
-
-		}
-		
-
-		}
-
-    public Iterable<Restaurante> getAllUsers() {
-        return restauranteDAO.findAll();
+    public List <Restaurante> getAllRestaurantes() {
+        List<Restaurante> restaurantes= restauranteDAO.findAll();
+		return restaurantes;
     }
 
 
