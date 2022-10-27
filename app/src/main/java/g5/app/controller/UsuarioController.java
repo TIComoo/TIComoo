@@ -1,12 +1,12 @@
 package g5.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import g5.app.service.UsuarioService;
 
-@Controller
+//@RestController
+//@RequestMapping("/user") a lo mejor habría que poner algo así
 public class UsuarioController {
 
 	@Autowired
@@ -16,10 +16,12 @@ public class UsuarioController {
 	public String index() {
 		return "index";
 	}
+	
+	// mirar como hacer bien el mapeo
 
-	@GetMapping("/userForm")
+	@GetMapping("/users")
 	public String loggueado() {
-		return "user-form/" + service.getLoggedUserRol().toLowerCase();
+		return "users/" + service.getLoggedUserRol().toLowerCase();
 	}
 
 }

@@ -60,7 +60,7 @@ public class WebSecurityConfig {
         .formLogin()
         .loginPage("/login")
         .permitAll()
-        .defaultSuccessUrl("/userForm")
+        .defaultSuccessUrl("/users")
         .failureUrl("/login?error=true")
         .usernameParameter("username")
         .passwordParameter("password")
