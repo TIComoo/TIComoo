@@ -30,7 +30,7 @@ public class Rider extends Usuario {
     public Rider(String email, String nombre, String apellido, String pwd, String nif, String tipoVehiculo,
 			String matricula, String carnet) {
 
-		super(nombre, apellido, email, pwd);
+		super(email, nombre, apellido, pwd); // he cambiado también el orden de esto
 		this.nif = nif;
 		this.tipoVehiculo = tipoVehiculo;
 		this.matricula = matricula;
