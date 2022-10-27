@@ -7,11 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Usuario {
 
     @Id
-    private String email;
-    private String nombre;
-    private String apellido;
-    private String pwd;
-    private String rol;
+    protected String email;
+    protected String nombre;
+    protected String apellido;
+    protected String pwd;
+    private String rol; // he cambiado la visibilidad de los atributos a protected menos de rol
 
     //sin rol
     public Usuario(String email, String nombre, String apellido, String pwd) {
