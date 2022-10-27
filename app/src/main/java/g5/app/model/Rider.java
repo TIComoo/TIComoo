@@ -26,7 +26,8 @@ public class Rider extends Usuario {
     private String carnet;
     private String tipoVehiculo; // he cambiado el nombre de tipo_vehiculo a tipoVehiculo por temas de calidad
     
-    public Rider(String nombre, String apellido, String email, String pwd, String nif, String tipoVehiculo,
+    // he cambiado el orden de las entradas al constructor para que los atributos de usuario tengan el mismo orden en todas las clases
+    public Rider(String email, String nombre, String apellido, String pwd, String nif, String tipoVehiculo,
 			String matricula, String carnet) {
 
 		super(nombre, apellido, email, pwd);
