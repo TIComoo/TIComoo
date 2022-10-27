@@ -3,51 +3,42 @@ package g5.app.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "Usuario")
 public class Usuario {
+
 	@Id
-	private String email;
-	private String nombre;
-	private String apellido;
-	private String nif;
-	private String direccion;
-	private int telefono;
-	private String pwd;
+	protected String email;
+	protected String nombre;
+	protected String apellido;
+	protected String pwd;
+	private String rol;
 
-	public Usuario(String nombre, String apellido, String nif, String direccion, int telefono, String email,
-			String pwd) {
-
+	// sin rol
+	public Usuario(String email, String nombre, String apellido, String pwd) {
+		this.email = email;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.nif = nif;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.email = email;
-		this.pwd = pwd;
-
-	}
-
-	public Usuario(String nombre, String apellido, String nif, String email, String pwd) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.nif = nif;
-		this.email = email;
 		this.pwd = pwd;
 	}
 
-	// Constructor temporar para probar la aplicación
+	// Vacio
+	public Usuario() {
+		
+	}
 
+	// Con rol
+	public Usuario(String email, String nombre, String apellido, String pwd, String rol) {
+		this.email = email;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.pwd = pwd;
+		this.rol = rol;
+	}
+
+	// Constructor con email y pwd
 	public Usuario(String email, String pwd) {
 		this.email = email;
 		this.pwd = pwd;
-	}
-
-	public Usuario() {
 	}
 
 	public String getNombre() {
@@ -67,30 +58,6 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public String getNif() {
-		return nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public int getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -105,6 +72,19 @@ public class Usuario {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellido=" + apellido + ", pwd=" + pwd + "]";
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 }

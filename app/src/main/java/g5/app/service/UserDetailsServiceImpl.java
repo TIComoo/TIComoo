@@ -22,37 +22,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UsuarioService usrService;
 
-	@Autowired
-	private RiderService rdrService;
-
-	@Autowired
-	private AdministradorService admService;
-
-	/*
-	 * Habría que ver qué hacer con este método: si mirar en las 3 tablas o hacer
-	 * una tabla Login que tenga el email, pwd y rol del usuario
-	 */
-
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		g5.app.model.Usuario appUser;
+		g5.app.model.Usuario appUser = null;
 
 		try {
 			appUser = usrService.buscarPorEmail(email);
 		} catch (UsernameNotFound e) {
-			try {
-				appUser = admService.buscarPorEmail(email);
-			} catch (UsernameNotFound e2) {
-				try {
-					appUser = rdrService.buscarPorEmail(email);
-				} catch (Exception e3) {
-					throw new UsernameNotFoundException("El email del usuario no existe.");
-				}
-			}
+			e.printStackTrace();
 		}
 
 		Set<GrantedAuthority> grantList = new HashSet<>();
-		grantList.add(new SimpleGrantedAuthority(appUser.getClass().getSimpleName()));
+		grantList.add(new SimpleGrantedAuthority(appUser.getRol()));
 
 		return new User(email, appUser.getPwd(), grantList);
 	}
