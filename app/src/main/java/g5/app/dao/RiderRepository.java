@@ -8,4 +8,6 @@ import g5.app.model.Rider;
 @Repository
 public interface RiderRepository extends MongoRepository<Rider, String>{
 
+    public Rider findByEmail(String email);
+
 }

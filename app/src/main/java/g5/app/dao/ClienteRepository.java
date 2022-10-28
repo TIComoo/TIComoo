@@ -12,9 +12,6 @@ como al rider. */
 @Repository
 public interface ClienteRepository extends MongoRepository<Cliente, String>
 {
-	//public Usuario buscarUsuarioPorId(String email);
-
-	//Usuario buscarPorEmail(String email);
 	
     
 }

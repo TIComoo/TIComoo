@@ -1,10 +1,10 @@
 package g5.app;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,21 +54,21 @@ public class ClienteServiceTests {
         assertEquals(u, u_resultado);
 
     }
-  /*   @Test
-    public void test_modificarUsuario() {
-        Usuario u1 = new Usuario(email, nombre, apellido, nif, direccion, telefono, pwd);
-        u1.setNombre("Sergio");
-        Mockito.when(usuarioRepository.save(u1)).thenReturn(u);
-        assertNotEquals(u1.toString(), servicio.crearUsuario(u1).toString());
+
+    @Test 
+    public void test_leerClientes(){
+        List<Cliente> clientes = servicio.consultarClientes();
+
+        
+        assertNotNull(clientes);
+    }
+    @Test
+    public void test_leerClientePorEmail(){
+        String email = "johndoe@gmail.com";
+        Mockito.when(usuarioRepository.findById(email)).thenReturn(Optional.of(u));
+        Cliente cliente = servicio.leerClientePorEmail(email);
+        assertEquals(email, cliente.getEmail());
     }
 
-    @Test
-    public void test_consultarUsuarios(){
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-        usuarios = servicio.consultarUsuarios();
 
-        for(Usuario u : usuarios){
-            System.out.println(u.toString());
-        }
-    } */
 }

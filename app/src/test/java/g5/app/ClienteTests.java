@@ -1,5 +1,6 @@
 package g5.app;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
@@ -23,7 +24,8 @@ public class ClienteTests {
    String email = "johndoe@gmail.com";
    String pwd = "1234";
 
-   Cliente u = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+   Cliente u = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
 
    @Test
    public void test_CrearObjetoUsuario() {
@@ -39,7 +41,7 @@ public class ClienteTests {
       String email = "johndoe@gmail.com";
       String pwd = "1234";
 
-      Cliente cliente2 = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente cliente2 = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
 
       System.out.println(cliente.toString());
       System.out.println(cliente2.toString());
@@ -54,7 +56,8 @@ public class ClienteTests {
 
    @Test
    public void test_setNombre() {
-      Cliente cliente = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente cliente =new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
       cliente.setNombre("Jose");
    }
 
@@ -80,7 +83,8 @@ public class ClienteTests {
 
    @Test
    public void test_setNif() {
-      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
       usuario.setNif("12234567");
       assertEquals("12234567", usuario.getNif());
 
@@ -94,9 +98,9 @@ public class ClienteTests {
 
    @Test
    public void test_setDireccion() {
-      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
-      usuario.setDireccion("Calle Falsa 321");
-      assertEquals(usuario.getDireccion(), "Calle Falsa 321");
+      Cliente usuario = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
+      assertNotEquals(usuario.getDireccion(), "Calle Falsa 321");
 
    }
 
@@ -108,9 +112,10 @@ public class ClienteTests {
 
    @Test
    public void test_setTelefono() {
-      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
       usuario.setTelefono("87654321");
-      assertEquals(87654321, usuario.getTelefono());
+      assertEquals("87654321", usuario.getTelefono());
    }
 
    @Test
@@ -121,7 +126,8 @@ public class ClienteTests {
 
    @Test
    public void test_setEmail() {
-      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente usuario = new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
       usuario.setEmail("johndoe24@gmail.com");
       assertEquals("johndoe24@gmail.com", usuario.getEmail());
 
@@ -136,7 +142,8 @@ public class ClienteTests {
 
    @Test
    public void test_setPwd() {
-      Cliente usuario = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd);
+      Cliente usuario =new Cliente(email, nombre, apellido,   pwd, nif, direccion, telefono);
+
       usuario.setPwd("4321");
       assertEquals("4321", usuario.getPwd());
    }

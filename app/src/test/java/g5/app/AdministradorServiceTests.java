@@ -1,8 +1,13 @@
 package g5.app;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +31,7 @@ public class AdministradorServiceTests {
     String pwd = "1234";
     String zona = "El pilar";
 
-    Administrador a = new Administrador(nombre, apellido, email, pwd, zona);
+    Administrador a = new Administrador( email,nombre, apellido, pwd, zona);
 
     @Mock
     AdministradorRepository adminRepository;
@@ -46,11 +51,27 @@ public class AdministradorServiceTests {
 
     @Test 
     public void test_modificarAdministrador(){
-        Administrador nuevo_a = new Administrador(nombre,apellido,email,pwd,zona);
+        Administrador nuevo_a = new Administrador(email,nombre,apellido,pwd,zona);
         nuevo_a.setNombre("Jose");
         Mockito.when(adminRepository.save(nuevo_a)).thenReturn(a);
         servicio.crearAdministrador(nuevo_a);
         assertNotEquals(nuevo_a.toString(), a.toString());
         ;
     }
+
+    @Test 
+    public void test_leerRiders(){
+        List<Administrador> administradores = servicio.leerAdministradores();
+        
+        assertNotNull(administradores);
+    }
+    @Test
+    public void test_leerRidersPorEmail(){
+        String email = "johndoe@gmail.com";
+        Mockito.when(adminRepository.findById(email)).thenReturn(Optional.of(a));
+        Administrador admin = servicio.leerAdminPorEmail(email);
+        assertEquals(email, admin.getEmail());
+    }
+
+
 }

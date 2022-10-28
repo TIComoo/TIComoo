@@ -29,8 +29,8 @@ public class RiderTests {
     }
     @Test
     public void test_setTipo_Vehiculo(){
-    r.setTipo_vehiculo("Scooter");
-    assertEquals("Scooter", r.getTipo_vehiculo());
+    r.setTipoVehiculo("Scooter");
+    assertEquals("Scooter", r.getTipoVehiculo());
     
     }
     public void test_setMatricula(){

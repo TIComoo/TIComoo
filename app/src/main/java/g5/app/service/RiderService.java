@@ -1,5 +1,8 @@
 package g5.app.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +14,10 @@ public class RiderService {
     
 
     @Autowired
-    RiderRepository usuarioRepository;
+    RiderRepository riderRepository;
 
     public void crearRider(Rider rider) {
-        usuarioRepository.save(rider);
+        riderRepository.save(rider);
 
     }
 
@@ -22,14 +25,22 @@ public class RiderService {
     public void modificarRider(Rider rider) {
     }
 
-   /*  public void modificarRider() {
-
+    public List<Rider> leerRiders() {
+        List<Rider> administradores = riderRepository.findAll();
+    
+        return administradores;
     }
 
-    public void consultarRider(){
 
-    }
-    public void borrarRider() {
+    
+  public Rider leerRiderPorEmail(String email) {
+    Optional<Rider> riderOptional = riderRepository.findById(email);
 
-    } */
+    Rider rider = riderOptional.get();
+
+    return rider;
+
+  }
+
+  
 }
