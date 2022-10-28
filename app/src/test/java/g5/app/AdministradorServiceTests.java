@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class AdministradorServiceTests {
         Administrador nuevo_a = new Administrador(email,nombre,apellido,pwd,zona);
         nuevo_a.setNombre("Jose");
         Mockito.when(adminRepository.save(nuevo_a)).thenReturn(a);
-        servicio.crearAdministrador(nuevo_a);
+        servicio.guardarAdministrador(nuevo_a);
         assertNotEquals(nuevo_a.toString(), a.toString());
         ;
     }

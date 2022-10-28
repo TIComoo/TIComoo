@@ -24,15 +24,12 @@ public class RiderController {
     @Autowired
     private RiderService riderService;
 
-    @PostMapping(value = "/crearRider")
-    public void crearRider(@RequestBody @ModelAttribute("Rider") Rider rider ) {
+    @PostMapping(value = "/guardarRider")
+    public void guardarRider(@RequestBody @ModelAttribute("Rider") Rider rider ) {
   
-        this.riderService.crearRider(rider);
+        this.riderService.guardarRider(rider);
     }
-    @PostMapping(value = "modificarRider")
-    public void modificarRider(@RequestBody @ModelAttribute("Rider") Rider rider) {
-        this.riderService.modificarRider(rider);
-    }
+
 
     @GetMapping(value = "/leerRiders", produces = "application/json")
     @ResponseBody

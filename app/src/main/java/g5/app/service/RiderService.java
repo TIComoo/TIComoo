@@ -11,28 +11,21 @@ import g5.app.model.Rider;
 
 @Service
 public class RiderService {
-    
 
-    @Autowired
-    RiderRepository riderRepository;
+  @Autowired
+  RiderRepository riderRepository;
 
-    public void crearRider(Rider rider) {
-        riderRepository.save(rider);
+  public void guardarRider(Rider rider) {
+    riderRepository.save(rider);
 
-    }
+  }
 
+  public List<Rider> leerRiders() {
+    List<Rider> administradores = riderRepository.findAll();
 
-    public void modificarRider(Rider rider) {
-    }
+    return administradores;
+  }
 
-    public List<Rider> leerRiders() {
-        List<Rider> administradores = riderRepository.findAll();
-    
-        return administradores;
-    }
-
-
-    
   public Rider leerRiderPorEmail(String email) {
     Optional<Rider> riderOptional = riderRepository.findById(email);
 
@@ -42,5 +35,4 @@ public class RiderService {
 
   }
 
-  
 }

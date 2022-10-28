@@ -1,6 +1,6 @@
 package g5.app.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,15 +17,11 @@ public class ClienteService {
                                          // ya que se sobreentiende que es del tipo de usuario que es, y queda más corto
     
     // habría que cambiar el nombre de los métodos de Usuario a Cliente
-    //CRUD Crear con TDD.
-    public Cliente crearUsuario(Cliente cliente) { // diría de cambiar el nombre del método que usa el save() a guardarCliente, guardarUsuario, guardarRider, etc
+    //CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es inmutable.
+    public Cliente guardarCliente(Cliente cliente) { // diría de cambiar el nombre del método que usa el save() a guardarCliente, guardarUsuario, guardarRider, etc
         return clienteRepository.save(cliente);
     }
 
-    //CRUD Modificar con TDD.
-    public void modificarUsuario(Cliente cliente) {
-
-    }
 
 
     public List<Cliente> consultarClientes() {

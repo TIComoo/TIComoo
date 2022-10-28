@@ -50,7 +50,7 @@ public class ClienteServiceTests {
        
         Cliente u = new Cliente(email, nombre, apellido, nif, direccion, telefono, pwd); 
         Mockito.when(usuarioRepository.save(u)).thenReturn(u);
-        Cliente u_resultado = servicio.crearUsuario(u);
+        Cliente u_resultado = servicio.guardarCliente(u);
         assertEquals(u, u_resultado);
 
     }

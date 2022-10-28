@@ -18,12 +18,11 @@ public class AdministradorService {
   // CRUD Crear y Modificar. Testeado con TDD que Modificar funciona
   // correctamente.
 
-  public void crearAdministrador(Administrador a) {
+  public void guardarAdministrador(Administrador a) {
     adminRepository.save(a);
   }
 
-  public void modificarAdministrador(Administrador admin) {
-  }
+ 
 
   public List<Administrador> leerAdministradores() {
     List<Administrador> administradores = adminRepository.findAll();

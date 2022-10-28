@@ -23,15 +23,11 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping(value = "/crearCliente")
-    public void crearUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
-        this.clienteService.crearUsuario(cliente);
+    @PostMapping(value = "/guardarCliente")
+    public void guardarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
+        this.clienteService.guardarCliente(cliente);
     }
 
-    @PostMapping(value = "modificarCliente")
-    public void modificarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
-        this.clienteService.modificarUsuario(cliente);
-    }
 
     @GetMapping(value = "/leerClientes", produces = "application/json")
     @ResponseBody

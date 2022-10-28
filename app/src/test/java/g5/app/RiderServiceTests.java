@@ -46,7 +46,7 @@ public class RiderServiceTests {
     @Test
     public void test_crearRider() {
         Mockito.when(riderRepository.save(r)).thenReturn(r);
-        servicio.crearRider(r);
+        servicio.guardarRider(r);
         assertNotNull(riderRepository.save(r));
     }
 
@@ -55,7 +55,7 @@ public class RiderServiceTests {
         Rider r_nuevo = new Rider(email, nombre, apellido, pwd, nif,  tipo_vehiculo, matricula, carnet);
         r_nuevo.setTipoVehiculo("Bicicleta");
         Mockito.when(riderRepository.save(r_nuevo)).thenReturn(r_nuevo);
-        servicio.crearRider(r_nuevo);
+        servicio.guardarRider(r_nuevo);
         assertNotNull(r_nuevo.toString(), r.toString());
 
     }

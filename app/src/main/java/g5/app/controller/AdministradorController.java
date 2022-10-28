@@ -22,16 +22,12 @@ public class AdministradorController {
     @Autowired
     private  AdministradorService adminService;
 
-    @PostMapping(value = "/crearAdmin")
+    @PostMapping(value = "/guardarAdmin")
     public void crearAdmin(@RequestBody @ModelAttribute("Administrador") Administrador admin ) {
   
-        this.adminService.crearAdministrador(admin);
+        this.adminService.guardarAdministrador(admin);
     }
 
-    @PostMapping(value = "/modificarAdmin")
-    public void modificarAdmin(@RequestBody @ModelAttribute("Administrador") Administrador admin) {
-        this.adminService.modificarAdministrador(admin); //
-    }
     
     @GetMapping(value = "/leerAdminPorEmail", produces = "application/json")
     @ResponseBody
