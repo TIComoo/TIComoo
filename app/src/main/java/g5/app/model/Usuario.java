@@ -11,27 +11,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Usuario")
 public class Usuario {
-
-	@Transient
-    public static final String NOMBRE_SECUENCIA  = "seq_usuarios";
 	
 	@Id
-	private int id;
+	private String email;
+
 	
 	private String nombre;
 	private String apellidos;
 	private String nif;
 	private String direccion;
 	private String telefono;
-	private String email;
 	private String pwd;
+	@Transient
+	private String confirmarPwd;
+
+	
 	
 	private HashSet <Roles> roles = new HashSet<Roles>();
 	
 	public Usuario() {}
 
 	public Usuario( String nombre, String apellidos, String nif, String direccion, String telefono, String email,
-			String pwd) {
+			String pwd,String confirmarPwd) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -40,14 +41,8 @@ public class Usuario {
 		this.telefono = telefono;
 		this.email = email;
 		this.pwd = pwd;
-	}
+		this.confirmarPwd = confirmarPwd;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -114,9 +109,24 @@ public class Usuario {
 		this.roles = rol;
 	}
 
+	public String getConfirmarPwd() {
+		return confirmarPwd;
+	}
+
+	public void setConfirmarPwd(String confirmarPwd) {
+		this.confirmarPwd = confirmarPwd;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif
+				+ ", direccion=" + direccion + ", telefono=" + telefono + ", pwd=" + pwd + ", confirmarPwd="
+				+ confirmarPwd + ", roles=" + roles + "]";
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellidos, direccion, email, id, nif, nombre, pwd, roles, telefono);
+		return Objects.hash(apellidos, confirmarPwd, direccion, email, nif, nombre, pwd, roles, telefono);
 	}
 
 	@Override
@@ -128,17 +138,13 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(apellidos, other.apellidos) && Objects.equals(direccion, other.direccion)
-				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(nif, other.nif)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(pwd, other.pwd)
-				&& Objects.equals(roles, other.roles) && Objects.equals(telefono, other.telefono);
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(confirmarPwd, other.confirmarPwd)
+				&& Objects.equals(direccion, other.direccion) && Objects.equals(email, other.email)
+				&& Objects.equals(nif, other.nif) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(pwd, other.pwd) && Objects.equals(roles, other.roles)
+				&& Objects.equals(telefono, other.telefono);
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", direccion="
-				+ direccion + ", telefono=" + telefono + ", email=" + email + ", pwd=" + pwd + ", rol=" + roles + "]";
-	}
-
+	
 	
 }

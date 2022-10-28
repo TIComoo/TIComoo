@@ -21,11 +21,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
 	public Usuario createUser(Usuario usuario) throws Exception {
-//		&& checkPasswordValid(usuario)
-		Usuario aux=new Usuario();
-		if (checkUsernameAvailable(usuario) ) {
-			aux.setId(GeneradorSecuenciaService.generateSequence(aux.NOMBRE_SECUENCIA));
-			usuario.setId(aux.getId());
+
+		if (checkUsernameAvailable(usuario) && checkPasswordValid(usuario)) {
 			String encodedPassword = bCryptPasswordEncoder.encode(usuario.getPwd());
 			usuario.setPwd(encodedPassword);
 			usuario = uRepository.save(usuario);
@@ -41,16 +38,16 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return true;
 	}
 
-//	private boolean checkPasswordValid(Usuario usuario) throws Exception {
-//		if (usuario.getConfirmPassword() == null || usuario.getConfirmPassword().isEmpty()) {
-//			throw new CustomeFieldValidationException("Confirm Password es obligatorio","confirmPassword");
-//		}
-//		
-//		if ( !usuario.getPassword().equals(usuario.getConfirmPassword())) {
-//			throw new CustomeFieldValidationException("Password y Confirm Password no son iguales","password");
-//		}
-//		return true;
-//	}
+	private boolean checkPasswordValid(Usuario usuario) throws Exception {
+		if (usuario.getConfirmarPwd() == null || usuario.getConfirmarPwd().isEmpty()) {
+			throw new CustomeFieldValidationException("Confirmar la contraseña es obligatorio","confirmarPwd");
+		}
+		
+		if ( !usuario.getPwd().equals(usuario.getConfirmarPwd())) {
+			throw new CustomeFieldValidationException("Contraseña y Confirmar cpntraseña no son iguales","pwd");
+		}
+		return true;
+	}
 
 	@Override
 	public Usuario findUserByEmail(String email) {

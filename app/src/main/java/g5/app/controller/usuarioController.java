@@ -29,22 +29,17 @@ public class usuarioController {
 
 	@GetMapping("/signup")
 	public String signup(Model model) {
-//		Roles usuarioRol = rRepository.findByNombre("USUARIO");
-//		List<Roles> roles = Arrays.asList(usuarioRol);
 		
 		model.addAttribute("signup",true);
 		model.addAttribute("userForm", new Usuario());
-//		model.addAttribute("roles",roles);
 		return "user-form/user-signup";
 	}
 	
 	@PostMapping("/signup")
 	public String signupAction(@Valid @ModelAttribute("userForm")Usuario usuario, BindingResult result, ModelMap model) {
 		Roles usuarioRol = rRepository.findByNombre("USUARIO");
-//		List<Roles> roles = Arrays.asList(usuarioRol);
 		usuario.getRoles().add(usuarioRol);
 		model.addAttribute("userForm", usuario);
-//		model.addAttribute("roles",roles);
 		model.addAttribute("signup",true);
 		
 		if(result.hasErrors()) {
@@ -69,7 +64,6 @@ public class usuarioController {
 	private void baseAttributerForUserForm(Model model, Usuario user,String activeTab) {
 		model.addAttribute("userForm", user);
 		model.addAttribute("userList", uService.getAllUsers());
-//		model.addAttribute("roles",rRepository.findAll());
 		model.addAttribute(activeTab,"active");
 	}
 	
