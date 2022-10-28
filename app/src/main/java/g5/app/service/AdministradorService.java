@@ -40,4 +40,8 @@ public class AdministradorService {
 
   }
 
+  public void borrarAdminPorEmail(String email) {
+    adminRepository.deleteById(email);
+  }
+
 }

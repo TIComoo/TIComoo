@@ -69,6 +69,6 @@ public class ClienteServiceTests {
         Cliente cliente = servicio.leerClientePorEmail(email);
         assertEquals(email, cliente.getEmail());
     }
-
+  
 
 }

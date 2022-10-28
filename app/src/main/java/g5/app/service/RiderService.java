@@ -35,4 +35,8 @@ public class RiderService {
 
   }
 
+  public void borrarRiderPorEmail(String email) {
+    riderRepository.deleteById(email);
+  }
+
 }

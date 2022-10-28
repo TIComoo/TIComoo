@@ -3,6 +3,7 @@ package g5.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,10 @@ public class ClienteController {
         Cliente cliente = this.clienteService.leerClientePorEmail(email);
         return cliente;
 
+    }
+    @DeleteMapping(value = "/borrarClientePorEmail")
+    public void borrarClientePorEmail(@RequestHeader String email) {
+        this.clienteService.borrarClientePorEmail(email);
     }
 
 }

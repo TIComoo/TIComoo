@@ -1,6 +1,5 @@
 package g5.app.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,24 +11,25 @@ import g5.app.model.Cliente;
 
 @Service
 public class ClienteService {
-    @Autowired
-    ClienteRepository clienteRepository; // diría de cambiarle el nombre a clienteRepository, o incluso cambiarlo a repository o a dao para todas las clases,
-                                         // ya que se sobreentiende que es del tipo de usuario que es, y queda más corto
-    
-    // habría que cambiar el nombre de los métodos de Usuario a Cliente
-    //CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es inmutable.
-    public Cliente guardarCliente(Cliente cliente) { // diría de cambiar el nombre del método que usa el save() a guardarCliente, guardarUsuario, guardarRider, etc
-        return clienteRepository.save(cliente);
-    }
+  @Autowired
+  ClienteRepository clienteRepository; // diría de cambiarle el nombre a clienteRepository, o incluso cambiarlo a
+                                       // repository o a dao para todas las clases,
+                                       // ya que se sobreentiende que es del tipo de usuario que es, y queda más corto
 
+  // habría que cambiar el nombre de los métodos de Usuario a Cliente
+  // CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es
+  // inmutable.
+  public Cliente guardarCliente(Cliente cliente) { // diría de cambiar el nombre del método que usa el save() a
+                                                   // guardarCliente, guardarUsuario, guardarRider, etc
+    return clienteRepository.save(cliente);
+  }
 
+  public List<Cliente> consultarClientes() {
+    List<Cliente> clientes = clienteRepository.findAll();
 
-    public List<Cliente> consultarClientes() {
-        List<Cliente> clientes = clienteRepository.findAll();
-        
-        return clientes;
-    }
-     
+    return clientes;
+  }
+
   public Cliente leerClientePorEmail(String email) {
     Optional<Cliente> ClienteOptional = clienteRepository.findById(email);
 
@@ -38,5 +38,9 @@ public class ClienteService {
     return Cliente;
 
   }
-    
+
+  public void borrarClientePorEmail(String email) {
+    clienteRepository.deleteById(email);
+  }
+
 }

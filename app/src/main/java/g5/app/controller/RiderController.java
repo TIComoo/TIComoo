@@ -5,6 +5,7 @@ package g5.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,5 +46,10 @@ public class RiderController {
         return rider;
 
     }
+    @DeleteMapping(value = "/borrarRiderPorEmail")
+    public void borrarRiderPorEmail(@RequestHeader String email) {
+        this.riderService.borrarRiderPorEmail(email);
+    }
+
     
 }

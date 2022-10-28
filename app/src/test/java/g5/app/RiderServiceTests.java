@@ -75,5 +75,5 @@ public class RiderServiceTests {
         assertEquals(email, rider.getEmail());
 
     }
-
+   
 }
