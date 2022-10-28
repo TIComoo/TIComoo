@@ -3,24 +3,35 @@ package g5.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Carta")
 public class Carta {
 
-    @Id
-    private int id;
-    private String nombreRestaurante;
-    private List<Plato>listaPlatos=new ArrayList<>();
+    @Transient
+    public static final String SEQUENCE_NAME = "carta_sequence";
 
-    public Carta(int id, String nombreRestaurante, List<Plato> listaPlatos) {
-        this.id = id;
+    @Id
+    private long id;
+
+    @NotBlank(message = ("Nombre restaurante requerido"))
+    private String nombreRestaurante;
+
+    private List<Plato>listaPlatos;
+
+    public Carta( String nombreRestaurante) {
         this.nombreRestaurante = nombreRestaurante;
-        this.listaPlatos = listaPlatos;
+        this.listaPlatos =new ArrayList<>();
+    }
+    public Carta(){
+        
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -32,7 +43,7 @@ public class Carta {
         return listaPlatos;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

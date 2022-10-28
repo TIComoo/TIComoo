@@ -67,7 +67,7 @@ public class PlatoService {
 
    
 	public Plato getPlatorById(Long id) throws CustomException {
-		return platoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del usuario no existe."));
+		return platoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del plato no existe."));
 	}
 
     protected void mapUser( Plato from,Plato to) {
