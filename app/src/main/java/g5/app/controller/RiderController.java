@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import g5.app.model.Rider;
 import g5.app.service.RiderService;
 
+
 @RestController
 @RequestMapping("/rider")
 public class RiderController {

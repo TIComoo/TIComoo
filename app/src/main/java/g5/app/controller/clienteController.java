@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import javax.validation.Valid;
-
 import g5.app.exception.CustomeFieldValidationException;
 import g5.app.model.Cliente;
 import g5.app.model.Usuario;

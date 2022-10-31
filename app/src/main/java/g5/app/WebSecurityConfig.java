@@ -22,6 +22,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter
    String[] resources = new String[] {
             "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**"
     };
+   
     
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

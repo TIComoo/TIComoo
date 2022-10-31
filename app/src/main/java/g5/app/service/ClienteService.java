@@ -26,7 +26,7 @@ public class ClienteService {
   // inmutable.
   public Cliente guardarCliente(Cliente cliente) throws Exception { // diría de cambiar el nombre del método que usa el save() a
                                                    // guardarCliente, guardarUsuario, guardarRider, etc
-	  if (checkUsernameAvailable(cliente) && checkPasswordValid(cliente)) {
+	  if (pwdValida(cliente) && emailValido(cliente)) {
 			String encodedPassword = bCryptPasswordEncoder.encode(cliente.getPwd());
 			cliente.setPwd(encodedPassword);
 			cliente = clienteRepository.save(cliente);
@@ -34,7 +34,7 @@ public class ClienteService {
     return cliente;
   }
 
-  private boolean checkUsernameAvailable(Cliente cliente) throws Exception {
+  private boolean emailValido(Cliente cliente) throws Exception {
 		Cliente encontrado = leerClientePorEmail(cliente.getEmail());
 		if (encontrado != null) {
 			throw new CustomeFieldValidationException("Nombre no disponible","username");
@@ -42,7 +42,7 @@ public class ClienteService {
 		return true;
 	}
 
-	private boolean checkPasswordValid(Cliente cliente) throws Exception {
+	private boolean pwdValida(Cliente cliente) throws Exception {
 		if (cliente.getConfirmarPwd() == null || cliente.getConfirmarPwd().isEmpty()) {
 			throw new CustomeFieldValidationException("Confirmar la contraseña es obligatorio","confirmarPwd");
 		}

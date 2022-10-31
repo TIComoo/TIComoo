@@ -11,6 +11,7 @@ public class Cliente extends Usuario {
     private String direccion;
     private String telefono;
     
+    
 
     public Cliente(String email, String nombre, String apellido, String pwd, String confirmarPwd, String nif, String direccion,
             String telefono) {
