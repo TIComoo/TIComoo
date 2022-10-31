@@ -12,41 +12,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-import g5.app.dao.RolRepository;
 import g5.app.exception.CustomeFieldValidationException;
-import g5.app.model.Roles;
+import g5.app.model.Cliente;
 import g5.app.model.Usuario;
-import g5.app.service.UsuarioService;
+import g5.app.service.ClienteService;
 
 @Controller
-public class usuarioController {
+public class clienteController {
 
 	@Autowired
-	private RolRepository rRepository;
-	@Autowired
-	private UsuarioService uService;
+	private ClienteService cService;
 	
 
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		
 		model.addAttribute("signup",true);
-		model.addAttribute("userForm", new Usuario());
+		model.addAttribute("userForm", new Cliente());
 		return "user-form/user-signup";
 	}
 	
 	@PostMapping("/signup")
-	public String signupAction(@Valid @ModelAttribute("userForm")Usuario usuario, BindingResult result, ModelMap model) {
-		Roles usuarioRol = rRepository.findByNombre("USUARIO");
-		usuario.getRoles().add(usuarioRol);
-		model.addAttribute("userForm", usuario);
+	public String signupAction(@Valid @ModelAttribute("userForm")Cliente cliente, BindingResult result, ModelMap model) {
+		cliente.setRol("USUARIO");
+		model.addAttribute("userForm", cliente);
 		model.addAttribute("signup",true);
 		
 		if(result.hasErrors()) {
 			return "user-form/user-signup";
 		}else {
 			try {
-				uService.createUser(usuario);
+				cService.guardarCliente(cliente);
 			} catch (CustomeFieldValidationException cfve) {
 				result.rejectValue(cfve.getFieldName(), null, cfve.getMessage());
 			}catch (Exception e) {
@@ -61,33 +57,33 @@ public class usuarioController {
         return "index";
     }
 	
-	private void baseAttributerForUserForm(Model model, Usuario user,String activeTab) {
-		model.addAttribute("userForm", user);
-		model.addAttribute("userList", uService.getAllUsers());
+	private void baseAttributerForUserForm(Model model, Cliente cliente,String activeTab) {
+		model.addAttribute("userForm", cliente);
+		model.addAttribute("userList", cService.consultarClientes());
 		model.addAttribute(activeTab,"active");
 	}
 	
 	@GetMapping("/userForm")
 	public String userForm(Model model) {
-		baseAttributerForUserForm(model, new Usuario(), "listTab" );
+		baseAttributerForUserForm(model, new Cliente(), "listTab" );
 		return "user-form/user-view";
 	}
 	
 	@PostMapping("/userForm")
-	public String createUser(@Valid @ModelAttribute("userForm")Usuario user, BindingResult result, Model model) {
+	public String createUser(@Valid @ModelAttribute("userForm")Cliente cliente, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			baseAttributerForUserForm(model, user, "formTab");
+			baseAttributerForUserForm(model, cliente, "formTab");
 		}else {
 			try {
-				uService.createUser(user);
-				baseAttributerForUserForm(model, new Usuario(), "listTab" );
+				cService.guardarCliente(cliente);
+				baseAttributerForUserForm(model, new Cliente(), "listTab" );
 				
 			} catch (CustomeFieldValidationException cfve) {
 				result.rejectValue(cfve.getFieldName(), null, cfve.getMessage());
-				baseAttributerForUserForm(model, user, "formTab" );
+				baseAttributerForUserForm(model, cliente, "formTab" );
 			}catch (Exception e) {
 				model.addAttribute("formErrorMessage",e.getMessage());
-				baseAttributerForUserForm(model, user, "formTab" );
+				baseAttributerForUserForm(model, cliente, "formTab" );
 			}
 		}
 		return "user-form/user-view";

@@ -1,48 +1,59 @@
 package g5.app.model;
 
-
-import java.util.HashSet;
-import java.util.Objects;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document(collection="Usuario")
+@Document(collection = "Usuario")
 public class Usuario {
-	
+
 	@Id
-	private String email;
+	protected String email;
+	protected String nombre;
+	protected String apellido;
+	protected String pwd;
+	protected String confirmarPwd;
+	private String rol;
 
-	
-	private String nombre;
-	private String apellidos;
-	private String nif;
-	private String direccion;
-	private String telefono;
-	private String pwd;
-	@Transient
-	private String confirmarPwd;
-
-	
-	
-	private HashSet <Roles> roles = new HashSet<Roles>();
-	
-	public Usuario() {}
-
-	public Usuario( String nombre, String apellidos, String nif, String direccion, String telefono, String email,
-			String pwd,String confirmarPwd) {
-		super();
+	// sin rol
+	public Usuario(String email, String nombre, String apellido, String pwd, String confirmarPwd) {
+		this.email = email;
 		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.nif = nif;
-		this.direccion = direccion;
-		this.telefono = telefono;
+		this.apellido = apellido;
+		this.pwd = pwd;
+		this.confirmarPwd= confirmarPwd;
+	}
+
+	// Vacio
+	public Usuario() {
+		
+	}
+
+	// Con rol
+	public Usuario(String email, String nombre, String apellido, String pwd, String confirmarPwd, String rol) {
+		this.email = email;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.pwd = pwd;
+		this.rol = rol;
+		this.confirmarPwd= confirmarPwd;
+
+	}
+
+	// Constructor con email y pwd
+	public Usuario(String email, String pwd, String confirmarPwd) {
 		this.email = email;
 		this.pwd = pwd;
-		this.confirmarPwd = confirmarPwd;
+		this.confirmarPwd= confirmarPwd;
 
+	}
+
+	
+	public String getConfirmarPwd() {
+		return confirmarPwd;
+	}
+
+	public void setConfirmarPwd(String confirmarPwd) {
+		this.confirmarPwd = confirmarPwd;
 	}
 
 	public String getNombre() {
@@ -53,36 +64,13 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getApellidos() {
-		return apellidos;
+	public String getApellido() {
+		return apellido;
+
 	}
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public String getNif() {
-		return nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getEmail() {
@@ -101,50 +89,17 @@ public class Usuario {
 		this.pwd = pwd;
 	}
 
-	public HashSet<Roles> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(HashSet<Roles> rol) {
-		this.roles = rol;
-	}
-
-	public String getConfirmarPwd() {
-		return confirmarPwd;
-	}
-
-	public void setConfirmarPwd(String confirmarPwd) {
-		this.confirmarPwd = confirmarPwd;
-	}
-
 	@Override
 	public String toString() {
-		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif
-				+ ", direccion=" + direccion + ", telefono=" + telefono + ", pwd=" + pwd + ", confirmarPwd="
-				+ confirmarPwd + ", roles=" + roles + "]";
+		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellido=" + apellido + ", pwd=" + pwd + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(apellidos, confirmarPwd, direccion, email, nif, nombre, pwd, roles, telefono);
+	public String getRol() {
+		return rol;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(apellidos, other.apellidos) && Objects.equals(confirmarPwd, other.confirmarPwd)
-				&& Objects.equals(direccion, other.direccion) && Objects.equals(email, other.email)
-				&& Objects.equals(nif, other.nif) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(pwd, other.pwd) && Objects.equals(roles, other.roles)
-				&& Objects.equals(telefono, other.telefono);
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
-	
-	
 }
