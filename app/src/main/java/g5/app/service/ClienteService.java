@@ -12,15 +12,11 @@ import g5.app.model.Cliente;
 @Service
 public class ClienteService {
   @Autowired
-  ClienteRepository clienteRepository; // diría de cambiarle el nombre a clienteRepository, o incluso cambiarlo a
-                                       // repository o a dao para todas las clases,
-                                       // ya que se sobreentiende que es del tipo de usuario que es, y queda más corto
-
-  // habría que cambiar el nombre de los métodos de Usuario a Cliente
+  private ClienteRepository clienteRepository; // le he añadido private
+  
   // CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es
   // inmutable.
-  public Cliente guardarCliente(Cliente cliente) { // diría de cambiar el nombre del método que usa el save() a
-                                                   // guardarCliente, guardarUsuario, guardarRider, etc
+  public Cliente guardarCliente(Cliente cliente) { 
     return clienteRepository.save(cliente);
   }
 
@@ -31,11 +27,11 @@ public class ClienteService {
   }
 
   public Cliente leerClientePorEmail(String email) {
-    Optional<Cliente> ClienteOptional = clienteRepository.findById(email);
+    Optional<Cliente> clienteOptional = clienteRepository.findById(email); // he puesto en minúscula la primera c de la variable
 
-    Cliente Cliente = ClienteOptional.get();
+    Cliente cliente = clienteOptional.get(); // he puesto en minúscula la primera c de la variable
 
-    return Cliente;
+    return cliente;
 
   }
 
