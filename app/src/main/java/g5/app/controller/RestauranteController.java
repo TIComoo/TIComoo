@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
+
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -82,8 +85,9 @@ public class RestauranteController {
 
 	@GetMapping("/editRestaurante/{nombre}")
 	public String getEditarRestaurante(Model model, @PathVariable(name ="nombre")String nombre)throws Exception{
-		
-		Restaurante restauranteToEdit = restauranteRepository.findById(nombre).get();
+
+
+		Optional<Restaurante> restauranteToEdit = restauranteRepository.findById(nombre);
 
 		model.addAttribute("restauranteForm", restauranteToEdit);
 		model.addAttribute("restauranteList", restauranteService.getAllRestaurantes());
