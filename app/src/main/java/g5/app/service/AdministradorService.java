@@ -11,18 +11,18 @@ import g5.app.model.Administrador;
 public class AdministradorService {
 	
 	@Autowired
-	private AdministradorRepository repository;
+	private AdministradorRepository adminRepository;
 
 	public void guardarAdministrador(Administrador adm) {
-		repository.save(adm);
+		adminRepository.save(adm);
 	}
 
-	public void borrarAdministrador() {
-
+	public void borrarAdminPorEmail(String email) {
+	    adminRepository.deleteById(email);
 	}
 
 	public Administrador buscarPorEmail(String email) throws UsernameNotFound {
-		return repository.findByEmail(email)
+		return adminRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFound("El email del usuario no existe."));
 	}
 

@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import g5.app.service.UsuarioService;
 
-//@RestController
-//@RequestMapping("/user") a lo mejor habría que poner algo así
 @Controller
 public class UsuarioController {
 
@@ -18,8 +16,6 @@ public class UsuarioController {
 	public String index() {
 		return "index";
 	}
-	
-	// mirar como hacer bien el mapeo
 
 	@GetMapping("/users")
 	public String loggueado() {

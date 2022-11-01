@@ -13,18 +13,18 @@ import g5.app.model.Usuario;
 public class UsuarioService {
 
 	@Autowired
-	UsuarioRepository repository;
+	private UsuarioRepository usuarioRepository;
 
 	public void guardarUsuario(Usuario usr) {
-		repository.save(usr);
+		usuarioRepository.save(usr);
 	}
 
-	public void borrarUsuario() {
-
+	public void borrarUsuarioPorEmail(String email) {
+		usuarioRepository.deleteById(email);
 	}
 
 	public Usuario buscarPorEmail(String email) throws UsernameNotFound {
-		return repository.findByEmail(email).orElseThrow(() -> new UsernameNotFound("El email del usuario no existe."));
+		return usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFound("El email del usuario no existe."));
 	}
 
 	public String getLoggedUserRol() {

@@ -11,18 +11,18 @@ import g5.app.model.Rider;
 public class RiderService {
 	
 	@Autowired
-	private RiderRepository repository;
+	private RiderRepository riderRepository;
 
 	public void guardarRider(Rider rdr) {
-		repository.save(rdr);
+		riderRepository.save(rdr);
 	}
 
-	public void borrarRider() {
-
+	public void borrarRiderPorEmail(String email) {
+	    riderRepository.deleteById(email);
 	}
 
 	public Rider buscarPorEmail(String email) throws UsernameNotFound {
-		return repository.findByEmail(email)
+		return riderRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFound("El email del usuario no existe."));
 	}
 
