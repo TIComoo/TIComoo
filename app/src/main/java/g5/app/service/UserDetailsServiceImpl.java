@@ -13,24 +13,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import g5.app.exception.UsernameNotFound;
+import g5.app.dao.UsuarioRepository;
 
 @Service
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioService usrService;
+	private UsuarioRepository repository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		g5.app.model.Usuario appUser = null;
-
-		try {
-			appUser = usrService.buscarPorEmail(email);
-		} catch (UsernameNotFound e) {
-			e.printStackTrace();
-		}
+		g5.app.model.Usuario appUser = repository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("Login Username Inválido."));
 
 		Set<GrantedAuthority> grantList = new HashSet<>();
 		grantList.add(new SimpleGrantedAuthority(appUser.getRol()));

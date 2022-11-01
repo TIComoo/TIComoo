@@ -31,13 +31,11 @@ public class UsuarioService {
 		// Obtener el usuario logeado
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		UserDetails loggedUser = null;
-
 		// Verificar que ese objeto traido de sesion es el usuario
-		if (principal instanceof UserDetails)
-			loggedUser = (UserDetails) principal;
+		if (principal instanceof UserDetails loggedUser)
+			return loggedUser.getAuthorities().iterator().next().toString();
 
-		return loggedUser.getAuthorities().iterator().next().toString();
+		return null;
 	}
 
 }
