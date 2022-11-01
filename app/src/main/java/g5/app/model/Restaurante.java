@@ -1,18 +1,39 @@
 package g5.app.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Restaurante")
 public class Restaurante {
+
     @Id
+    @NotBlank(message = "Campo requerido")
     String nombre;
-    String razon;
+
+    @NotBlank(message = "Campo requerido")
+    String razon; 
+
+    @NotBlank(message = "Campo requerido")
     String cif;
+
+    @NotBlank(message = "Campo requerido")
     String direccion;
+
+    @NotBlank(message = "Campo requerido")
     String tlf;
+
+    @NotBlank(message = "Campo requerido")
     String categoria;
+    
+    @NotBlank(message = "Campo requerido")
+    @Email
     String email;
+
+    public Restaurante() {
+    }
+
 
     public Restaurante(String nombre, String razon, String cif, String direccion,String tlf, String categoria, String email) {
         this.nombre = nombre;
@@ -23,10 +44,6 @@ public class Restaurante {
         this.categoria = categoria;
         this.email = email;
     }
-
-    public Restaurante() {
-    }
-
 
     public String getNombre() {
         return nombre;
@@ -40,10 +57,10 @@ public class Restaurante {
     public void setRazon(String razon) {
         this.razon = razon;
     }
-    public String getCIF() {
+    public String getCif() {
         return cif;
     }
-    public void setCIF(String cif) {
+    public void setCif(String cif) {
         this.cif = cif;
     }
     public String getDireccion() {

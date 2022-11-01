@@ -16,7 +16,7 @@ public class RestauranteTest {
     String razon="Pizzerias Ciudad Real";
     String cif="1234567CJS";
     String direccion="C/Alegria";
-    Integer tlf=67676767;
+    String tlf="67676767";
     String categoria="Pizzeria";
     String email="dominos@domino.com";
 
@@ -30,7 +30,7 @@ public class RestauranteTest {
        String razon="Pizzerias Ciudad Real";
        String cif="1234567CJS";
        String direccion="C/Alegria";
-       Integer tlf=67676767;
+       String tlf="67676767";
        String categoria="Pizzeria";
        String email="dominos@domino.com";
        
@@ -59,8 +59,8 @@ public class RestauranteTest {
     @Test
     public void test_setCIF() {
        Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
-       restauranteAux1.setCIF("CIF");
-       assertEquals("CIF", restauranteAux1.getCIF());
+       restauranteAux1.setCif("CIF");
+       assertEquals("CIF", restauranteAux1.getCif());
     }
 
     @Test
@@ -73,8 +73,8 @@ public class RestauranteTest {
     @Test
     public void test_setTlf() {
       Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
-      restauranteAux1.setTlf(12345);
-       assertEquals(12345, restauranteAux1.getTlf());
+      restauranteAux1.setTlf("12345");
+       assertEquals("12345", restauranteAux1.getTlf());
     }
 
     @Test
