@@ -25,8 +25,8 @@ public class AdministradorService {
  
 
   public List<Administrador> leerAdministradores() {
+    //<Administrador> administradores = adminRepository.findAll();
     List<Administrador> administradores = adminRepository.findAll();
-
     return administradores;
 
   }

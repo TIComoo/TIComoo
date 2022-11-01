@@ -3,6 +3,8 @@ package g5.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,14 +17,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import g5.app.model.Administrador;
 import g5.app.service.AdministradorService;
+import g5.app.service.ClienteService;
+import g5.app.service.RiderService;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdministradorController {
 
+    
+
+
     @Autowired
     private  AdministradorService adminService;
+    private  RiderService riderService;
+    private ClienteService clienteService;
 
+    @GetMapping("/admin-view")
+    public String getAdministradorList(Model model){
+        model.addAttribute("admin-list", adminService.leerAdministradores());
+        model.addAttribute("rider-list", riderService.leerRiders());
+        model.addAttribute("cliente-list", clienteService.consultarClientes());
+        model.addAttribute("listTabAdmin", "active");
+        model.addAttribute("listTabRider", "active"); 
+        model.addAttribute("listTabCliente","active" );
+         
+
+        return "users/admin-view";
+
+    }
     @PostMapping(value = "/guardarAdmin")
     public void crearAdmin(@RequestBody @ModelAttribute("Administrador") Administrador admin ) {
   
@@ -39,8 +61,8 @@ public class AdministradorController {
     }
     @GetMapping(value = "/leerAdministradores", produces = "application/json")
     @ResponseBody
-    public List<Administrador> leerAdministradores(){
-       List<Administrador> administradores = this.adminService.leerAdministradores();
+    public Iterable<Administrador> leerAdministradores(){
+       Iterable<Administrador> administradores = this.adminService.leerAdministradores();
        return administradores;
     }
     @DeleteMapping(value = "/borrarAdminPorEmail")
