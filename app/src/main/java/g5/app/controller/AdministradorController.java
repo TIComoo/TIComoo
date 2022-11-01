@@ -29,18 +29,20 @@ public class AdministradorController {
 
     @Autowired
     private  AdministradorService adminService;
+    @Autowired
     private  RiderService riderService;
+    @Autowired
     private ClienteService clienteService;
 
     @GetMapping("/admin-view")
-    public String getAdministradorList(Model model){
-        model.addAttribute("admin-list", adminService.leerAdministradores());
-        model.addAttribute("rider-list", riderService.leerRiders());
-        model.addAttribute("cliente-list", clienteService.consultarClientes());
+    public String getAdministradorView(Model model){
+       /*  model.addAttribute("adminList", adminService.leerAdministradores());    
+        model.addAttribute("riderList", riderService.leerRiders());
+        model.addAttribute("clienteList", clienteService.consultarClientes()); */
         model.addAttribute("listTabAdmin", "active");
         model.addAttribute("listTabRider", "active"); 
         model.addAttribute("listTabCliente","active" );
-         
+          
 
         return "users/admin-view";
 

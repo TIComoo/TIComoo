@@ -1,5 +1,5 @@
 <div class="table-responsive">
-	<table id="cliente-list" class="table table-bordered table-hover table-striped">
+	<table id="clienteList" class="table table-bordered table-hover table-striped">
 		<thead class="thead-light">
 		<tr>
 			<th scope="col">Email</th>
@@ -13,12 +13,14 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="cliente: ${cliente-list}">
+		<tr th:each="cliente: ${clienteList}">
 			<td th:text="${cliente.email}"></td>
 			<td th:text="${cliente.nombre}"></td>
 			<td th:text="${cliente.apellido}"></td>
 			<td th:text="${cliente.pwd}"></td>
-			<td th:text="${cliente.zona}"></td>
+			<td th:text="${cliente.nif}"></td>
+			<td th:text="${cliente.direccion}"></td>
+			<td th:text="${cliente.telefono}"></td>
 			<!-- <td>
 					<a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
 					| <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>

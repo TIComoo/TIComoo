@@ -1,6 +1,6 @@
 
 <div class="table-responsive">
-	<table id="admin-list" class="table table-bordered table-hover table-striped">
+	<table id="adminList" class="table table-bordered table-hover table-striped">
 		<thead class="thead-light">
 		<tr>
 			<th scope="col">Email</th>
@@ -8,11 +8,11 @@
 			<th scope="col">Apellido</th>
 			<th scope="col">pwd</th>
 			<th scope="col">zona</th>
-			<th></th>
+			
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="admin: ${admin-list}">
+		<tr th:each="admin: ${adminList}">
 			<td th:text="${admin.email}"></td>
 			<td th:text="${admin.nombre}"></td>
 			<td th:text="${admin.apellido}"></td>
