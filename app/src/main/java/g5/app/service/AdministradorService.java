@@ -13,7 +13,7 @@ import g5.app.model.Administrador;
 public class AdministradorService {
 
   @Autowired
-  AdministradorRepository adminRepository;
+  private AdministradorRepository adminRepository; // he añadido private
 
   // CRUD Crear y Modificar. Testeado con TDD que Modificar funciona
   // correctamente.

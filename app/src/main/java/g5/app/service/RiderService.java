@@ -13,7 +13,7 @@ import g5.app.model.Rider;
 public class RiderService {
 
   @Autowired
-  RiderRepository riderRepository;
+  private RiderRepository riderRepository; // he añadido private
 
   public void guardarRider(Rider rider) {
     riderRepository.save(rider);
