@@ -1,8 +1,14 @@
-package g5.app;
+package g5.app.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import g5.app.CustomException;
+import g5.app.SequenceGeneratorServicePlato;
+import g5.app.dao.PlatoRepository;
+import g5.app.dao.RestauranteRepository;
+import g5.app.model.Plato;
 
 
 @Service
@@ -11,34 +17,46 @@ public class PlatoService {
     @Autowired
    private PlatoRepository platoRepository;
 
+   @Autowired
+   private RestauranteRepository restauranteRepository;
+
    public Boolean validarNombreNoRepe(Plato plato)throws CustomException{
 
-    if(platoRepository.findBynombre(plato.getNombre()).isPresent()){
+        if(platoRepository.findBynombre(plato.getNombre()).isPresent()){
 
-        throw new CustomException("Nombre no disponible");
+            throw new CustomException("Nombre no disponible");
 
+        }
+        return true;
     }
+    public Boolean validarNombreRestaurante(Plato plato)throws CustomException{
 
-    return true;
-   }
+        if(!restauranteRepository.findByNombre(plato.getNombreRestaurante()).isPresent()){
+    
+            throw new CustomException("El restaurante no existe");
+    
+        }
+
+        return true;
+    }
 
    public Boolean categoriaValida(Plato plato) throws CustomException{
 
-    if(!plato.getCategoria().equalsIgnoreCase("primero") && !plato.getCategoria().equalsIgnoreCase("segundo") && !plato.getCategoria().equalsIgnoreCase("postre")
-    && !plato.getCategoria().equalsIgnoreCase("entrante")){
+        if(!plato.getCategoria().equalsIgnoreCase("primero") && !plato.getCategoria().equalsIgnoreCase("segundo") && !plato.getCategoria().equalsIgnoreCase("postre")
+        && !plato.getCategoria().equalsIgnoreCase("entrante")){
 
-        throw new CustomException("La categoria debe de ser: Entrante,primero,segundo o postre");
-    }
+            throw new CustomException("La categoria debe de ser: Entrante,primero,segundo o postre");
+        }
 
 
-    return true;
+        return true;
    }
 
     public void insert(Plato plato)throws CustomException{
        
 
-        if(validarNombreNoRepe(plato) && categoriaValida(plato)){
-            plato.setId(SequenceGeneratorService.generateSequence(Plato.SEQUENCE_NAME));
+        if(validarNombreNoRepe(plato) && categoriaValida(plato)&& validarNombreRestaurante(plato)){
+            plato.setId(SequenceGeneratorServicePlato.generateSequence(Plato.SEQUENCE_NAME));
             platoRepository.insert(plato);
         }
          

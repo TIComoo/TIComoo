@@ -1,4 +1,4 @@
-package g5.app;
+package g5.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import g5.app.CustomException;
+import g5.app.service.PlatoService;
+import g5.app.model.Plato;
 
 @RestController
 @RequestMapping("plato")

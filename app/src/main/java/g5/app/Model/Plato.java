@@ -1,4 +1,4 @@
-package g5.app;
+package g5.app.model;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +24,10 @@ public class Plato {
     private String nombre;
 
     @NotBlank(message = "Campo requerido")
+    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
+    private String nombreRestaurante;
+
+    @NotBlank(message = "Campo requerido")
     private String imagen;
 
     @NotBlank(message = "Campo requerido")
@@ -41,7 +45,8 @@ public class Plato {
     @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
     private String categoria;
 
-    public Plato(String nombre,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
+    public Plato(String nombre,String nombreRestaurante,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
+       this.nombreRestaurante=nombreRestaurante;
         this.categoria=categoria;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -106,11 +111,25 @@ public class Plato {
         this.aptoVeganos = aptoVeganos;
     }
 
+
+    public String getNombreRestaurante() {
+        return nombreRestaurante;
+    }
+
+    public void setNombreRestaurante(String nombreRestaurante) {
+        this.nombreRestaurante = nombreRestaurante;
+    }
+
     @Override
     public String toString() {
-        return "Plato [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", descripcion=" + descripcion
-                + ", precio=" + precio + ", aptoVeganos=" + aptoVeganos + ", categoria=" + categoria + "]";
+        return "Plato [id=" + id + ", nombre=" + nombre + ", nombreRestaruante=" + nombreRestaurante + ", imagen="
+                + imagen + ", descripcion=" + descripcion + ", precio=" + precio + ", aptoVeganos=" + aptoVeganos
+                + ", categoria=" + categoria + "]";
     }
+
+    
+
+    
 
    
 

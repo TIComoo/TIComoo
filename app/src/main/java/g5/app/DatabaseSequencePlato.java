@@ -5,14 +5,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document(collection = "Orden_Platos")
-public class DatabaseSequence {
+public class DatabaseSequencePlato {
 
     @Id
     private String id;
 
     private long seq;
 
-    public DatabaseSequence() {}
+    public DatabaseSequencePlato() {}
 
     public String getId() {
         return id;

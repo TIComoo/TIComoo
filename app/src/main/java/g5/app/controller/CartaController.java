@@ -1,4 +1,4 @@
-package g5.app;
+package g5.app.controller;
 
 import javax.validation.Valid;
 
@@ -15,12 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import g5.app.service.CartaService;
+import g5.app.dao.CartaRepository;
+import g5.app.model.Carta;
+import g5.app.model.Plato;
+
 @RestController
 @RequestMapping("carta")
 public class CartaController {
 
     @Autowired
     CartaService cartaService=new CartaService();
+	@Autowired
+    CartaRepository cartaRepository;
 
     @GetMapping("/insert")
 	public String insertForm(Model model) {
@@ -65,6 +72,19 @@ public class CartaController {
 			model.addAttribute("listErrorMessage",e.getMessage());
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
 		}
+	}
+
+	@GetMapping("/list/{id}")
+	public Iterable<Plato> listarPlatosCarta(@PathVariable(name="id")Long id,Model model){	
+		
+		try {
+			return cartaService.listarPlatos(cartaRepository.findById(id).get().getNombreRestaurante());
+
+		} catch (Exception e) {
+			model.addAttribute("listErrorMessage",e.getMessage());
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+		}
+
 	}
 
     private void baseAttributerForPlatoForm(Model model, Carta carta) {
