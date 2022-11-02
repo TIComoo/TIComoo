@@ -10,6 +10,61 @@
 
 			</div>
 		</div>
+		
+				<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">DNI</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="text" th:field="${riderForm.nif}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}">Nombre Error</div>
+
+			</div>
+		</div>
+		
+				<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Matricula</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="text" th:field="${riderForm.matricula}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}">Nombre Error</div>
+
+			</div>
+		</div>
+		
+				<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Carnet</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="text" th:field="${riderForm.carnet}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('carnet')}" th:errors="*{carnet}">Nombre Error</div>
+
+			</div>
+		</div>
+		
+				<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Tipo vehiculo</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="text" th:field="${riderForm.tipoVehiculo}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('tipoVehiculo')}" th:errors="*{tipoVehiculo}">Nombre Error</div>
+
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="password" th:field="${riderForm.pwd}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}">Nombre Error</div>
+
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Confirmar contraseña</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="password" th:field="${riderForm.confirmarPwd}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('confirmarPwd')}" th:errors="*{confirmarPwd}">Nombre Error</div>
+
+			</div>
+		</div>
+		
 
 		<div class="form-group row">
 			<div class="col-lg-12 text-center">
