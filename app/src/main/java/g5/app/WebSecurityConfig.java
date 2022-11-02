@@ -63,7 +63,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter
         http
         .authorizeRequests()
         .antMatchers(resources).permitAll()
-        .antMatchers("/", "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}").permitAll()
+        .antMatchers( "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()

@@ -2,7 +2,7 @@
     <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Id</label>
         <div class="col-lg-9">
-            <input class="form-control" type="text" th:field="${platoForm.id}" th:disabled="${disableFields}">
+            <input class="form-control" type="text" th:field="${platoForm.id}" th:disabled="${disableFields}"readonly="readonly">
                 <div class="alert-danger" th:if="${#fields.hasErrors('id') }" th:errors="*{id}">id Error</div>
 
         </div>

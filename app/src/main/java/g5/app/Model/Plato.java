@@ -20,7 +20,7 @@ public class Plato {
     private long id;
 
     @NotBlank(message = "Campo requerido")
-    @Pattern(regexp = "[a-zA-Z]{0,20}", message = "Este campo no debe contener valores numéricos")
+    @Pattern(regexp = "[a-zA-Z ]{0,20}", message = "Este campo no debe contener valores numéricos")
     private String nombre;
 
     @NotBlank(message = "Campo requerido")

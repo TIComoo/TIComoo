@@ -9,14 +9,11 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import g5.app.CustomException;
 import g5.app.dao.PlatoRepository;
@@ -38,7 +35,7 @@ public class PlatoController {
         model.addAttribute("platoForm", new Plato());
         model.addAttribute("platoList", platoService.getAllPlatos());
         model.addAttribute("listTab", "active");
-        return "user-form/user-view";
+        return "plato-form/plato-view";
     }
     
     @PostMapping("/crearPlato")
@@ -69,7 +66,7 @@ public class PlatoController {
 
 		model.addAttribute("platoList", platoService.getAllPlatos());
 
-		return "user-form/user-view";
+		return "plato-form/plato-view";
 	}
 
 	@GetMapping("/editPlato/{id}")
@@ -82,7 +79,7 @@ public class PlatoController {
 		model.addAttribute("formTab", "active");
 		model.addAttribute("editMode", "true");
 
-		return "user-form/user-view";
+		return "plato-form/plato-view";
 	}
 
 
@@ -116,7 +113,7 @@ public class PlatoController {
 		
 		model.addAttribute("platoList", platoService.getAllPlatos());
 
-		return "user-form/user-view";
+		return "plato-form/plato-view";
 	}
 
     @GetMapping("/deletePlato/{id}")
@@ -133,7 +130,7 @@ public class PlatoController {
 		model.addAttribute("platoList", platoService.getAllPlatos());
 		model.addAttribute("listTab", "active");
 
-		return "user-form/user-view";
+		return "plato-form/plato-view";
 	}
 	
 }
