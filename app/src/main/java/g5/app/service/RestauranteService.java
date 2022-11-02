@@ -1,5 +1,6 @@
 package g5.app.service;
 
+
 import g5.app.model.Restaurante;
 
 public interface RestauranteService {
@@ -13,3 +14,4 @@ public interface RestauranteService {
 	public void eliminarRestaurante(String nombre) throws Exception;
 
 }
+

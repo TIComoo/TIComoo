@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 /*********************************************************************
  *
  * Class Name: WebSecurityConfig Author/s name: Gregorio Release/Creation date:
@@ -50,7 +51,7 @@ public class WebSecurityConfig {
 		http.authorizeRequests().antMatchers(resources).permitAll()
 				.antMatchers("/", "/index", "/signup", "/admin/admin-view", "/admin/admin-list", "/rider/guardarRider",
 						"/restauranteForm", "/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
-						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}",
+						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}", "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}",
 						"/admin/borrarAdminPorEmail/{email}", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.defaultSuccessUrl("/users").failureUrl("/login?error=true").usernameParameter("username")
@@ -78,3 +79,4 @@ public class WebSecurityConfig {
 	}
 
 }
+
