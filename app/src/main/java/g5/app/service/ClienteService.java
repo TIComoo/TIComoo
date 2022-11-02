@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.ClienteRepository;
-import g5.app.dao.UsuarioRepository;
+
 import g5.app.model.Cliente;
 
 @Service
@@ -15,8 +15,8 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	@Autowired
-	private UsuarioRepository userRepository;
+	/* @Autowired
+	private UsuarioRepository userRepository; */
 
 	// CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es
 	// inmutable.

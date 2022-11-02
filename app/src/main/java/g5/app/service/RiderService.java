@@ -1,7 +1,7 @@
 package g5.app.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import g5.app.dao.RiderRepository;
 
-import g5.app.model.Administrador;
+
 import g5.app.model.Rider;
 
 @Service
@@ -30,14 +30,14 @@ public class RiderService {
     riderRepository.save(rider);
 
   }
-
+/* 
   private boolean emailValido(Rider rider) throws Exception {
     Rider encontrado = leerRiderPorEmail(rider.getEmail());
     if (encontrado != null) {
       throw new Exception();
     }
     return true;
-  }
+  } */
 
   public List<Rider> leerRiders() {
     List<Rider> administradores = riderRepository.findAll();

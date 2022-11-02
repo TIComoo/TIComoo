@@ -43,7 +43,7 @@ public class CartaService {
     public List<Plato>listarPlatos(String nombreRestaurante)throws CustomException{
         
         
-        return platoRepository.findBynombreRestaurante(nombreRestaurante);
+        return platoRepository.findByNombreRestaurante(nombreRestaurante);
     }
     
 }

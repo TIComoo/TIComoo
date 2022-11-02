@@ -7,9 +7,9 @@ import g5.app.model.Restaurante;
 import java.util.*;
 public interface RestauranteRepository extends MongoRepository<Restaurante,String>{
 
-	Optional<Restaurante> findByemail(String email);
+	Optional<Restaurante> findByEmail(String email);
 
-	Optional<Restaurante> findBynombre(String nombre);
+	Optional<Restaurante> findByNombre(String nombre);
 
 }
 

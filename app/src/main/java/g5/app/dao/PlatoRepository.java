@@ -8,8 +8,8 @@ import java.util.*;
 
 public interface PlatoRepository extends MongoRepository<Plato,Long>{
 
-	Optional<Plato> findBynombre(String nombre);
-	List<Plato>findBynombreRestaurante(String nombre);
+	Optional<Plato> findByNombre(String nombre);
+	List<Plato>findByNombreRestaurante(String nombre);
 
 	
 }

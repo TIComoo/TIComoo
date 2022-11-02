@@ -16,14 +16,14 @@ public class RestauranteServiceImpl implements RestauranteService{
 	public Restaurante createRestaurante(Restaurante restaurante) {
 
 		
-		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCif().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf().isEmpty()|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
+		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCIF().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf().isEmpty()|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
 			throw new IllegalArgumentException("Rellene todos los campos");
 
 
 		if (this.restauranteRepository.findById(restaurante.getNombre()).isPresent())
 			throw new IllegalArgumentException("El restaurante ya existe en el sistema");
 		
-		if (this.restauranteRepository.findByemail(restaurante.getEmail()).isPresent()) 
+		if (this.restauranteRepository.findByEmail(restaurante.getEmail()).isPresent()) 
 			throw new IllegalArgumentException("El correo introducido ya esta asociado a un restaurante");
 	
 				
@@ -40,10 +40,10 @@ public class RestauranteServiceImpl implements RestauranteService{
 
 
 		java.util.Optional<Restaurante>  restauranteAux = this.restauranteRepository.findById(restaurante.getNombre());
-		java.util.Optional<Restaurante>  emailAux = this.restauranteRepository.findByemail(restaurante.getEmail());
+		java.util.Optional<Restaurante>  emailAux = this.restauranteRepository.findByEmail(restaurante.getEmail());
 
 
-		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCif().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf().isEmpty()|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
+		if (restaurante.getNombre().isEmpty() || restaurante.getRazon().isEmpty() || restaurante.getCIF().isEmpty() || restaurante.getDireccion().isEmpty()|| restaurante.getTlf().isEmpty()|| restaurante.getCategoria().isEmpty()|| restaurante.getEmail().isEmpty())
 		throw new IllegalArgumentException("Rellene todos los campos");
 
 		if (!restauranteAux.isPresent())

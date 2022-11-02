@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import g5.app.model.Administrador;
+import g5.app.model.Plato;
 import g5.app.model.Rider;
 import g5.app.service.AdministradorService;
 import g5.app.service.ClienteService;
+import g5.app.service.PlatoService;
 import g5.app.service.RestauranteService;
 import g5.app.service.RiderService;
 
@@ -39,6 +41,9 @@ public class AdministradorController {
 	@Autowired
 	private RestauranteService restauranteService;
 
+	@Autowired
+	private PlatoService platoService;
+
 	@GetMapping("/admin-view")
 	public String getAdministradorView(Model model) {
 		model.addAttribute("listTab", "active");
@@ -50,7 +55,8 @@ public class AdministradorController {
 		model.addAttribute("adminForm", new Administrador());
 		model.addAttribute("crearRider",true);
 		model.addAttribute("riderForm", new Rider());
-
+		model.addAttribute("platoForm", new Plato());
+        model.addAttribute("platoList", platoService.getAllPlatos());
 
 		model.addAttribute("adminList", adminService.leerAdministradores());
 		model.addAttribute("riderList", riderService.leerRiders());

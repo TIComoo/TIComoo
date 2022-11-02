@@ -18,7 +18,7 @@ public class SequenceGeneratorServicePlato {
 
     @Autowired
     public SequenceGeneratorServicePlato(MongoOperations mongoOperations) {
-        this.mongoOperations = mongoOperations;
+        SequenceGeneratorServicePlato.mongoOperations = mongoOperations;
     }
 
     public static long generateSequence(String seqName) {

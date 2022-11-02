@@ -18,7 +18,7 @@ public class SequenceGeneratorServiceCarta {
 
     @Autowired
     public SequenceGeneratorServiceCarta(MongoOperations mongoOperations) {
-        this.mongoOperations = mongoOperations;
+        SequenceGeneratorServiceCarta.mongoOperations = mongoOperations;
     }
 
     public static long generateSequence(String seqName) {

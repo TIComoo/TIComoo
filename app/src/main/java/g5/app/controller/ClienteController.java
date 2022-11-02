@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import g5.app.model.Cliente;
 import g5.app.service.ClienteService;
@@ -35,7 +35,7 @@ public class ClienteController {
 		
 		model.addAttribute("signup",true);
 		model.addAttribute("clientesForm", new Cliente());
-		return "user-form/user-signup";
+		return "users/cliente-signup";
 	}
 
 	
@@ -46,7 +46,7 @@ public class ClienteController {
 		model.addAttribute("signup",true);
 		
 		if(result.hasErrors()) {
-			return "user-form/user-signup";
+			return "users/cliente-signup";
 		}else {
 			try {
 				clienteService.guardarCliente(cliente);

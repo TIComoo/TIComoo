@@ -22,7 +22,7 @@ public class PlatoService {
 
    public Boolean validarNombreNoRepe(Plato plato)throws CustomException{
 
-        if(platoRepository.findBynombre(plato.getNombre()).isPresent()){
+        if(platoRepository.findByNombre(plato.getNombre()).isPresent()){
 
             throw new CustomException("Nombre no disponible");
 
