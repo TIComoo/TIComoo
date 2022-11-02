@@ -100,6 +100,7 @@ public class PlatoController {
 				platoService.update(plato);
 				model.addAttribute("platoForm",new Plato());
 				model.addAttribute("listTab", "active");
+
 				
 
 
@@ -113,8 +114,9 @@ public class PlatoController {
 			}
 		}
 		
+		model.addAttribute("platoList", platoService.getAllPlatos());
 
-	return "user-form/user-view";
+		return "user-form/user-view";
 	}
 
     @GetMapping("/deletePlato/{id}")

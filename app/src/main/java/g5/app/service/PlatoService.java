@@ -63,14 +63,16 @@ public class PlatoService {
        
     }
     
-    public Plato update(Plato fromPlato)throws CustomException{
-         
+    public void update(Plato fromPlato)throws CustomException{
+
+        if(validarNombreNoRepe(fromPlato) && categoriaValida(fromPlato)&& validarNombreRestaurante(fromPlato)){ 
         Plato toPlato=getPlatorById(fromPlato.getId());
         mapUser(fromPlato, toPlato);
 
        
-		return this.platoRepository.save(toPlato);	
-
+		this.platoRepository.save(toPlato);	
+        }
+        
     }
 
     public void delete(Long id)throws CustomException{
