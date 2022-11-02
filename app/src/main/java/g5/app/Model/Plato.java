@@ -20,21 +20,20 @@ public class Plato {
     private long id;
 
     @NotBlank(message = "Campo requerido")
-    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
+    @Pattern(regexp = "[a-zA-Z]{2,20}", message = "Este campo no debe contener valores numéricos")
     private String nombre;
 
     @NotBlank(message = "Campo requerido")
-    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
+    @Pattern(regexp = "[a-zA-Z]{2,10}", message = "Este campo no debe contener valores numéricos")
     private String nombreRestaurante;
 
-    @NotBlank(message = "Campo requerido")
     private String imagen;
 
     @NotBlank(message = "Campo requerido")
-    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
+    @Pattern(regexp = "[a-zA-Z]{1,30}", message = "Este campo no debe contener valores numéricos")
     private String descripcion;
 
-    @NotBlank(message = "Campo requerido")
+    
     @Digits(integer = 4,fraction = 2,message = "Este campo debe de ser un numero")
     private double precio;
 
@@ -42,7 +41,7 @@ public class Plato {
     private boolean aptoVeganos;
 
     @NotBlank(message = "Campo requerido")
-    @Pattern(regexp = "[a-zA-Z]", message = "Este campo no debe contener valores numéricos")
+    @Pattern(regexp = "[a-zA-Z]{6,8}", message = "Este campo no debe contener valores numéricos")
     private String categoria;
 
     public Plato(String nombre,String nombreRestaurante,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {

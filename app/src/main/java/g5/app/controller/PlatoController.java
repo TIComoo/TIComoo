@@ -5,9 +5,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,103 +19,119 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import g5.app.CustomException;
+import g5.app.dao.PlatoRepository;
 import g5.app.service.PlatoService;
 import g5.app.model.Plato;
 
-@RestController
-@RequestMapping("plato")
+@Controller
+//@RequestMapping("plato")
 public class PlatoController {
 
     @Autowired
     PlatoService platoService=new PlatoService();
+	@Autowired
+    PlatoRepository platoRepository;
 
-	@GetMapping("/insert")
-	public String insertForm(Model model) {
-		
-		baseAttributerForPlatoForm(model, new Plato());
-		
-		return "carpeta/archivo.httml";
-	}
+
+	@GetMapping("/platoForm")
+    public String getRestaurantes(Model model) {
+        model.addAttribute("platoForm", new Plato());
+        model.addAttribute("platoList", platoService.getAllPlatos());
+        model.addAttribute("listTab", "active");
+        return "user-form/user-view";
+    }
     
-    @PostMapping("/insert")
-	public String insert(@Valid @RequestBody @ModelAttribute("dishForm")Plato plato, BindingResult result, Model model) {
-
+    @PostMapping("/crearPlato")
+	public String insert(@Valid @RequestBody @ModelAttribute("platoForm")Plato plato, BindingResult result, Model model)throws Exception {
 		
 
 		if(result.hasErrors()){
-			baseAttributerForPlatoForm(model, new Plato());
+
+			model.addAttribute("platoForm",plato);
+			model.addAttribute("formTab", "active");
 			
+
 		}else{
 
 			try {
-				
 				platoService.insert(plato);
+				model.addAttribute("platoForm",new Plato());
+				model.addAttribute("listTab", "active");
 
-			} catch (Exception e) {
 
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-				//model.addAttribute("formErrorMessage",e.getMessage());
+			}catch (Exception e) {
+				model.addAttribute("formErrorMessage",e.getMessage());
+				model.addAttribute("platoForm", plato);
+				model.addAttribute("formTab", "active");
+				model.addAttribute("platoList", platoService.getAllPlatos());
 			}
 		}
 
-		return "carpeta/archivo.httml";
+		model.addAttribute("platoList", platoService.getAllPlatos());
+
+		return "user-form/user-view";
 	}
 
-	@GetMapping("/update/{id}")
+	@GetMapping("/editPlato/{id}")
 	public String updateForm(Model model,@PathVariable(name="id" )long id)throws CustomException {
 
-		Plato platoToUpdate=platoService.getPlatorById(id);
-		
-		baseAttributerForPlatoForm(model, platoToUpdate);
+		Optional<Plato> platoToEdit = platoRepository.findById(id);
+
+		model.addAttribute("platoForm", platoToEdit);
+		model.addAttribute("platoList", platoService.getAllPlatos());
+		model.addAttribute("formTab", "active");
 		model.addAttribute("editMode", "true");
-		
-		return "carpeta/archivo.httml";
+
+		return "user-form/user-view";
 	}
 
 
-    @PostMapping("/update")
-	public String update(@Valid @RequestBody @ModelAttribute("dishForm")Plato plato, BindingResult result, Model model) {
+    @PostMapping("/editPlato")
+	public String update(@Valid @RequestBody @ModelAttribute("platoForm")Plato plato, BindingResult result, Model model) {
 
-		
-
-		if(result.hasErrors()){
-			baseAttributerForPlatoForm(model, plato);
-			model.addAttribute("editMode", "true");
+		if(result.hasErrors()) {
+			model.addAttribute("platoForm", plato);
+			model.addAttribute("editMode","true");
+			model.addAttribute("formTab", "active");
 			
-		}else{
+		}else {
 
 			try {
-				
 				platoService.update(plato);
-
-			} catch (Exception e) {
-
-				model.addAttribute("formErrorMessage",e.getMessage());
-				model.addAttribute("editMode", "true");
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+				model.addAttribute("platoForm",new Plato());
+				model.addAttribute("listTab", "active");
 				
+
+
+			}catch (Exception e) {
+				model.addAttribute("formErrorMessage",e.getMessage());
+				model.addAttribute("platoForm", plato);
+				model.addAttribute("formTab", "active");
+				model.addAttribute("platoList", platoService.getAllPlatos());
+				model.addAttribute("editMode","true");
+
 			}
 		}
+		
 
-		return "carpeta/archivo.httml";
+	return "user-form/user-view";
 	}
 
-    @GetMapping("/delete/{id}")
-	public void delete(Model model, @PathVariable(name="id")Long id) {
+    @GetMapping("/deletePlato/{id}")
+	public String delete(Model model, @PathVariable(name="id")Long id) {
 
 		try {
-            
-			platoService.delete(id);
-
-		} catch (Exception e) {
-			model.addAttribute("listErrorMessage",e.getMessage());
-			throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+			platoService.delete(id);;
+		
+		}catch (Exception e) {
+		model.addAttribute("listErrorMessage",e.getMessage());
 		}
+
+		model.addAttribute("platoForm", new Plato());
+		model.addAttribute("platoList", platoService.getAllPlatos());
+		model.addAttribute("listTab", "active");
+
+		return "user-form/user-view";
 	}
 	
-	private void baseAttributerForPlatoForm(Model model, Plato plato) {
-
-		model.addAttribute("dishForm", plato);
-		//model.addAttribute(activeTab,"active");
-	}
 }

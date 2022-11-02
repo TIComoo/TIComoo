@@ -63,16 +63,13 @@ public class PlatoService {
        
     }
     
-    public void update(Plato fromPlato)throws CustomException{
+    public Plato update(Plato fromPlato)throws CustomException{
          
-        Plato toPlato = this.getPlatorById(fromPlato.getId());
+        Plato toPlato=getPlatorById(fromPlato.getId());
+        mapUser(fromPlato, toPlato);
 
-		mapUser(fromPlato, toPlato);
-
-        if(validarNombreNoRepe(toPlato) && categoriaValida(toPlato)){
-
-            platoRepository.save(toPlato);
-        }
+       
+		return this.platoRepository.save(toPlato);	
 
     }
 
@@ -97,4 +94,8 @@ public class PlatoService {
         to.setPrecio(from.getPrecio());
         
 	}
+
+    public Iterable<Plato> getAllPlatos() {
+        return platoRepository.findAll();
+    }
 }
