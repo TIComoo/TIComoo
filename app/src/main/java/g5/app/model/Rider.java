@@ -27,10 +27,10 @@ public class Rider extends Usuario {
     private String tipoVehiculo; // he cambiado el nombre de tipo_vehiculo a tipoVehiculo por temas de calidad
     
     // he cambiado el orden de las entradas al constructor para que los atributos de usuario tengan el mismo orden en todas las clases
-    public Rider(String email, String nombre, String apellido, String pwd, String confirmarPwd, String nif, String tipoVehiculo,
+    public Rider(String email, String nombre, String apellido, String pwd, String nif, String tipoVehiculo,
 			String matricula, String carnet) {
 
-		super(email, nombre, apellido, pwd, confirmarPwd); // he cambiado también el orden de esto
+		super(email, nombre, apellido, pwd); // he cambiado también el orden de esto
 		this.nif = nif;
 		this.tipoVehiculo = tipoVehiculo;
 		this.matricula = matricula;

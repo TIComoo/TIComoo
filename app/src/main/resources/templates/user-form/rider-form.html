@@ -48,19 +48,10 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
+			<label class="col-lg-3 col-form-label form-control-label">Password</label>
 			<div class="col-lg-9">
 				<input class="form-control" type="password" th:field="${riderForm.pwd}" th:disabled="${disableFields}">
 					<div class="alert-danger" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}">Nombre Error</div>
-
-			</div>
-		</div>
-		
-		<div class="form-group row">
-			<label class="col-lg-3 col-form-label form-control-label">Confirmar contraseña</label>
-			<div class="col-lg-9">
-				<input class="form-control" type="password" th:field="${riderForm.confirmarPwd}" th:disabled="${disableFields}">
-					<div class="alert-danger" th:if="${#fields.hasErrors('confirmarPwd')}" th:errors="*{confirmarPwd}">Nombre Error</div>
 
 			</div>
 		</div>
@@ -70,7 +61,7 @@
 			<div class="col-lg-12 text-center">
 				<a class="btn btn-secondary"  th:href="@{'/riderForm'}">Cancelar</a>
 				<input type="submit" class="btn btn-primary"
-				value="Guardar cambios" >
+				value="Crear Rider" >
 			</div>
 		</div>
 

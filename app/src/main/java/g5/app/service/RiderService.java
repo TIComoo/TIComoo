@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.RiderRepository;
+import g5.app.exception.CustomeFieldValidationException;
 import g5.app.model.Administrador;
 import g5.app.model.Rider;
 
@@ -16,10 +18,27 @@ public class RiderService {
   @Autowired
   RiderRepository riderRepository;
 
-  public void guardarRider(Rider rider) {
-    riderRepository.save(rider);
+  @Autowired
+  BCryptPasswordEncoder bCryptPasswordEncoder;
+  
+  public void guardarRider(Rider rider) throws Exception {
+    if(emailValido(rider)) {
+		String encodedPassword = bCryptPasswordEncoder.encode(rider.getPwd());
+		rider.setPwd(encodedPassword);
+	    riderRepository.save(rider);
+
+}
 
   }
+  
+
+private boolean emailValido(Rider rider) throws Exception {
+	Rider encontrado = leerRiderPorEmail(rider.getEmail());
+	if (encontrado != null) {
+		throw new CustomeFieldValidationException("Email no disponible","email");
+	}
+	return true;
+}
 
   public List<Rider> leerRiders() {
     List<Rider> administradores = riderRepository.findAll();

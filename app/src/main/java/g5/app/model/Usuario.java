@@ -11,16 +11,14 @@ public class Usuario {
 	protected String nombre;
 	protected String apellido;
 	protected String pwd;
-	protected String confirmarPwd;
 	private String rol;
 
 	// sin rol
-	public Usuario(String email, String nombre, String apellido, String pwd, String confirmarPwd) {
+	public Usuario(String email, String nombre, String apellido, String pwd) {
 		this.email = email;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.pwd = pwd;
-		this.confirmarPwd= confirmarPwd;
 	}
 
 	// Vacio
@@ -29,32 +27,23 @@ public class Usuario {
 	}
 
 	// Con rol
-	public Usuario(String email, String nombre, String apellido, String pwd, String confirmarPwd, String rol) {
+	public Usuario(String email, String nombre, String apellido, String pwd , String rol) {
 		this.email = email;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.pwd = pwd;
 		this.rol = rol;
-		this.confirmarPwd= confirmarPwd;
 
 	}
 
 	// Constructor con email y pwd
-	public Usuario(String email, String pwd, String confirmarPwd) {
+	public Usuario(String email, String pwd) {
 		this.email = email;
 		this.pwd = pwd;
-		this.confirmarPwd= confirmarPwd;
 
 	}
 
-	
-	public String getConfirmarPwd() {
-		return confirmarPwd;
-	}
 
-	public void setConfirmarPwd(String confirmarPwd) {
-		this.confirmarPwd = confirmarPwd;
-	}
 
 	public String getNombre() {
 		return nombre;
