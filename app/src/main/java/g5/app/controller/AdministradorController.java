@@ -3,7 +3,6 @@ package g5.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,8 +72,14 @@ public class AdministradorController {
 	}
 
 	@GetMapping("/borrarAdminPorEmail/{email}")
-	public void borrarAdminPorEmail(@PathVariable(name = "email") String email) {
-		this.adminService.borrarAdminPorEmail(email);
+	public String borrarAdminPorEmail(Model model, @PathVariable(name = "email") String email) {
+		try {
+			this.adminService.borrarAdminPorEmail(email);
+		} catch (Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		
+		return getAdministradorView(model);
 	}
 
 }

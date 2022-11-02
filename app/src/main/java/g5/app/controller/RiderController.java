@@ -3,7 +3,7 @@ package g5.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +26,6 @@ public class RiderController {
 
 	@PostMapping(value = "/guardarRider")
 	public void guardarRider(@RequestBody @ModelAttribute("Rider") Rider rider) {
-
 		this.riderService.guardarRider(rider);
 	}
 
@@ -45,9 +44,18 @@ public class RiderController {
 
 	}
 
-	@DeleteMapping(value = "/borrarRiderPorEmail/{email}")
-	public void borrarRiderPorEmail(@PathVariable(name = "email") String email) {
-		this.riderService.borrarRiderPorEmail(email);
+	@GetMapping("/borrarRiderPorEmail/{email}")
+	public String borrarRiderPorEmail(Model model, @PathVariable(name = "email") String email)  {
+		try {
+			this.riderService.borrarRiderPorEmail(email);
+		} catch (Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+
+		model.addAttribute("riderList", riderService.leerRiders());
+		model.addAttribute("listTab", "active");
+		
+		return "/admin/admin-view";
 	}
 
 }

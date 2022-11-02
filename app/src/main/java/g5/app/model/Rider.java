@@ -21,16 +21,15 @@ public class Rider extends Usuario {
 
     // Esta clase hereda de usuario, y estos son sus nuevos atributos
     
-    private String nif; // faltaba este atributo, que antes estaba en el padre, pero ahora no, así que hay que indicarlo aquí
+    private String nif;
     private String matricula;
     private String carnet;
-    private String tipoVehiculo; // he cambiado el nombre de tipo_vehiculo a tipoVehiculo por temas de calidad
+    private String tipoVehiculo;
     
-    // he cambiado el orden de las entradas al constructor para que los atributos de usuario tengan el mismo orden en todas las clases
     public Rider(String email, String nombre, String apellido, String pwd, String nif, String tipoVehiculo,
 			String matricula, String carnet) {
 
-		super(email, nombre, apellido, pwd); // he cambiado también el orden de esto
+		super(email, nombre, apellido, pwd);
 		this.nif = nif;
 		this.tipoVehiculo = tipoVehiculo;
 		this.matricula = matricula;
@@ -69,7 +68,5 @@ public class Rider extends Usuario {
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
     }
-
-
 
 }

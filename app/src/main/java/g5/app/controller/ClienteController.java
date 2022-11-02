@@ -3,7 +3,7 @@ package g5.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import g5.app.model.Cliente;
-
 import g5.app.service.ClienteService;
 
 @RestController
@@ -41,13 +40,19 @@ public class ClienteController {
 	@ResponseBody
 	public Cliente leerClientePorEmail(@RequestHeader String email) {
 		Cliente cliente = this.clienteService.leerClientePorEmail(email);
+		
 		return cliente;
-
 	}
 
-	@DeleteMapping(value = "/borrarClientePorEmail/{email}")
-	public void borrarClientePorEmail(@PathVariable(name = "email") String email) {
-		this.clienteService.borrarClientePorEmail(email);
+	@GetMapping("/borrarClientePorEmail/{email}")
+	public String borrarClientePorEmail(Model model, @PathVariable(name = "email") String email) {
+		try {
+			this.clienteService.borrarClientePorEmail(email);
+		} catch (Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		
+		return "users/admin-view";
 	}
 
 }

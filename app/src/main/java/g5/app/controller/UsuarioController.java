@@ -19,7 +19,7 @@ public class UsuarioController {
 
 	@GetMapping("/users")
 	public String loggueado() {
-		return "users/" + service.getLoggedUserRol().toLowerCase();
+		return "users/" + service.getLoggedUserRol().toLowerCase(); // cambiar redirección a las views
 	}
 
 }
