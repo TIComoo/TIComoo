@@ -1,0 +1,32 @@
+<div class="table-responsive">
+    <table
+      id="platoList"
+      class="table table-bordered table-hover table-striped"
+    >
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Nombre Restaurante</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Apto Vegano</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="plato: ${platoList}">
+          <td th:text="${plato.id}"></td>
+          <td th:text="${plato.nombre}"></td>
+          <td th:text="${plato.nombreRestaurante}"></td>
+          <td th:text="${plato.categoria}"></td>
+          <td th:text="${plato.precio}"></td>
+          <td th:text="${plato.aptoVeganos}"></td>
+          <td>
+              <a href="Id" th:href="@{'/editPlato/'+  ${plato.id}}"><i class="fas fa-edit"></i></a>
+              | <a href="#" th:href="@{'/deletePlato/'+  ${plato.id}}"><i class="fas fa-user-times"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
