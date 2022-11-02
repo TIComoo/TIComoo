@@ -65,6 +65,12 @@
 			<artifactId>json</artifactId>
 			<version>20220924</version>
 		</dependency>
+		<dependency>
+			   <groupId>org.jacoco</groupId>
+			   <artifactId>jacoco-maven-plugin</artifactId>
+			   <version>0.8.4</version>
+		</dependency>
+
 
 		
 		<dependency>
@@ -146,4 +152,6 @@
             		</plugin>
 		</plugins>
 	</build>
+
 </project>
+
