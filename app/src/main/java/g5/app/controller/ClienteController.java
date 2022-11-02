@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -21,32 +22,32 @@ import g5.app.service.ClienteService;
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+	@Autowired
+	private ClienteService clienteService;
 
-    @PostMapping(value = "/guardarCliente")
-    public void guardarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
-        this.clienteService.guardarCliente(cliente);
-    }
+	@PostMapping(value = "/guardarCliente")
+	public void guardarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {
+		this.clienteService.guardarCliente(cliente);
+	}
 
+	@GetMapping(value = "/leerClientes", produces = "application/json")
+	@ResponseBody
+	public List<Cliente> leerClientes() {
+		List<Cliente> clientes = this.clienteService.consultarClientes();
+		return clientes;
+	}
 
-    @GetMapping(value = "/leerClientes", produces = "application/json")
-    @ResponseBody
-    public List<Cliente> leerClientes() {
-        List<Cliente> clientes = this.clienteService.consultarClientes();
-        return clientes;
-    }
+	@GetMapping(value = "/leerClientePorEmail", produces = "application/json")
+	@ResponseBody
+	public Cliente leerClientePorEmail(@RequestHeader String email) {
+		Cliente cliente = this.clienteService.leerClientePorEmail(email);
+		return cliente;
 
-    @GetMapping(value = "/leerClientePorEmail", produces = "application/json")
-    @ResponseBody
-    public Cliente leerClientePorEmail(@RequestHeader String email) {
-        Cliente cliente = this.clienteService.leerClientePorEmail(email);
-        return cliente;
+	}
 
-    }
-    @DeleteMapping(value = "/borrarClientePorEmail")
-    public void borrarClientePorEmail(@RequestHeader String email) {
-        this.clienteService.borrarClientePorEmail(email);
-    }
+	@DeleteMapping(value = "/borrarClientePorEmail/{email}")
+	public void borrarClientePorEmail(@PathVariable(name = "email") String email) {
+		this.clienteService.borrarClientePorEmail(email);
+	}
 
 }

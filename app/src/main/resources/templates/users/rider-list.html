@@ -21,6 +21,9 @@
         <td th:text="${rider.tipoVehiculo}"></td>
         <td th:text="${rider.matricula}"></td>
         <td th:text="${rider.carnet}"></td>
+        <td>
+			<a href="Nombre" th:href="@{'/borrarRiderPorEmail/'+  ${rider.email}}"><i class="fas fa-user-times"></i></a>
+		</td>
         <!-- <td>
 					<a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
 					| <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>

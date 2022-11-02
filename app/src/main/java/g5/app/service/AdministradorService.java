@@ -7,41 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.AdministradorRepository;
+import g5.app.dao.UsuarioRepository;
 import g5.app.model.Administrador;
 
 @Service
 public class AdministradorService {
 
-  @Autowired
-  private AdministradorRepository adminRepository; // he añadido private
+	@Autowired
+	private AdministradorRepository adminRepository;
+	
+	@Autowired
+	private UsuarioRepository userRepository;
 
-  // CRUD Crear y Modificar. Testeado con TDD que Modificar funciona
-  // correctamente.
+	// CRUD Crear y Modificar. Testeado con TDD que Modificar funciona
+	// correctamente.
 
-  public void guardarAdministrador(Administrador a) {
-    adminRepository.save(a);
-  }
+	public void guardarAdministrador(Administrador a) {
+		adminRepository.save(a);
+	}
 
- 
+	public List<Administrador> leerAdministradores() {
+		// <Administrador> administradores = adminRepository.findAll();
+		List<Administrador> administradores = adminRepository.findAll();
+		return administradores;
 
-  public List<Administrador> leerAdministradores() {
-    //<Administrador> administradores = adminRepository.findAll();
-    List<Administrador> administradores = adminRepository.findAll();
-    return administradores;
+	}
 
-  }
+	public Administrador leerAdminPorEmail(String email) {
+		Optional<Administrador> adminOptional = adminRepository.findById(email);
 
-  public Administrador leerAdminPorEmail(String email) {
-    Optional<Administrador> adminOptional = adminRepository.findById(email);
+		Administrador admin = adminOptional.get();
 
-    Administrador admin = adminOptional.get();
+		return admin;
 
-    return admin;
+	}
 
-  }
-
-  public void borrarAdminPorEmail(String email) {
-    adminRepository.deleteById(email);
-  }
+	public void borrarAdminPorEmail(String email) {
+		adminRepository.deleteById(email);
+		userRepository.deleteById(email);
+	}
 
 }

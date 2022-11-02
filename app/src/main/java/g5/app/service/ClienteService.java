@@ -7,36 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.ClienteRepository;
+import g5.app.dao.UsuarioRepository;
 import g5.app.model.Cliente;
 
 @Service
 public class ClienteService {
-  @Autowired
-  private ClienteRepository clienteRepository; // le he añadido private
-  
-  // CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es
-  // inmutable.
-  public Cliente guardarCliente(Cliente cliente) { 
-    return clienteRepository.save(cliente);
-  }
+	@Autowired
+	private ClienteRepository clienteRepository;
 
-  public List<Cliente> consultarClientes() {
-    List<Cliente> clientes = clienteRepository.findAll();
+	@Autowired
+	private UsuarioRepository userRepository;
 
-    return clientes;
-  }
+	// CRUD Crear con TDD. Crea o modifica un usuario. Al ser su id el email es
+	// inmutable.
+	public Cliente guardarCliente(Cliente cliente) {
+		return clienteRepository.save(cliente);
+	}
 
-  public Cliente leerClientePorEmail(String email) {
-    Optional<Cliente> clienteOptional = clienteRepository.findById(email); // he puesto en minúscula la primera c de la variable
+	public List<Cliente> consultarClientes() {
+		List<Cliente> clientes = clienteRepository.findAll();
 
-    Cliente cliente = clienteOptional.get(); // he puesto en minúscula la primera c de la variable
+		return clientes;
+	}
 
-    return cliente;
+	public Cliente leerClientePorEmail(String email) {
+		Optional<Cliente> clienteOptional = clienteRepository.findById(email);
 
-  }
+		Cliente cliente = clienteOptional.get();
 
-  public void borrarClientePorEmail(String email) {
-    clienteRepository.deleteById(email);
-  }
+		return cliente;
+	}
+
+	public void borrarClientePorEmail(String email) {
+		clienteRepository.deleteById(email);
+	}
 
 }

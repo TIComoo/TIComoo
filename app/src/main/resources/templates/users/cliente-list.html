@@ -21,6 +21,9 @@
 			<td th:text="${cliente.nif}"></td>
 			<td th:text="${cliente.direccion}"></td>
 			<td th:text="${cliente.telefono}"></td>
+			<td>
+				<a href="Nombre" th:href="@{'/borrarClientePorEmail/'+  ${cliente.email}}"><i class="fas fa-user-times"></i></a>
+			</td>
 			<!-- <td>
 					<a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
 					| <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
