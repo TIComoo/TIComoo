@@ -41,9 +41,8 @@ public class RestauranteController {
 	public String getRestaurantes(Model model) {
 
 		model.addAttribute("restauranteForm", new Restaurante());
-		//model.addAttribute("restauranteList", restauranteService.getAllRestaurantes());
-		model.addAttribute("formTab", "active");
-
+		model.addAttribute("restauranteList", restauranteService.getAllRestaurantes());
+		model.addAttribute("listTab", "active");
 
 		return "restaurante-form/restaurante-view";
 	}
