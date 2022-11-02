@@ -36,6 +36,9 @@ public class Rider extends Usuario {
 		this.carnet = carnet;
 	}
     
+    public Rider() {
+    }
+
     // Getter y Setter de nif añadidos
     public String getNif() {
 		return nif;

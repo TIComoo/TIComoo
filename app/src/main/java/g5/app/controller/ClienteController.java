@@ -2,8 +2,13 @@ package g5.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
 import g5.app.model.Cliente;
 import g5.app.service.ClienteService;
 
-@RestController
+@Controller
 @RequestMapping("/cliente")
 public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
+
+	
+	@GetMapping("/signup")
+	public String signup(Model model) {
+		
+		model.addAttribute("signup",true);
+		model.addAttribute("clientesForm", new Cliente());
+		return "user-form/user-signup";
+	}
+
+	
+	@PostMapping("/signup")
+	public String signupAction(@Valid @ModelAttribute("clientesForm")Cliente cliente, BindingResult result, ModelMap model) {
+		cliente.setRol("USUARIO");
+		model.addAttribute("clientesForm", cliente);
+		model.addAttribute("signup",true);
+		
+		if(result.hasErrors()) {
+			return "user-form/user-signup";
+		}else {
+			try {
+				clienteService.guardarCliente(cliente);
+			
+			}catch (Exception e) {
+				model.addAttribute("formErrorMessage",e.getMessage());
+			}
+		}
+		return index();
+	}
+	
+	@GetMapping({"/","/login"})
+    public String index() {
+        return "index";
+    }
 
 	@PostMapping(value = "/guardarCliente")
 	public void guardarUsuario(@RequestBody @ModelAttribute("Cliente") Cliente cliente) {

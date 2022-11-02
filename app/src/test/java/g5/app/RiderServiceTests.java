@@ -44,14 +44,14 @@ public class RiderServiceTests {
     }
 
     @Test
-    public void test_crearRider() {
+    public void test_crearRider() throws Exception {
         Mockito.when(riderRepository.save(r)).thenReturn(r);
         servicio.guardarRider(r);
         assertNotNull(riderRepository.save(r));
     }
 
     @Test
-    public void test_modificarRider() { //
+    public void test_modificarRider() throws Exception { //
         Rider r_nuevo = new Rider(email, nombre, apellido, pwd, nif,  tipo_vehiculo, matricula, carnet);
         r_nuevo.setTipoVehiculo("Bicicleta");
         Mockito.when(riderRepository.save(r_nuevo)).thenReturn(r_nuevo);

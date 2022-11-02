@@ -1,8 +1,12 @@
 package g5.app.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import g5.app.model.Administrador;
+import g5.app.model.Rider;
 import g5.app.service.AdministradorService;
 import g5.app.service.ClienteService;
 import g5.app.service.RestauranteService;
@@ -41,6 +46,11 @@ public class AdministradorController {
 		 * model.addAttribute("listTab1", "active"); model.addAttribute("listTab2",
 		 * "active"); model.addAttribute("listTab3", "active");
 		 */
+		model.addAttribute("crearAdmin",true);
+		model.addAttribute("adminForm", new Administrador());
+		model.addAttribute("crearRider",true);
+		model.addAttribute("riderForm", new Rider());
+
 
 		model.addAttribute("adminList", adminService.leerAdministradores());
 		model.addAttribute("riderList", riderService.leerRiders());
@@ -50,6 +60,49 @@ public class AdministradorController {
 		return "users/admin-view";
 
 	}
+
+	@PostMapping("/crearAdmin")
+	public String signupAction(@Valid @ModelAttribute("adminForm")Administrador admin, BindingResult result, ModelMap model) {
+		admin.setRol("ADMIN");
+		model.addAttribute("adminForm", admin);
+		model.addAttribute("crearAdmin",true);
+		
+		if(result.hasErrors()) {
+			return "users/admin-view";
+		}else {
+			try {
+				adminService.guardarAdministrador(admin);
+
+			}catch (Exception e) {
+				model.addAttribute("formErrorMessage",e.getMessage());
+			}
+		}
+		return "users/admin-view";
+	}
+	
+	@PostMapping("/crearRider")
+	public String signupAction(@Valid @ModelAttribute("riderForm") Rider rider, BindingResult result, ModelMap model) {
+		rider.setRol("RIDER");
+		model.addAttribute("riderForm", rider);
+		model.addAttribute("crearRider",true);
+		
+		if(result.hasErrors()) {
+			return "user-form/admin-view";
+		}else {
+			try {
+				riderService.guardarRider(rider);
+
+			}catch (Exception e) {
+				model.addAttribute("formErrorMessage",e.getMessage());
+			}
+		}
+		return index();
+	}
+	@GetMapping({"/","/login"})
+    public String index() {
+        return "index";
+    }
+	
 
 	@PostMapping(value = "/guardarAdmin")
 	public void crearAdmin(@RequestBody @ModelAttribute("Administrador") Administrador admin) {
@@ -82,4 +135,25 @@ public class AdministradorController {
 		return getAdministradorView(model);
 	}
 
+	private void baseAdminForm(Model model, Administrador admin,String activeTab) {
+		model.addAttribute("adminForm", admin);
+		model.addAttribute(activeTab,"active");
+	}
+	
+	@GetMapping("/adminForm")
+	public String adminForm(Model model) {
+		baseAdminForm(model, new Administrador(), "listTab" );
+		return "users/admin-form";
+	}
+	
+	private void baseRiderForm(Model model, Rider rider,String activeTab) {
+		model.addAttribute("riderForm", rider);
+		model.addAttribute(activeTab,"active");
+	}
+	
+	@GetMapping("/riderForm")
+	public String riderForm(Model model) {
+		baseRiderForm(model, new Rider(), "listTab" );
+		return "users/rider-form";
+	}
 }

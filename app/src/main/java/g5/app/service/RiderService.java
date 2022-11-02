@@ -4,43 +4,56 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.RiderRepository;
-import g5.app.dao.UsuarioRepository;
+
+import g5.app.model.Administrador;
 import g5.app.model.Rider;
 
 @Service
 public class RiderService {
 
-	@Autowired
-	private RiderRepository riderRepository;
+  @Autowired
+  RiderRepository riderRepository;
 
-	@Autowired
-	private UsuarioRepository userRepository;
+  @Autowired
+  BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public void guardarRider(Rider rider) {
-		riderRepository.save(rider);
-	}
+  public void guardarRider(Rider rider) throws Exception {
+    /*
+     * if (emailValido(rider)) {
+     * String encodedPassword = bCryptPasswordEncoder.encode(rider.getPwd());
+     * rider.setPwd(encodedPassword);
+     */
+    riderRepository.save(rider);
 
-	public List<Rider> leerRiders() {
-		List<Rider> administradores = riderRepository.findAll();
+  }
 
-		return administradores;
-	}
+  private boolean emailValido(Rider rider) throws Exception {
+    Rider encontrado = leerRiderPorEmail(rider.getEmail());
+    if (encontrado != null) {
+      throw new Exception();
+    }
+    return true;
+  }
 
-	public Rider leerRiderPorEmail(String email) {
-		Optional<Rider> riderOptional = riderRepository.findById(email);
+  public List<Rider> leerRiders() {
+    List<Rider> administradores = riderRepository.findAll();
 
-		Rider rider = riderOptional.get();
+    return administradores;
+  }
 
-		return rider;
+  public Rider leerRiderPorEmail(String email) {
+    Rider rider = riderRepository.findByEmail(email);
 
-	}
+    return rider;
 
-	public void borrarRiderPorEmail(String email) {
-		riderRepository.deleteById(email);
-		userRepository.deleteById(email);
-	}
+  }
+
+  public void borrarRiderPorEmail(String email) {
+    riderRepository.deleteById(email);
+  }
 
 }

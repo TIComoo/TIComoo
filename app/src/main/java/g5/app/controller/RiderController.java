@@ -25,7 +25,7 @@ public class RiderController {
 	private RiderService riderService;
 
 	@PostMapping(value = "/guardarRider")
-	public void guardarRider(@RequestBody @ModelAttribute("Rider") Rider rider) {
+	public void guardarRider(@RequestBody @ModelAttribute("Rider") Rider rider) throws Exception {
 		this.riderService.guardarRider(rider);
 	}
 

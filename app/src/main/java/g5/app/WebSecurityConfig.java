@@ -48,10 +48,11 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(resources).permitAll()
-				.antMatchers("/", "/index", "/signup", "/admin/admin-view", "/admin/admin-list", "/rider/guardarRider",
+				.antMatchers("/", "/index", "/signup", "/admin/admin-view", "/rider/guardarRider",
 						"/restauranteForm", "/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
-						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}",
-						"/admin/borrarAdminPorEmail/{email}", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}")
+						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}", "/admin/adminForm",
+						"/admin/borrarAdminPorEmail/{email}", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}",
+						"/admin/crearAdmin","/admin/crearRider")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.defaultSuccessUrl("/users").failureUrl("/login?error=true").usernameParameter("username")
 				.passwordParameter("password").and().csrf().disable().logout().permitAll()
