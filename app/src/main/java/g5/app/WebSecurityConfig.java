@@ -70,7 +70,9 @@ public class WebSecurityConfig {
         .logout()
         .permitAll()
         .logoutSuccessUrl("/login?logout");
+        
         http.headers().httpStrictTransportSecurity().disable();
+
     	
     	return http.build();
     }

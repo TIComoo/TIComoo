@@ -11,7 +11,7 @@ public class Usuario {
     protected String nombre;
     protected String apellido;
     protected String pwd;
-    private String rol; // he cambiado la visibilidad de los atributos a protected menos de rol
+    private String rol;
 
     //sin rol
     public Usuario(String email, String nombre, String apellido, String pwd) {
@@ -20,9 +20,11 @@ public class Usuario {
         this.apellido = apellido;
         this.pwd = pwd;
     }
+    
     //vacio
     public Usuario() {
     }
+    
     //con rol
     public Usuario(String email, String nombre, String apellido, String pwd, String rol) {
         this.email = email;
@@ -31,6 +33,7 @@ public class Usuario {
         this.pwd = pwd;
         this.rol = rol;
     }
+    
     //constructor con email y pwd 
     public Usuario(String email, String pwd) {
         this.email = email;
@@ -82,6 +85,4 @@ public class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-
 }
