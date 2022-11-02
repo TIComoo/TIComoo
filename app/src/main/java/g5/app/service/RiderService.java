@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import g5.app.dao.RiderRepository;
+import g5.app.model.Administrador;
 import g5.app.model.Rider;
 
 @Service
@@ -27,9 +28,8 @@ public class RiderService {
   }
 
   public Rider leerRiderPorEmail(String email) {
-    Optional<Rider> riderOptional = riderRepository.findById(email);
+	    Rider rider = riderRepository.findByEmail(email);
 
-    Rider rider = riderOptional.get();
 
     return rider;
 

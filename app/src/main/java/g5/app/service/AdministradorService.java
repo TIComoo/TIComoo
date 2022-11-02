@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import g5.app.dao.AdministradorRepository;
 import g5.app.model.Administrador;
+import g5.app.model.Cliente;
 
 @Service
 public class AdministradorService {
@@ -32,9 +33,8 @@ public class AdministradorService {
   }
 
   public Administrador leerAdminPorEmail(String email) {
-    Optional<Administrador> adminOptional = adminRepository.findById(email);
+	    Administrador admin = adminRepository.findByEmail(email);
 
-    Administrador admin = adminOptional.get();
 
     return admin;
 

@@ -1,0 +1,25 @@
+<form class="form" role="form" autocomplete="off"  th:object="${riderForm}" th:action="@{/admin/crearRider}" method="post">
+
+
+		
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Email</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="email" th:field="${riderForm.email}" th:disabled="${disableFields}">
+					<div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Nombre Error</div>
+
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<div class="col-lg-12 text-center">
+				<a class="btn btn-secondary"  th:href="@{'/riderForm'}">Cancelar</a>
+				<input type="submit" class="btn btn-primary"
+				value="Guardar cambios" >
+			</div>
+		</div>
+
+		<div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error Message</div>
+		<div class="alert alert-success text-center d-none" id="formSuccess" th:text="${formSuccessMessage}" th:if="${editMode}" >Success MEssage</div>
+			
+	</form>

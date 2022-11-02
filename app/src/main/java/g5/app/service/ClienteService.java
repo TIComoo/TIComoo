@@ -37,7 +37,7 @@ public class ClienteService {
   private boolean emailValido(Cliente cliente) throws Exception {
 		Cliente encontrado = leerClientePorEmail(cliente.getEmail());
 		if (encontrado != null) {
-			throw new CustomeFieldValidationException("Nombre no disponible","username");
+			throw new CustomeFieldValidationException("Email no disponible","email");
 		}
 		return true;
 	}
