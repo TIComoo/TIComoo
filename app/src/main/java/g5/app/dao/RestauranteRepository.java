@@ -8,7 +8,8 @@ import java.util.*;
 public interface RestauranteRepository extends MongoRepository<Restaurante,String>{
 
 	Optional<Restaurante> findByemail(String email);
-	Optional<Restaurante> findByNombre(String nombre);
 
+	Optional<Restaurante> findBynombre(String nombre);
 
 }
+

@@ -1,0 +1,16 @@
+
+POST http://localhost:8080/usuario/crearUsuario HTTP/1.1
+
+Content-Type: "application/json"
+
+{
+     
+     "email": "john@example.com",
+     "nombre": "John",
+     "apellido": "Doe",
+     "nif": "12345678A",
+     "direccion": "Calle Falsa 123",
+     "telefono": "6666666",
+     "pwd": "1234"
+   
+}

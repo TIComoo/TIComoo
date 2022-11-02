@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table id="restauranteList" class="table table-bordered table-hover table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Razon</th>
+        <th scope="col">CIF</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">E-mail</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="restaurante: ${restauranteList}">
+        <td th:text="${restaurante.nombre}"></td>
+        <td th:text="${restaurante.razon}"></td>
+        <td th:text="${restaurante.cif}"></td>
+        <td th:text="${restaurante.direccion}"></td>
+        <td th:text="${restaurante.tlf}"></td>
+        <td th:text="${restaurante.categoria}"></td>
+        <td th:text="${restaurante.email}"></td>
+        <td>
+          <a href="Nombre" th:href="@{'/restauranteForm'}" <i class="fa-regular fa-square-plus"></i>
+            ></a>
+          <a href="Nombre" th:href="@{'/editRestaurante/'+  ${restaurante.nombre}}"><i class="fas fa-edit"></i></a>
+          |
+          <a href="Nombre" th:href="@{'/deleteRestaurante/'+  ${restaurante.nombre}}"><i
+              class="fas fa-user-times"></i></a>
+          
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
