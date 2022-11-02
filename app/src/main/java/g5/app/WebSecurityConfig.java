@@ -54,7 +54,8 @@ public class WebSecurityConfig {
     	http
         .authorizeRequests()
         .antMatchers(resources).permitAll()
-        .antMatchers("/", "/index", "/signup").permitAll()
+        .antMatchers("/", "/index", "/signup", "/admin/admin-view", "/admin/admin-list", "/rider/guardarRider", 
+        "/restauranteForm", "/crearRestaurante","/editRestaurante/{nombre}","/editRestaurante","/editRestaurante/crearRestaurante","/deleteRestaurante/{nombre}").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()
@@ -69,6 +70,9 @@ public class WebSecurityConfig {
         .logout()
         .permitAll()
         .logoutSuccessUrl("/login?logout");
+        
+        http.headers().httpStrictTransportSecurity().disable();
+
     	
     	return http.build();
     }
