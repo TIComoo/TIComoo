@@ -60,7 +60,7 @@ public class RestauranteTest {
     public void test_setCIF() {
        Restaurante restauranteAux1 = new Restaurante(nombre,razon,cif,direccion,tlf,categoria,email);
        restauranteAux1.setCif("CIF");
-       assertEquals("CIF", restauranteAux1.getCIF));
+       assertEquals("CIF", restauranteAux1.getCIF());
     }
 
     @Test
