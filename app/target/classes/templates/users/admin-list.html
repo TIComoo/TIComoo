@@ -1,0 +1,39 @@
+
+<div class="table-responsive">
+	<table id="adminList" class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">Email</th>
+			<th scope="col">Nombre</th>
+			<th scope="col">Apellido</th>
+			<th scope="col">pwd</th>
+			<th scope="col">zona</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="admin: ${adminList}">
+			<td th:text="${admin.email}"></td>
+			<td th:text="${admin.nombre}"></td>
+			<td th:text="${admin.apellido}"></td>
+			<td th:text="${admin.pwd}"></td>
+			<td th:text="${admin.zona}"></td>
+			<td>
+				<a href="Nombre" th:href="@{'/admin/borrarAdminPorEmail/'+  ${admin.email}}"><i class="fas fa-user-times"></i></a>
+				<!-- <a href="Nombre" th:href="@users/rider-list.html" <i class="fa-regular fa-square-plus"></i>
+					></a> -->
+			</td>
+			
+			 <!--  <a href="Nombre" th:href="@{'/editRestaurante/'+  ${restaurante.nombre}}"><i class="fas fa-edit"></i></a>
+			
+			   -->
+	
+
+			<!-- <td>
+					<a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
+					| <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
+			</td> -->
+		</tr>
+		</tbody>
+	</table>
+</div>
