@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -92,7 +93,7 @@ public class RestauranteController {
 	
 
 	
-	@PostMapping("/crearRestaurante")
+	@PostMapping("/createRestaurante")
 	public void postCrearRestaurante(@RequestBody Map<String, Object> info) throws Exception {
 
 		try {
@@ -115,6 +116,38 @@ public class RestauranteController {
 		
 	}
 
+	
+	@PostMapping("/editRestaurante")
+	public void postEditarRestaurante(@RequestBody Map<String, Object> info) throws Exception {
+
+		try {
+			JSONObject jso = new JSONObject(info);
+			Restaurante restaurante = new Restaurante();
+			restaurante.setNombre(jso.getString("nombre"));
+			restaurante.setRazon(jso.getString("razon"));
+			restaurante.setCIF(jso.getString("CIF"));
+			restaurante.setDireccion(jso.getString("direccion"));
+			restaurante.setTlf(jso.getString("tlf"));
+			restaurante.setCategoria(jso.getString("categoria"));
+			restaurante.setEmail(jso.getString("email"));
+			
+			restauranteService.editarRestaurante(restaurante);
+
+
+		} catch (ResponseStatusException e) {
+			throw e;
+		}
+	}
+	
+
+	@GetMapping("/deleteRestaurante/{nombre}")
+		public void getEliminarrRestaurante(@PathVariable String nombre) {
+			try {
+				this.restauranteService.eliminarRestaurante(nombre);
+			} catch (Exception e) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
+			}
+		}
 	/*
 	@GetMapping("/restauranteForm")
 >>>>>>> main:server/src/main/java/ticomo/app/controller/RestauranteController.java
