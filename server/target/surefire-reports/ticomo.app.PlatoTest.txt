@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: ticomo.app.PlatoTest
--------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.275 s - in ticomo.app.PlatoTest
