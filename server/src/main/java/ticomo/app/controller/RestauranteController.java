@@ -1,8 +1,10 @@
 package ticomo.app.controller;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-    
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import ticomo.app.dao.RestauranteRepository;
 import ticomo.app.model.Restaurante;
@@ -22,8 +27,8 @@ import ticomo.app.service.RestauranteService;
 
 
 
-@Controller
-
+@RestController
+@RequestMapping("restaurantes")
 public class RestauranteController {
 
 	@Autowired
@@ -31,7 +36,42 @@ public class RestauranteController {
 	
 	@Autowired
 	RestauranteRepository restauranteRepository;
+	
+	
+	@GetMapping("/restauranteForm")
+	public List<Restaurante> getAllRestaurantes() {
+		
+		return restauranteService.getAllRestaurantes();
 
+
+	}
+	
+
+	
+	@PostMapping("/crearRestaurante")
+	public void postCrearRestaurante(@RequestBody Map<String, Object> info) throws Exception {
+
+		try {
+			JSONObject jso = new JSONObject(info);
+			Restaurante restaurante = new Restaurante();
+			restaurante.setNombre(jso.getString("nombre"));
+			restaurante.setRazon(jso.getString("razon"));
+			restaurante.setCIF(jso.getString("CIF"));
+			restaurante.setDireccion(jso.getString("direccion"));
+			restaurante.setTlf(jso.getString("tlf"));
+			restaurante.setCategoria(jso.getString("categoria"));
+			restaurante.setEmail(jso.getString("email"));
+			
+			restauranteService.createRestaurante(restaurante);
+
+
+		} catch (ResponseStatusException e) {
+			throw e;
+		}
+		
+	}
+
+	/*
 	@GetMapping("/restauranteForm")
 	public String getRestaurantes(Model model) {
 
@@ -121,6 +161,6 @@ public class RestauranteController {
 		model.addAttribute("listTab", "active");
 		return "restaurante-form/restaurante-view";
 	}
-
+*/
 }
 

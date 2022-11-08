@@ -50,7 +50,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(resources).permitAll()
 				.antMatchers("/", "/index", "/cliente/signup", "/admin/admin-view", "/rider/guardarRider",
-						"/restauranteForm", "/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
+						"/restaurantes/restauranteForm", "/restaurantes/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
 						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}", "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}",
 						"/admin/borrarAdminPorEmail/{email}", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()

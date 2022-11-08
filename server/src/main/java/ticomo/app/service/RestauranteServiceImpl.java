@@ -1,5 +1,7 @@
 package ticomo.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +81,8 @@ public class RestauranteServiceImpl implements RestauranteService{
 
 }
 
-	public Iterable<Restaurante> getAllRestaurantes() {
+	public List<Restaurante> getAllRestaurantes() {
+		
 		return restauranteRepository.findAll();
 	}
 
