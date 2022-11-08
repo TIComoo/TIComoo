@@ -1,14 +1,12 @@
 package ticomo.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import javax.validation.Valid;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import ticomo.app.model.Cliente;
 import ticomo.app.service.ClienteService;
 
-@Controller
+@RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
@@ -39,20 +39,23 @@ public class ClienteController {
 
 	
 	@PostMapping("/signup")
-	public String signupAction(@Valid @ModelAttribute("clientesForm")Cliente cliente, BindingResult result, ModelMap model) {
-		cliente.setRol("USUARIO");
-		model.addAttribute("clientesForm", cliente);
-		model.addAttribute("signup",true);
-		
-		if(result.hasErrors()) {
-			return "users/cliente-signup";
-		}else {
-			try {
-				clienteService.guardarCliente(cliente);
+	public String signupAction(@RequestBody Map<String, Object> info) throws Exception {
+		try {
+			JSONObject jso = new JSONObject(info);
+			Cliente cliente = new Cliente();
+			cliente.setApellido(jso.getString("email"));
+			cliente.setNombre(jso.getString("nombre"));
+			cliente.setApellido(jso.getString("apellido"));
+			cliente.setPwd(jso.getString("pwd"));
+			cliente.setNif(jso.getString("nif"));
+			cliente.setDireccion(jso.getString("direccion"));
+			cliente.setTelefono(jso.getString("telefono"));
 			
-			}catch (Exception e) {
-				model.addAttribute("formErrorMessage",e.getMessage());
-			}
+			clienteService.guardarCliente(cliente);
+
+
+		} catch (ResponseStatusException e) {
+			throw e;
 		}
 		return index();
 	}
