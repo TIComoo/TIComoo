@@ -1,7 +1,10 @@
 package ticomo.app.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,12 +54,12 @@ public class AdministradorController {
 		 * model.addAttribute("listTab1", "active"); model.addAttribute("listTab2",
 		 * "active"); model.addAttribute("listTab3", "active");
 		 */
-		model.addAttribute("crearAdmin",true);
+		model.addAttribute("crearAdmin", true);
 		model.addAttribute("adminForm", new Administrador());
-		model.addAttribute("crearRider",true);
+		model.addAttribute("crearRider", true);
 		model.addAttribute("riderForm", new Rider());
 		model.addAttribute("platoForm", new Plato());
-        model.addAttribute("platoList", platoService.getAllPlatos());
+		model.addAttribute("platoList", platoService.getAllPlatos());
 
 		model.addAttribute("adminList", adminService.leerAdministradores());
 		model.addAttribute("riderList", riderService.leerRiders());
@@ -68,50 +71,60 @@ public class AdministradorController {
 	}
 
 	@PostMapping("/crearAdmin")
-	public String signupAction(@Valid @ModelAttribute("adminForm")Administrador admin, BindingResult result, ModelMap model) {
+	public String signupAction(@Valid @ModelAttribute("adminForm") Administrador admin, BindingResult result,
+			ModelMap model) {
 		admin.setRol("ADMIN");
 		model.addAttribute("adminForm", admin);
-		model.addAttribute("crearAdmin",true);
-		
-		if(result.hasErrors()) {
+		model.addAttribute("crearAdmin", true);
+
+		if (result.hasErrors()) {
 			return "users/admin-view";
-		}else {
+		} else {
 			try {
 				adminService.guardarAdministrador(admin);
 
-			}catch (Exception e) {
-				model.addAttribute("formErrorMessage",e.getMessage());
+			} catch (Exception e) {
+				model.addAttribute("formErrorMessage", e.getMessage());
 			}
 		}
 		return "users/admin-view";
 	}
-	
+
 	@PostMapping("/crearRider")
 	public String signupAction(@Valid @ModelAttribute("riderForm") Rider rider, BindingResult result, ModelMap model) {
 		rider.setRol("RIDER");
 		model.addAttribute("riderForm", rider);
-		model.addAttribute("crearRider",true);
-		
-		if(result.hasErrors()) {
+		model.addAttribute("crearRider", true);
+
+		if (result.hasErrors()) {
 			return "user-form/admin-view";
-		}else {
+		} else {
 			try {
 				riderService.guardarRider(rider);
 
-			}catch (Exception e) {
-				model.addAttribute("formErrorMessage",e.getMessage());
+			} catch (Exception e) {
+				model.addAttribute("formErrorMessage", e.getMessage());
 			}
 		}
 		return index();
 	}
-	@GetMapping({"/","/login"})
-    public String index() {
-        return "index";
-    }
-	
+
+	@GetMapping({ "/", "/login" })
+	public String index() {
+		return "index";
+	}
 
 	@PostMapping(value = "/guardarAdmin")
-	public void crearAdmin(@RequestBody @ModelAttribute("Administrador") Administrador admin) {
+	public void crearAdmin(@RequestBody Map<String, Object> info) {
+		JSONObject jso = new JSONObject(info);
+
+		Administrador admin = new Administrador();
+		admin.setEmail(jso.getString("email"));
+		admin.setNombre(jso.getString("nombre"));
+		admin.setApellido(jso.getString("apellido"));
+		admin.setPwd(jso.getString("pwd"));
+		admin.setZona(jso.getString("zona"));
+
 		this.adminService.guardarAdministrador(admin);
 	}
 
@@ -131,35 +144,31 @@ public class AdministradorController {
 	}
 
 	@GetMapping("/borrarAdminPorEmail/{email}")
-	public String borrarAdminPorEmail(Model model, @PathVariable(name = "email") String email) {
-		try {
-			this.adminService.borrarAdminPorEmail(email);
-		} catch (Exception e) {
-			model.addAttribute("listErrorMessage", e.getMessage());
-		}
-		
-		return getAdministradorView(model);
+	public String borrarAdminPorEmail(@PathVariable(name = "email") String email) {
+		this.adminService.borrarAdminPorEmail(email);
+
+		return "/admin/admin-view";
 	}
 
-	private void baseAdminForm(Model model, Administrador admin,String activeTab) {
+	private void baseAdminForm(Model model, Administrador admin, String activeTab) {
 		model.addAttribute("adminForm", admin);
-		model.addAttribute(activeTab,"active");
+		model.addAttribute(activeTab, "active");
 	}
-	
+
 	@GetMapping("/adminForm")
 	public String adminForm(Model model) {
-		baseAdminForm(model, new Administrador(), "listTab" );
+		baseAdminForm(model, new Administrador(), "listTab");
 		return "users/admin-form";
 	}
-	
-	private void baseRiderForm(Model model, Rider rider,String activeTab) {
+
+	private void baseRiderForm(Model model, Rider rider, String activeTab) {
 		model.addAttribute("riderForm", rider);
-		model.addAttribute(activeTab,"active");
+		model.addAttribute(activeTab, "active");
 	}
-	
+
 	@GetMapping("/riderForm")
 	public String riderForm(Model model) {
-		baseRiderForm(model, new Rider(), "listTab" );
+		baseRiderForm(model, new Rider(), "listTab");
 		return "users/rider-form";
 	}
 }

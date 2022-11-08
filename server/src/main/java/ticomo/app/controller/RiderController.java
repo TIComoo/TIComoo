@@ -1,11 +1,11 @@
 package ticomo.app.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +24,21 @@ public class RiderController {
 	@Autowired
 	private RiderService riderService;
 
+	// cambiado
 	@PostMapping(value = "/guardarRider")
-	public void guardarRider(@RequestBody @ModelAttribute("Rider") Rider rider) throws Exception {
+	public void guardarRider(@RequestBody Map<String, Object> info) {
+		JSONObject jso = new JSONObject(info);
+
+		Rider rider = new Rider();
+		rider.setEmail(jso.getString("email"));
+		rider.setNombre(jso.getString("nombre"));
+		rider.setApellido(jso.getString("apellido"));
+		rider.setPwd(jso.getString("pwd"));
+		rider.setNif(jso.getString("nif"));
+		rider.setTipoVehiculo(jso.getString("tipoVehiculo"));
+		rider.setMatricula(jso.getString("matricula"));
+		rider.setCarnet(jso.getString("carnet"));
+
 		this.riderService.guardarRider(rider);
 	}
 
@@ -41,19 +54,12 @@ public class RiderController {
 	public Rider leerRiderPorEmail(@RequestHeader String email) {
 		Rider rider = this.riderService.leerRiderPorEmail(email);
 		return rider;
-
 	}
 
+	// cambiado
 	@GetMapping("/borrarRiderPorEmail/{email}")
-	public String borrarRiderPorEmail(Model model, @PathVariable(name = "email") String email) {
-		try {
-			this.riderService.borrarRiderPorEmail(email);
-		} catch (Exception e) {
-			model.addAttribute("listErrorMessage", e.getMessage());
-		}
-
-		model.addAttribute("riderList", riderService.leerRiders());
-		model.addAttribute("listTab", "active");
+	public String borrarRiderPorEmail(@PathVariable(name = "email") String email) {
+		this.riderService.borrarRiderPorEmail(email);
 
 		return "/admin/admin-view";
 	}

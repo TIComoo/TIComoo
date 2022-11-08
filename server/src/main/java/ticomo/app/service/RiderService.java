@@ -18,7 +18,7 @@ public class RiderService {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public void guardarRider(Rider rider) throws Exception {
+	public void guardarRider(Rider rider) {
 		/*
 		 * if (emailValido(rider)) { String encodedPassword =
 		 * bCryptPasswordEncoder.encode(rider.getPwd()); rider.setPwd(encodedPassword);
