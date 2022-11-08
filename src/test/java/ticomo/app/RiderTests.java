@@ -23,6 +23,27 @@ public class RiderTests {
 
     Rider r = new Rider(nombre, apellido, nif, email, pwd, tipo_vehiculo, matricula, carnet);
 
+
+    @Test
+	public void test_CrearObjetoRider() {
+
+        String nombre = "John";
+        String apellido = "Doe";
+        String nif = "12345678k";
+        String email = "johndoe@gmail.com";
+        String pwd = "1234";
+        String tipo_vehiculo = "Motocicleta";
+        String matricula = "1199";
+        String carnet = "2222";
+
+        Rider r1 = new Rider(nombre, apellido, nif, email, pwd, tipo_vehiculo, matricula, carnet);
+
+		System.out.println(r.toString());
+		System.out.println(r1.toString());
+
+	}
+
+    
     @Test
     public void test_Rider(){
         assertNotNull(r);
