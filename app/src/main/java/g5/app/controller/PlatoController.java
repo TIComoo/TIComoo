@@ -33,7 +33,7 @@ public class PlatoController {
 	@GetMapping("/platoForm")
     public String getRestaurantes(Model model) {
         model.addAttribute("platoForm", new Plato());
-        model.addAttribute("platoList", platoService.getAllPlatos());
+       // model.addAttribute("platoList", platoService.getAllPlatos());
         model.addAttribute("listTab", "active");
         return "plato-form/plato-view";
     }
@@ -60,11 +60,11 @@ public class PlatoController {
 				model.addAttribute("formErrorMessage",e.getMessage());
 				model.addAttribute("platoForm", plato);
 				model.addAttribute("formTab", "active");
-				model.addAttribute("platoList", platoService.getAllPlatos());
+				//model.addAttribute("platoList", platoService.getAllPlatos());
 			}
 		}
 
-		model.addAttribute("platoList", platoService.getAllPlatos());
+		//model.addAttribute("platoList", platoService.getAllPlatos());
 
 		return "plato-form/plato-view";
 	}
@@ -75,7 +75,7 @@ public class PlatoController {
 		Optional<Plato> platoToEdit = platoRepository.findById(id);
 
 		model.addAttribute("platoForm", platoToEdit);
-		model.addAttribute("platoList", platoService.getAllPlatos());
+		//model.addAttribute("platoList", platoService.getAllPlatos());
 		model.addAttribute("formTab", "active");
 		model.addAttribute("editMode", "true");
 
@@ -105,13 +105,13 @@ public class PlatoController {
 				model.addAttribute("formErrorMessage",e.getMessage());
 				model.addAttribute("platoForm", plato);
 				model.addAttribute("formTab", "active");
-				model.addAttribute("platoList", platoService.getAllPlatos());
+				//model.addAttribute("platoList", platoService.getAllPlatos());
 				model.addAttribute("editMode","true");
 
 			}
 		}
 		
-		model.addAttribute("platoList", platoService.getAllPlatos());
+		//model.addAttribute("platoList", platoService.getAllPlatos());
 
 		return "plato-form/plato-view";
 	}
@@ -127,7 +127,7 @@ public class PlatoController {
 		}
 
 		model.addAttribute("platoForm", new Plato());
-		model.addAttribute("platoList", platoService.getAllPlatos());
+		//model.addAttribute("platoList", platoService.getAllPlatos());
 		model.addAttribute("listTab", "active");
 
 		return "plato-form/plato-view";

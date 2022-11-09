@@ -56,7 +56,7 @@ public class AdministradorController {
 		model.addAttribute("crearRider",true);
 		model.addAttribute("riderForm", new Rider());
 		model.addAttribute("platoForm", new Plato());
-        model.addAttribute("platoList", platoService.getAllPlatos());
+       // model.addAttribute("platoList", platoService.getAllPlatos());
 
 		model.addAttribute("adminList", adminService.leerAdministradores());
 		model.addAttribute("riderList", riderService.leerRiders());

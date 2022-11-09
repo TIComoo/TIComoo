@@ -97,7 +97,7 @@ public class PlatoService {
         
 	}
 
-    public Iterable<Plato> getAllPlatos() {
-        return platoRepository.findAll();
+    public Iterable<Plato> getAllPlatosRestaurante(String nombreRestaurante) {
+        return platoRepository.findByNombreRestaurante(nombreRestaurante);
     }
 }
