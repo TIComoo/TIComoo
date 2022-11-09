@@ -27,7 +27,7 @@ import ticomo.app.service.RestauranteService;
 
 
 
-@RestController
+@Controller
 @RequestMapping("restaurantes")
 public class RestauranteController {
 
@@ -38,40 +38,6 @@ public class RestauranteController {
 	RestauranteRepository restauranteRepository;
 	
 	
-	@GetMapping("/restauranteForm")
-	public List<Restaurante> getAllRestaurantes() {
-		
-		return restauranteService.getAllRestaurantes();
-
-
-	}
-	
-
-	
-	@PostMapping("/crearRestaurante")
-	public void postCrearRestaurante(@RequestBody Map<String, Object> info) throws Exception {
-
-		try {
-			JSONObject jso = new JSONObject(info);
-			Restaurante restaurante = new Restaurante();
-			restaurante.setNombre(jso.getString("nombre"));
-			restaurante.setRazon(jso.getString("razon"));
-			restaurante.setCIF(jso.getString("CIF"));
-			restaurante.setDireccion(jso.getString("direccion"));
-			restaurante.setTlf(jso.getString("tlf"));
-			restaurante.setCategoria(jso.getString("categoria"));
-			restaurante.setEmail(jso.getString("email"));
-			
-			restauranteService.createRestaurante(restaurante);
-
-
-		} catch (ResponseStatusException e) {
-			throw e;
-		}
-		
-	}
-
-	/*
 	@GetMapping("/restauranteForm")
 	public String getRestaurantes(Model model) {
 
@@ -161,6 +127,6 @@ public class RestauranteController {
 		model.addAttribute("listTab", "active");
 		return "restaurante-form/restaurante-view";
 	}
-*/
+
 }
 
