@@ -52,7 +52,7 @@ public class WebSecurityConfig {
 				.antMatchers("/", "/index", "/cliente/signup", "/admin/admin-view", "/rider/guardarRider",
 						"/restaurantes/restauranteForm", "/restaurantes/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
 						"/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}", "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}",
-						"/admin/borrarAdminPorEmail/{email}", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}")
+						"/admin/borrarAdminPorEmail/{email}","/pedido/crearPedido", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.defaultSuccessUrl("/users").failureUrl("/login?error=true").usernameParameter("username")
 				.passwordParameter("password").and().csrf().disable().logout().permitAll()

@@ -1,5 +1,6 @@
 package ticomo.app.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -16,13 +17,13 @@ public class Pedido {
     @Id
     private long id;
 
-    private Plato [] platos ;
+    private ArrayList <Plato> platos = new ArrayList<Plato>() ;
     private double precio;
     private Date fecha;
     private String estado;
 
     
-    public Pedido(long id, Plato[] platos, double precio, Date fecha, String estado) {
+    public Pedido(long id, ArrayList <Plato> platos, double precio, Date fecha, String estado) {
         this.id = id;
         this.platos = platos;
         this.precio = precio;
@@ -38,10 +39,10 @@ public class Pedido {
     public void setId(long id) {
         this.id = id;
     }
-    public Plato[] getPlatos() {
+    public ArrayList <Plato> getPlatos() {
         return platos;
     }
-    public void setPlatos(Plato[] platos) {
+    public void setPlatos(ArrayList <Plato> platos) {
         this.platos = platos;
     }
     public double getPrecio() {
@@ -63,11 +64,15 @@ public class Pedido {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido [id=" + id + ", platos=" + Arrays.toString(platos) + ", precio=" + precio + ", fecha=" + fecha
-                + ", estado=" + estado + "]";
+    public void sumarPrecios(){
+        double suma=0;
+        for(int i=0;i<this.platos.size();i++){
+            suma+=this.platos.get(i).getPrecio();
+        }
+        this.setPrecio(suma);
     }
 
+
+   
     
 }
