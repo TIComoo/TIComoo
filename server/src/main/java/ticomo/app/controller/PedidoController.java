@@ -14,7 +14,7 @@ import ticomo.app.model.Pedido;
 import ticomo.app.service.PedidoService;
 
 @RestController
-@RequestMapping("/Pedido")
+@RequestMapping("/pedido")
 public class PedidoController {
     
 
