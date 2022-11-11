@@ -14,7 +14,7 @@ const PedidoComponente: React.FC<IProps> = ({ pedido_, setPedido }) => {
     const deletePedido = () => {
         const options = { method: 'DELETE' }
 
-        fetch(`http://localhost:8080/pedido/${pedido_.id}`, options)
+        fetch("http://localhost:8080/pedido/"+ pedido_.id, options)
             .then(response => {
                 if (response.ok) {
                     setPedido(prevState => prevState.filter(item => item.id !== pedido_.id))

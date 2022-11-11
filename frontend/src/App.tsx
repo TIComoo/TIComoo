@@ -4,7 +4,7 @@ import PedidoListaComponente from "./components/PedidoListaComponente";
 import Container from 'react-bootstrap/Container';
 
 export interface IPedido {
-    id: number
+    id: any
     platos : []
     precio: number
     estado : string
