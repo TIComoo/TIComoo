@@ -1,5 +1,7 @@
 package ticomo.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class PedidoService {
 		
 
 	}
-    public void eliminarPedido(int id) throws CustomException {
+    public void eliminarPedido(Long id) throws CustomException {
 
 		Pedido pedido = this.buscarPedido(id);
 		pedidoRepository.delete(pedido);
@@ -51,7 +53,7 @@ public class PedidoService {
 
 	// }
 
-    public Iterable<Pedido> getAllPedidos() {
+    public List <Pedido> getAllPedidos() {
 		return pedidoRepository.findAll();
 	}
 

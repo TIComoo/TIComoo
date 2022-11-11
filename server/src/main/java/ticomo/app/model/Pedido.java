@@ -1,7 +1,6 @@
 package ticomo.app.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -19,11 +18,11 @@ public class Pedido {
 
     private ArrayList <Plato> platos = new ArrayList<Plato>() ;
     private double precio;
-    private Date fecha;
+    private String fecha;
     private String estado;
 
     
-    public Pedido(long id, ArrayList <Plato> platos, double precio, Date fecha, String estado) {
+    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado) {
         this.id = id;
         this.platos = platos;
         this.precio = precio;
@@ -51,10 +50,10 @@ public class Pedido {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     public String getEstado() {
