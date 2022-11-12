@@ -1,6 +1,8 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes, useState} from "react";
 import {IPedido} from "../App";
-import {Button, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
+import {Button} from "primereact/button";
+
 
 
 interface IProps {

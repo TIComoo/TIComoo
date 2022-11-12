@@ -1,0 +1,27 @@
+<div class="mx-auto ">
+	<table id="adminList" class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">Nombre</th>
+			<th scope="col">Apellido</th>
+			<th scope="col">zona</th>
+			<th scope="col">Email</th>
+			<th></th>
+
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="admin: ${adminList}">
+			<td th:text="${admin.nombre}"></td>
+			<td th:text="${admin.apellido}"></td>
+			<td th:text="${admin.zona}"></td>
+			<td th:text="${admin.email}"></td>
+
+			<td>
+				<a href="Email" th:href="@{'/admin/editAdmin/'+ ${admin.email}}"><i class="fas fa-edit"></i></a>
+				<a href="Email" th:href="@{'/admin/borrarAdminPorEmail/'+ ${admin.email}}"><i class="fas fa-user-times"></i></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

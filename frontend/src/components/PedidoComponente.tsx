@@ -1,6 +1,7 @@
 import React from "react";
 import {IPedido} from "../App";
-import {Row, Col, Button} from "react-bootstrap";
+import {Row, Col,} from "react-bootstrap";
+import {Button} from "primereact/button";
 
 
 interface IProps {
@@ -32,6 +33,7 @@ const PedidoComponente: React.FC<IProps> = ({ pedido_, setPedido }) => {
             <Col md={8}>
                 <span>{pedido_.id}</span>
             </Col>
+            
             <Col md={2}>
                 <Button onClick={deletePedido}>X</Button>
             </Col>

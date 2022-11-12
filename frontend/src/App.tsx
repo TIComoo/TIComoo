@@ -3,6 +3,10 @@ import PedidoEntradaComponente from "./components/PedidoEntradaComponente";
 import PedidoListaComponente from "./components/PedidoListaComponente";
 import Container from 'react-bootstrap/Container';
 
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+
 export interface IPedido {
     id: any
     platos : []
