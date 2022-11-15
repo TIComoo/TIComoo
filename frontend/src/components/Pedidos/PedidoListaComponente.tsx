@@ -1,5 +1,5 @@
 import React from "react";
-import {IPedido} from "../App";
+import {IPedido} from "../../App";
 import {Container} from "react-bootstrap";
 import PedidoComponente from "./PedidoComponente";
 
@@ -14,7 +14,6 @@ const PedidoListaComponente: React.FC<IProps> = ({pedido, setPedido}) => {
     return (
         <Container>
             <hr/>
-            <h2 className={"display-4"}>Pedido</h2>
             {
                 pedido.map(pedido_ => <PedidoComponente setPedido={setPedido} pedido_={pedido_}/>)
             }

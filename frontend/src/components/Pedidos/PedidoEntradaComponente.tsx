@@ -1,5 +1,5 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes, useState} from "react";
-import {IPedido} from "../App";
+import {IPedido} from "../../App";
 import {Col, Row} from "react-bootstrap";
 import {Button} from "primereact/button";
 
