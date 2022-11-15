@@ -1,5 +1,5 @@
 import React from "react";
-import {IPedido} from "../App";
+import {IPedido} from "../../App";
 import {Row, Col,} from "react-bootstrap";
 import {Button} from "primereact/button";
 
