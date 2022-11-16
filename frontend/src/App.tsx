@@ -59,8 +59,8 @@ const App: React.FC = () => {
  
     return (
         <div className="App">
-            <Menu></Menu>
-           {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>}
+            <Menu restaurante={restaurante} setRestaurante={setRestaurante}></Menu>
+           {/* {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>} */}
         </div>
     );
 }
