@@ -14,7 +14,7 @@ const baseURL = 'http://localhost:8080/';
 function PedidoListaComponente() {
     const [data, setData] = useState();
     useEffect(() => {
-        axios.get('pedido/todos')
+        axios.get(baseURL + 'pedido/todos')
             .then(res => {
                 setData(res.data)
             })
@@ -22,6 +22,10 @@ function PedidoListaComponente() {
     }
 
 }
+
+const pedidoComponente()
+
+export default PedidoListaComponente;
 
 
 
