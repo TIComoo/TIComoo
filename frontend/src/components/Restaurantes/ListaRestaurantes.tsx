@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { ListBox } from 'primereact/listbox';
-import { Button } from 'primereact/button';
+import React, { useState , useEffect} from 'react';
+import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
 import { IRestaurante } from '../../App';
-import RestauranteComponente from "./RestauranteComponente";
+import { RestauranteService } from '../../service/RestaurantesServices';
 
 interface IProps {
     restaurante: IRestaurante[]
@@ -10,46 +9,59 @@ interface IProps {
 }
 const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
 
+    const rr: IRestaurante={
+        nombre: '',
+        razon: '',
+        cif: '',
+        direccion: '',
+        tlf: '',
+        categoria: ''
+    }; 
 
-    const [selectedRestaurantes, setSelectedRestaurantes] = useState(null);
+    const [selectedRestaurantes, setSelectedRestaurantes] = useState(rr);
+
+    const restauranteService = new RestauranteService();
+
+    
 
 
     
 
-    // const restaurantes = [
-    //     { name: 'McDonals', code: 'AU' },
-    //     { name: 'KFC', code: 'BR' },
-    //     { name: 'Burger King', code: 'CN' },
-    //     { name: 'Sakura', code: 'EG' },
-    //     { name: 'Pomodoro', code: 'FR' },
-    //     { name: 'Diverxo', code: 'DE' },
-    //     { name: 'Jsio', code: 'IN' },
-    //     { name: 'Casa Pepe', code: 'JP' },
-    //     { name: 'Kebab Lavapies', code: 'ES' },
-    // ];
+    useEffect(() => {
+        restauranteService.getRestaurantes().then(restaurante_ => setRestaurante(restaurante_));
+    }, []); 
     
 
-    // const restaurantes= restaurante.map(restaurante_ => <RestauranteComponente setRestaurante={setRestaurante} restaurante_={restaurante_}/>);
-    console.log();
-    const countryTemplate = (option: { name: string ; code: string; }) => {
+    const countryTemplate = (restaurante: IRestaurante) => {
         return (
-            <div className="country-item">
-                <div>
-                    <img alt="logoTicomo" src="logoTicomo.png"  height="40" className="mr-2"></img>
+            <div className="restaurante-item">
+                
+                <img alt="logoTicomo" src="logoTicomo.png"  height="40" className="mr-2"></img>
+                <div>{restaurante.nombre}</div>
 
-                </div>
-                {/* <div>{restaurante.map(restaurante_ => <RestauranteComponente setRestaurante={setRestaurante} restaurante_={restaurante_}/>)}</div> */}
-                {/* <Button style={{ position: "relative" , left:"1450px" }} > x</Button> */}
-                <div>{option.name}</div>
             </div>
         );
     }
 
 
+
+      function seleccionRestaurante(selectedRestaurantes: IRestaurante){
+
+
+        
+        
+        console.log(selectedRestaurantes.nombre);
+
+      }
+
+
+
+      
+
     return (
         <div className="card">
             
-            <ListBox value={selectedRestaurantes} options={restaurantes} onChange={(e) => setSelectedRestaurantes(e.value)} multiple filter optionLabel="name"
+            <ListBox value={selectedRestaurantes}   options={restaurante} onClickCapture={(e)=>seleccionRestaurante(selectedRestaurantes)}  onChange={(e) => setSelectedRestaurantes(e.value)} filter optionLabel="nombre"
                 itemTemplate={countryTemplate} style={{ width: '95em' }} listStyle={{ maxHeight: '600px' }}  />
 
             
