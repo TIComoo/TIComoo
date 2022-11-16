@@ -49,7 +49,7 @@ const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
     return (
         <div className="card">
             
-            <ListBox value={selectedRestaurantes} options={restaurantes} onChange={(e) => setSelectedRestaurantes(e.value)} multiple filter optionLabel="name"
+            <ListBox value={selectedRestaurantes} options={restaurante} onChange={(e) => setSelectedRestaurantes(e.value)} multiple filter optionLabel="name"
                 itemTemplate={countryTemplate} style={{ width: '95em' }} listStyle={{ maxHeight: '600px' }}  />
 
             

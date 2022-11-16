@@ -7,6 +7,8 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 import Menu from './components/Menu';
+import MenuRider from './components/Rider/RiderNavBar'
+ 
 import ListaRestaurantes from './components/Restaurantes/ListaRestaurantes';
 
 
@@ -59,8 +61,9 @@ const App: React.FC = () => {
  
     return (
         <div className="App">
-            <Menu></Menu>
-           {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>}
+           {/*  <Menu></Menu>
+           {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>} */}
+            <MenuRider/>
         </div>
     );
 }

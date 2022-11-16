@@ -1,0 +1,33 @@
+[{
+  "_id": 9,
+  "platos": [
+    {
+      "_id": 5,
+      "nombre": "Patatas",
+      "nombreRestaurante": "McDonalds",
+      "descripcion": "Plato recomendado",
+      "precio": 13,
+      "aptoVeganos": true
+    },
+    {
+      "_id": 1,
+      "nombre": "Hamburguesa",
+      "nombreRestaurante": "McDonalds",
+      "descripcion": "Plato recomendado",
+      "precio": 10,
+      "aptoVeganos": true
+    },
+    {
+      "_id": 8,
+      "nombre": "Kebab",
+      "nombreRestaurante": "Kebab con salsa",
+      "descripcion": "Plato recomendado",
+      "precio": 8,
+      "aptoVeganos": true
+    }
+  ],
+  "precio": 31,
+  "fecha": "nov 12 2022, 07:54:51 p. m.",
+  "estado": "En reparto",
+  "_class": "ticomo.app.model.Pedido"
+}]
