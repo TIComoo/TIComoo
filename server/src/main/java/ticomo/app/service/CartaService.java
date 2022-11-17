@@ -46,4 +46,8 @@ public class CartaService {
 		return platoRepository.findByNombreRestaurante(nombreRestaurante);
 	}
 
+	public List<Carta> getAllCartas() {
+		
+		return cartaRepository.findAll();
+	}
 }

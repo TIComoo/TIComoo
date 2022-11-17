@@ -1,11 +1,14 @@
 package ticomo.app.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +24,8 @@ import ticomo.app.model.Plato;
 import ticomo.app.service.CartaService;
 
 @RestController
-@RequestMapping("carta")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/carta")
 public class CartaController {
 
     @Autowired
@@ -29,6 +33,12 @@ public class CartaController {
 	@Autowired
     CartaRepository cartaRepository;
 
+	@GetMapping("/todas")
+	public List<Carta> getCartas() {
+		
+		return cartaService.getAllCartas();
+
+	}
     @GetMapping("/insert")
 	public String insertForm(Model model) {
 		

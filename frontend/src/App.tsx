@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import PedidoEntradaComponente from "./components/Pedidos/PedidoEntradaComponente";
-import PedidoListaComponente from "./components/Pedidos/PedidoListaComponente";
-import Container from 'react-bootstrap/Container';
+
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
@@ -28,17 +26,37 @@ export interface IRestaurante{
     categoria: string
 }
 
+export interface ICarta{
+    id: any
+    nombreRestaurante: string
+}
+
+
 const App: React.FC = () => {
     const [pedido, setPedido] = useState<IPedido[]>([])
     const [restaurante, setRestaurante] = useState<IRestaurante[]>([])
+    const [carta, setCarta] = useState<ICarta[]>([])
 
+
+
+    // useEffect(() => {
+    //     const options = {method: 'GET'}
+
+    //     fetch("http://localhost:8080/restaurantes/restauranteForm", options)
+    //         .then(response => response.json())
+    //         .then(fetchedRestaurante => setRestaurante(fetchedRestaurante))
+    //         .catch(error => {
+    //             console.log(error)
+    //             alert("No se encuentran los restaurantes")
+    //         })
+    // }, [])
 
     useEffect(() => {
         const options = {method: 'GET'}
 
-        fetch("http://localhost:8080/restaurantes/restauranteForm", options)
+        fetch("http://localhost:8080/carta/todas", options)
             .then(response => response.json())
-            .then(fetchedRestaurante => setRestaurante(fetchedRestaurante))
+            .then(fetchedCarta => setCarta(fetchedCarta))
             .catch(error => {
                 console.log(error)
                 alert("No se encuentran los restaurantes")
@@ -59,8 +77,8 @@ const App: React.FC = () => {
  
     return (
         <div className="App">
-            <Menu restaurante={restaurante} setRestaurante={setRestaurante}></Menu>
-           {/* {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>} */}
+            <Menu></Menu>
+           {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante} carta={carta} setCarta={setCarta}/>}
         </div>
     );
 }

@@ -1,31 +1,8 @@
 import React, { useState } from 'react';
 import { Menubar } from 'primereact/menubar';
-import ListaRestaurantes from './Restaurantes/ListaRestaurantes';
-import { render } from '@testing-library/react';
 
-export interface IPedido {
-    id: any
-    platos : []
-    precio: number
-    estado : string
-}
 
-export interface IRestaurante{
-
-    nombre: string
-    razon: string
-    cif: string
-    direccion:string
-    tlf: string
-    categoria: string
-}
-
-interface IProps {
-    restaurante: IRestaurante[]
-    setRestaurante: React.Dispatch<React.SetStateAction<IRestaurante[]>>
-}
-
-const Menu: React.FC<IProps> = ({restaurante, setRestaurante}) =>{
+const Menu = () => {
 
 
     
@@ -33,7 +10,7 @@ const Menu: React.FC<IProps> = ({restaurante, setRestaurante}) =>{
         {
             label: 'Restaurantes',
             icon: 'pi pi-fw pi-home',
-            command:() =>  restaurantesClick()
+            command:()=>{ }
             
              
         },
@@ -58,13 +35,6 @@ const Menu: React.FC<IProps> = ({restaurante, setRestaurante}) =>{
         }
     ];
 
-    const restaurantesClick: () => any(){
-        
-            return{
-                <ListaRestaurantes restaurante={restaurante } setRestaurante={setRestaurante} ></ListaRestaurantes>
-            }
-        
-    }
     const start = <img alt="logoTicomo" src="logoTicomo.png"  height="40" className="mr-2"></img>;
 
     return (

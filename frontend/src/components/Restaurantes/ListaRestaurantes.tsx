@@ -1,13 +1,19 @@
 import React, { useState , useEffect} from 'react';
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
-import { IRestaurante } from '../../App';
-import { RestauranteService } from '../../service/RestaurantesServices';
+import { ListBox } from 'primereact/listbox';
+import { ICarta, IRestaurante } from '../../App';
+import { RestauranteService } from '../../service/RestauranteService';
+import {CartaService} from '../../service/CartaService';
+
 
 interface IProps {
     restaurante: IRestaurante[]
     setRestaurante: React.Dispatch<React.SetStateAction<IRestaurante[]>>
+    carta: ICarta[]
+    setCarta: React.Dispatch<React.SetStateAction<ICarta[]>>
+    
+
 }
-const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
+export const ListaRestaurantes: React.FC<IProps> = ({carta, setRestaurante, restaurante, setCarta}) => {
 
     const rr: IRestaurante={
         nombre: '',
@@ -18,17 +24,22 @@ const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
         categoria: ''
     }; 
 
+
     const [selectedRestaurantes, setSelectedRestaurantes] = useState(rr);
 
-    const restauranteService = new RestauranteService();
 
-    
+    const restauranteService = new RestauranteService();   
 
-
+    const cartaService = new CartaService();
     
 
     useEffect(() => {
-        restauranteService.getRestaurantes().then(restaurante_ => setRestaurante(restaurante_));
+        const serv=()=>{
+
+            cartaService.getCartas().then(carta_ => setCarta(carta_));
+            restauranteService.getRestaurantes().then(restaurante_ => setRestaurante(restaurante_));
+    };
+    serv();
     }, []); 
     
 
@@ -45,12 +56,17 @@ const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
 
 
 
-      function seleccionRestaurante(selectedRestaurantes: IRestaurante){
+      function seleccionRestaurante(selectedRestaurantes: IRestaurante, carta: ICarta[]){
 
+        for(let i=0;i<carta.length;i++){
 
+            if( selectedRestaurantes.nombre == carta.at(i)?.nombreRestaurante ){
+                console.log(selectedRestaurantes.nombre);
+            }
+  
+        }
         
         
-        console.log(selectedRestaurantes.nombre);
 
       }
 
@@ -61,7 +77,7 @@ const ListaRestaurantes: React.FC<IProps> = ({restaurante, setRestaurante}) => {
     return (
         <div className="card">
             
-            <ListBox value={selectedRestaurantes}   options={restaurante} onClickCapture={(e)=>seleccionRestaurante(selectedRestaurantes)}  onChange={(e) => setSelectedRestaurantes(e.value)} filter optionLabel="nombre"
+            <ListBox value={selectedRestaurantes}   options={restaurante} onDoubleClick={(e)=>seleccionRestaurante(selectedRestaurantes, carta)}  onChange={(e) => setSelectedRestaurantes(e.value)} filter optionLabel="nombre"
                 itemTemplate={countryTemplate} style={{ width: '95em' }} listStyle={{ maxHeight: '600px' }}  />
 
             
