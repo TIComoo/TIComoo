@@ -38,6 +38,14 @@ public class PedidoController {
 		return pedidoService.getAllPedidos();
 
 	}
+	@GetMapping("/pedidosDisponibles")
+	public List<Pedido> getAllpedidosDisponibles() {
+		
+
+		return pedidoService.getAllpedidosDisponibles();
+
+	}
+
     @PostMapping("/crearPedido")
 	public String crearPedido(@RequestBody Map<String, Object> info) throws Exception {
 		try {

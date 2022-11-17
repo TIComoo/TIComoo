@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 
 const Navigation = () => {
     const navlist = [
-        { label: 'Pedidos Disponibles', icon: 'pi pi-fw pi-home' },
-        { label: 'Historial de Pedidos', icon: 'pi pi-fw pi-file' },
-        { label: 'Cuenta', icon: 'pi pi-fw pi-user' },
-        {label: 'Mis Valoraciones' ,icon: 'pi pi-fw pi-thumbs-up-fill'},
-        { label: 'Salir' ,icon: 'pi pi-fw pi-power-off'}
+        { label: 'Pedidos Disponibles', icon: 'pi pi-fw pi-home', command: () => { window.location.href='/pedidos'}},
+        { label: 'Historial de Pedidos', icon: 'pi pi-fw pi-file', command: () => { window.location.href='/historial'} },
+        { label: 'Cuenta', icon: 'pi pi-fw pi-user', command: () => { window.location.href='/cuenta'}},
+        { label: 'Mis Valoraciones' ,icon: 'pi pi-fw pi-thumbs-up-fill', command: () => { window.location.href='/valoraciones'}},
+        { label: 'Salir' ,icon: 'pi pi-fw pi-power-off', command: () => { window.location.href='/salir'}}
          
     ];
 

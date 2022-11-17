@@ -8,8 +8,14 @@ import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 import Menu from './components/Menu';
 import MenuRider from './components/Rider/RiderNavBar'
- 
+import Pedidos from './components/Rider/Pedidos';
+import Historial from './components/Rider/Historial';
+import Cuenta from './components/Rider/Cuenta';
+import Valoraciones from './components/Rider/Valoraciones';
+import Salir from './components/Rider/Salir';
+
 import ListaRestaurantes from './components/Restaurantes/ListaRestaurantes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 
@@ -31,39 +37,22 @@ export interface IRestaurante{
 }
 
 const App: React.FC = () => {
-    const [pedido, setPedido] = useState<IPedido[]>([])
-    const [restaurante, setRestaurante] = useState<IRestaurante[]>([])
-
-
-    useEffect(() => {
-        const options = {method: 'GET'}
-
-        fetch("http://localhost:8080/restaurantes/restauranteForm", options)
-            .then(response => response.json())
-            .then(fetchedRestaurante => setRestaurante(fetchedRestaurante))
-            .catch(error => {
-                console.log(error)
-                alert("No se encuentran los restaurantes")
-            })
-    }, [])
-
-    // useEffect(() => {
-    //     const options = {method: 'GET'}
-
-    //     fetch("http://localhost:8080/pedido/todos", options)
-    //         .then(response => response.json())
-    //         .then(fetchedPedido => setPedido(fetchedPedido))
-    //         .catch(error => {
-    //             console.log(error)
-    //             alert("No se encuentran los pedidos")
-    //         })
-    // }, [])
- 
+   
     return (
         <div className="App">
            {/*  <Menu></Menu>
            {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>} */}
             <MenuRider/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/pedidos' element={<Pedidos/>}/>
+                    <Route path='/historial' element={<Historial/>}/>
+                    <Route path='/cuenta' element={<Cuenta/>}/>
+                    <Route path='/valoraciones' element={<Valoraciones/>}/>
+                    <Route path='/salir' element={<Salir/>}/>
+                    
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 }

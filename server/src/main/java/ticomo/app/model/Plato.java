@@ -127,6 +127,10 @@ public class Plato {
     }
 
     
+    public String getStringPlato() {
+    return   nombre + "  " + nombreRestaurante +"  "
+           + precio+ "euros. ";
+}
 
     
 

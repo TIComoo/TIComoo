@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export class PedidoService {
-    baseUrl = "http://localhost:8080/pedido/todos";
+export class RiderService {
+    baseUrl = "http://localhost:8080/pedido/pedidosDisponibles";
 
     getAll(){
         return axios.get(this.baseUrl).then(res => res.data);
+            
     }
 
   /*   save(persona) {
