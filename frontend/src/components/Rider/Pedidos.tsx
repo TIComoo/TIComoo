@@ -15,7 +15,8 @@ export interface IPedido {
     id?: any
     st_platos?: any,
     precio?: number,
-    estado?: string
+    estado?: string,
+    direccion?: string
 }
 export interface Pedido {
     id: any
@@ -65,11 +66,11 @@ const Pedidos = () => {
                 <DataTable value={pedidos} responsiveLayout="scroll" selectionMode="single" selection={selectedPedido} onSelectionChange={e => setSelectedPedido(e.value)}
                     onRowSelect={onRowSelect}  >
                     {/*  <Column field="id" header="id"></Column> */}
-                    <Column field="st_platos" header="platos"></Column>
-                    <Column field="precio" header="precio"></Column>
-                    <Column field="fecha" header="fecha"></Column>
-                    {/*  <Column field="estado" header="estado"></Column> */}
-
+                    <Column field="st_platos" header="Platos del pedido"></Column>
+                    <Column field="precio" header="Precio(euros)"></Column>
+                    <Column field="fecha" header="Fecha"></Column>
+                    <Column field="estado" header="Estado"></Column> 
+                    <Column field="direccion" header="Direccion"></Column>
                 </DataTable>
             </div>
 

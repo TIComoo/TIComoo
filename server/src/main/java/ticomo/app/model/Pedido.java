@@ -21,14 +21,18 @@ public class Pedido {
     private String fecha;
     private String estado;
     private String st_platos;
+    private String direccion;
     
-    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado, String st_platos) {
+
+    
+    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado, String st_platos, String direccion) {
         this.id = id;
         this.platos = platos;
         this.precio = precio;
         this.fecha = fecha;
         this.estado = estado;
         this.st_platos = st_platos;
+        this.direccion= direccion;
     }
     public String getStringPlatos(ArrayList <Plato> platos){
         String st = "";
@@ -95,6 +99,12 @@ public class Pedido {
     }
     public void setSt_platos(String st_platos) {
         this.st_platos = st_platos;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
 
