@@ -34,20 +34,27 @@ public class CartaService {
 		;
 
 	}
-
 	public Carta getCartaById(Long id) throws CustomException {
 
 		return cartaRepository.findById(id).orElseThrow(() -> new CustomException("El Id de la carta no existe."));
 
 	}
 
+	
 	public List<Plato> listarPlatos(String nombreRestaurante) throws CustomException {
 
 		return platoRepository.findByNombreRestaurante(nombreRestaurante);
 	}
 
+	public Carta leerCartaPorRestaurante(String cartaR) {
+		Carta carta= cartaRepository.findBynombreRestaurante(cartaR);
+
+		return carta;
+
+	}
 	public List<Carta> getAllCartas() {
 		
 		return cartaRepository.findAll();
 	}
+
 }

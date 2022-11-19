@@ -1,14 +1,18 @@
 package ticomo.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import ticomo.app.dao.CartaRepository;
+import ticomo.app.exception.CustomException;
 import ticomo.app.model.Carta;
 import ticomo.app.model.Plato;
 import ticomo.app.service.CartaService;
@@ -39,6 +44,20 @@ public class CartaController {
 		return cartaService.getAllCartas();
 
 	}
+
+	@GetMapping("/eleccion")
+	public List<Carta> getEleccion() {
+		
+		List<Carta> cartas = cartaService.getAllCartas();
+		List<Carta> aux = new ArrayList<>();
+		for(int i=0;i<cartas.size();i++){
+			if(cartas.get(i).getCartaElegida()!=null){
+				aux.add(cartas.get(i));
+			}
+		}
+		return aux;
+
+	}
     @GetMapping("/insert")
 	public String insertForm(Model model) {
 		
@@ -46,6 +65,17 @@ public class CartaController {
 		
 		return "carpeta/archivo.httml";
 	}
+
+	
+	@PostMapping("/enviar")
+    public Carta addEleccion(@RequestBody String content){
+        return cartaRepository.save(new Carta(" ",content));
+    }
+
+	@DeleteMapping("/{id}")
+    public void eliminarPedido(@PathVariable Long id) throws CustomException{
+        cartaService.delete(id);
+    }
 
     @PostMapping("/insert")
 	public String insert(@Valid @RequestBody @ModelAttribute("cartaForm")Carta carta, BindingResult result, Model model) {

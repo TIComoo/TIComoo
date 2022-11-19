@@ -10,28 +10,29 @@ const Menu = () => {
         {
             label: 'Restaurantes',
             icon: 'pi pi-fw pi-home',
-            command:()=>{ }
+            command:()=> { window.location.href='/restaurante'}
             
              
         },
         {
             label: 'Novedades',
             icon: 'pi pi-fw pi-bolt',
-            command:()=>{ window.location.href="http://localhost:8080/cliente/signup"; }
+            command:()=>{ window.location.href="/novedades"; }
         },
         {
             label: 'Historial Pedidos',
             icon: 'pi pi-fw pi-book',
-            command:()=>{ window.location.href="http://localhost:8080/cliente/signup"; }
+            command:()=>{ window.location.href="/historial"; }
         },
         {
             label: 'Configuración',
             icon: 'pi pi-fw pi-wrench',
-            command:()=>{ window.location.href="http://localhost:8080/cliente/signup"; }
+            command:()=>{ window.location.href="/configuracion"; }
         },
         {
             label: 'Salir',
             icon: 'pi pi-fw pi-power-off',
+            command:()=>{ window.location.href="/salir"; }
         }
     ];
 

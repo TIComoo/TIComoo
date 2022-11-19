@@ -17,7 +17,7 @@ public class PlatoTest {
 	String imagen = "url";
 	String descripcion = "Hamburguesa";
 	double precio = 3.0;
-	boolean aptoVeganos = true;
+	String aptoVeganos = "No";
     String categoria = "Hamburguesas";
 
 
@@ -32,7 +32,7 @@ public class PlatoTest {
 	String imagen = "url";
 	String descripcion = "Hamburguesa";
 	double precio = 3.0;
-	boolean aptoVeganos = true;
+	String aptoVeganos = "Si";
     String categoria = "Hamburguesas";
 
 	Plato platoAux1 = new Plato( nombre, nombreRestaurante, categoria,  imagen,  descripcion,  precio,  aptoVeganos);
@@ -88,8 +88,8 @@ public class PlatoTest {
     @Test
 	public void test_setAptoVeganos() {
 		Plato platoAux1 = new Plato( nombre, nombreRestaurante, categoria,  imagen,  descripcion,  precio,  aptoVeganos);
-		platoAux1.setAptoVeganos(true);
-		assertEquals(true, platoAux1.getAptoVeganos());
+		platoAux1.setAptoVeganos("No");
+		assertEquals("No", platoAux1.getAptoVeganos());
 	}
 	
     @Test

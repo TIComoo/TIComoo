@@ -19,10 +19,18 @@ public class Carta {
     @NotBlank(message = ("Nombre restaurante requerido"))
     private String nombreRestaurante;
 
+    private String cartaElegida;
 
     public Carta( String nombreRestaurante) {
         this.nombreRestaurante = nombreRestaurante;
     }
+
+    public Carta( String nombreRestaurante, String cartaElegida) {
+        this.nombreRestaurante = nombreRestaurante;
+        this.cartaElegida = cartaElegida;
+
+    }
+
     public Carta(){
         
     }
@@ -35,6 +43,13 @@ public class Carta {
         return nombreRestaurante;
     }
 
+    public String getCartaElegida() {
+        return cartaElegida;
+    }
+
+    public void setCartaElegida(String carta) {
+        this.cartaElegida = carta;
+    }
     
 
     public void setId(long id) {

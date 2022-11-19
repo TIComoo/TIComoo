@@ -54,7 +54,7 @@ public class PedidoController {
 				aux.setNombreRestaurante(jsonAux.getString("nombreRestaurante"));
 				aux.setDescripcion(jsonAux.getString("descripcion"));
 				aux.setPrecio(jsonAux.getDouble("precio"));
-				aux.setAptoVeganos(jsonAux.getBoolean("aptoVeganos"));
+				aux.setAptoVeganos(jsonAux.getString("aptoVeganos"));
 				pedido.getPlatos().add(aux);
 			}
 

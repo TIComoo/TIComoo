@@ -38,13 +38,13 @@ public class Plato {
     private double precio;
 
     @NotNull
-    private boolean aptoVeganos;
+    private String aptoVeganos;
 
     @NotBlank(message = "Campo requerido")
     @Pattern(regexp = "[a-zA-Z ]{0,8}", message = "Este campo no debe contener valores numéricos")
     private String categoria;
 
-    public Plato(String nombre,String nombreRestaurante,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
+    public Plato(String nombre,String nombreRestaurante,String categoria, String imagen, String descripcion, double precio, String aptoVeganos) {
        this.nombreRestaurante=nombreRestaurante;
         this.categoria=categoria;
         this.nombre = nombre;
@@ -80,7 +80,7 @@ public class Plato {
         return precio;
     }
 
-    public boolean getAptoVeganos() {
+    public String getAptoVeganos() {
         return aptoVeganos;
     }
 
@@ -106,7 +106,7 @@ public class Plato {
         this.precio = precio;
     }
 
-    public void setAptoVeganos(boolean aptoVeganos) {
+    public void setAptoVeganos(String aptoVeganos) {
         this.aptoVeganos = aptoVeganos;
     }
 
