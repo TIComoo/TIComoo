@@ -106,14 +106,18 @@ public class Pedido {
         this.direccion = direccion;
     }
     //para no complicarnos un pedido contiene un solo restaurante
-    public String getNombreRestaurante(ArrayList<Plato> platos) {
+    public String getRestaurante(ArrayList<Plato> platos) {
         Plato plato = platos.get(0);
         String st = plato.getNombreRestaurante();        
-        nombreRestaurante = st;
-        return nombreRestaurante;
+        this.nombreRestaurante = st;
+        return this.nombreRestaurante;
     }
     public void setNombreRestaurante(String nombreRestaurante) {
         this.nombreRestaurante = nombreRestaurante;
+    }
+    public String getNombreRestaurante() {
+        
+        return nombreRestaurante;
     }
 
 

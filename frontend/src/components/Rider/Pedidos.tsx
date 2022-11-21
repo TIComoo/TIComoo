@@ -17,7 +17,7 @@ export interface IPedido {
     precio?: number,
     estado?: string,
     direccion?: string,
-    nombreRestaurante?: string
+    nombreRestaurante?: any
 }
 export interface Pedido {
     id: any
