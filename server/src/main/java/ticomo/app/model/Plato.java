@@ -9,8 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document(collection="Plato")
+@Document(collection = "Plato")
 public class Plato {
 
     @Transient
@@ -33,20 +32,20 @@ public class Plato {
     @Pattern(regexp = "[a-zA-Z ]{0,30}", message = "Este campo no debe contener valores numéricos")
     private String descripcion;
 
-    
-    @Digits(integer = 4,fraction = 2,message = "Este campo debe de ser un numero")
+    @Digits(integer = 4, fraction = 2, message = "Este campo debe de ser un numero")
     private double precio;
 
     @NotNull
-    private boolean aptoVeganos;
+    private String aptoVeganos;
 
     @NotBlank(message = "Campo requerido")
     @Pattern(regexp = "[a-zA-Z ]{0,8}", message = "Este campo no debe contener valores numéricos")
     private String categoria;
 
-    public Plato(String nombre,String nombreRestaurante,String categoria, String imagen, String descripcion, double precio, boolean aptoVeganos) {
-       this.nombreRestaurante=nombreRestaurante;
-        this.categoria=categoria;
+    public Plato(String nombre, String nombreRestaurante, String categoria, String imagen, String descripcion,
+            double precio, String aptoVeganos) {
+        this.nombreRestaurante = nombreRestaurante;
+        this.categoria = categoria;
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
@@ -54,13 +53,14 @@ public class Plato {
         this.aptoVeganos = aptoVeganos;
     }
 
-    public Plato(){
-            
+    public Plato() {
+
     }
 
     public long getId() {
         return id;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -68,6 +68,7 @@ public class Plato {
     public String getCategoria() {
         return categoria;
     }
+
     public String getImagen() {
         return imagen;
     }
@@ -80,16 +81,22 @@ public class Plato {
         return precio;
     }
 
-    public boolean getAptoVeganos() {
+    public String getAptoVeganos() {
         return aptoVeganos;
+    }public String getStringPlato() {
+        return nombre + " \n"
+                + precio + "  euros. ";
     }
 
+
     public void setId(long id) {
-       this.id = id;
+        this.id = id;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
@@ -106,10 +113,9 @@ public class Plato {
         this.precio = precio;
     }
 
-    public void setAptoVeganos(boolean aptoVeganos) {
+    public void setAptoVeganos(String aptoVeganos) {
         this.aptoVeganos = aptoVeganos;
     }
-
 
     public String getNombreRestaurante() {
         return nombreRestaurante;
@@ -126,17 +132,9 @@ public class Plato {
                 + ", categoria=" + categoria + "]";
     }
 
-    
     public String getStringPlato() {
-    return nombre + " \n"
-           + precio+ "  euros. ";
-}
+        return nombre + " \n"
+                + precio + "  euros. ";
+    }
 
-    
-
-   
-
-    
-
-   
 }

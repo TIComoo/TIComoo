@@ -1,11 +1,16 @@
 package ticomo.app.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import ticomo.app.dao.CartaRepository;
+import ticomo.app.exception.CustomException;
 import ticomo.app.model.Carta;
 import ticomo.app.model.Plato;
 import ticomo.app.service.CartaService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("carta")
 public class CartaController {
 
@@ -36,6 +43,29 @@ public class CartaController {
 		
 		return "carpeta/archivo.httml";
 	}
+	@GetMapping("/todas")
+    public List<Carta> getCartas() {
+        
+        return cartaService.getAllCartas();
+
+    }
+	@PostMapping("/enviar")
+    public Carta addEleccion(@RequestBody String content){
+        return cartaRepository.save(new Carta(" ",content));
+    }
+    @GetMapping("/eleccion")
+    public List<Carta> getEleccion() {
+        
+        List<Carta> cartas = cartaService.getAllCartas();
+        List<Carta> aux = new ArrayList<>();
+        for(int i=0;i<cartas.size();i++){
+            if(cartas.get(i).getCartaElegida()!=null){
+                aux.add(cartas.get(i));
+            }
+        }
+        return aux;
+
+    }
 
     @PostMapping("/insert")
 	public String insert(@Valid @RequestBody @ModelAttribute("cartaForm")Carta carta, BindingResult result, Model model) {
@@ -60,7 +90,10 @@ public class CartaController {
 
 		return "carpeta/archivo.httml";
 	}
-
+	@DeleteMapping("/{id}")
+    public void eliminarPedido(@PathVariable Long id) throws CustomException{
+        cartaService.delete(id);
+    }
     @GetMapping("/delete/{id}")
 	public void delete(Model model, @PathVariable(name="id")Long id) {
 

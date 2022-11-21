@@ -47,7 +47,7 @@ public class PedidoController {
 	}
 
     @PostMapping("/crearPedido")
-	public String crearPedido(@RequestBody Map<String, Object> info) throws Exception {
+	public String crearPedido(@RequestBody String info) throws Exception {
 		try {
 			JSONObject jso = new JSONObject(info);
 			Pedido pedido = new Pedido();
@@ -62,7 +62,7 @@ public class PedidoController {
 				aux.setNombreRestaurante(jsonAux.getString("nombreRestaurante"));
 				aux.setDescripcion(jsonAux.getString("descripcion"));
 				aux.setPrecio(jsonAux.getDouble("precio"));
-				aux.setAptoVeganos(jsonAux.getBoolean("aptoVeganos"));
+				aux.setAptoVeganos(jsonAux.getString("aptoVeganos"));
 				
 				
 				pedido.getPlatos().add(aux);
@@ -75,7 +75,7 @@ public class PedidoController {
                     .format(LocalDateTime.now());
 
 			pedido.setFecha((creacionP));  
-			pedido.setEstado(jso.getString("estado"));
+			pedido.setEstado("Disponible");
 			pedido.setDireccion(jso.getString("direccion"));
 			pedido.setNombreRestaurante(jso.getString("nombreRestaurante"));
 			pedidoService.crearPedido(pedido);
