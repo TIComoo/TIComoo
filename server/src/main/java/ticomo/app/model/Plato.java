@@ -128,8 +128,8 @@ public class Plato {
 
     
     public String getStringPlato() {
-    return   nombre + " \n " + nombreRestaurante +"  "
-           + precio+ "euros. ";
+    return nombre + " \n"
+           + precio+ "  euros. ";
 }
 
     

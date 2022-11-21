@@ -16,14 +16,17 @@ export interface IPedido {
     st_platos?: any,
     precio?: number,
     estado?: string,
-    direccion?: string
+    direccion?: string,
+    nombreRestaurante?: string
 }
 export interface Pedido {
     id: any
     platos: string,
     precio: number,
-    estado: string
-    fecha: string
+    estado: string,
+    fecha: string,
+    direccion: string,
+    nombreRestaurante: string
 }
 const Pedidos = () => {
     const [pedidos, setPedidos] = useState<IPedido[]>([]);
@@ -34,7 +37,7 @@ const Pedidos = () => {
     useEffect(() => {
 
         riderService.getAll().then(data => {
-            //console.log(data)
+            console.log(data)
 
             setPedidos(data)
 
@@ -66,6 +69,7 @@ const Pedidos = () => {
                 <DataTable value={pedidos} responsiveLayout="scroll" selectionMode="single" selection={selectedPedido} onSelectionChange={e => setSelectedPedido(e.value)}
                     onRowSelect={onRowSelect}  >
                     {/*  <Column field="id" header="id"></Column> */}
+                    <Column field="nombreRestaurante" header="Restaurante"></Column>
                     <Column field="st_platos" header="Platos del pedido"></Column>
                     <Column field="precio" header="Precio(euros)"></Column>
                     <Column field="fecha" header="Fecha"></Column>
