@@ -1,5 +1,6 @@
 package ticomo.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import ticomo.app.SequenceGeneratorServicePedido;
 import ticomo.app.dao.PedidoRepository;
 import ticomo.app.exception.CustomException;
 import ticomo.app.model.Pedido;
+import ticomo.app.model.Plato;
 
 @Service
 public class PedidoService {
@@ -32,6 +34,22 @@ public class PedidoService {
 
 	}
 
+	
+	public List<Pedido> getAllpedidosDisponibles() {
+		List<Pedido> pedidos = pedidoRepository.findAll();
+		List<Pedido> pedidos_aux = new ArrayList<Pedido>();
+		// paso el arrayList de platos a string
+		for (Pedido pedido : pedidos) {
+		ArrayList<Plato> platos = pedido.getPlatos();
+		String s = pedido.getStringPlatos(platos);
+		String nombreRestaurante = pedido.getRestaurante(platos);
+		Pedido ped = new Pedido(pedido.getId(), platos, pedido.getPrecio(), pedido.getFecha(), pedido.getEstado(), s, pedido.getDireccion(), nombreRestaurante );
+		pedidos_aux.add(ped);
+		}
+		return pedidos_aux;
+		}
+
+		
     //Tengo dudas en actualizar, preguntar en la daily
 
     // public void actualizarPedido(Pedido pedido_O) throws CustomException {
@@ -60,4 +78,5 @@ public class PedidoService {
     public Pedido buscarPedido(long id) throws CustomException {
 		return pedidoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del pedido no existe."));
 	}
+
 }

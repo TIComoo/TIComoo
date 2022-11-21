@@ -20,14 +20,19 @@ public class Pedido {
     private double precio;
     private String fecha;
     private String estado;
-
+    private String st_platos;
+    private String direccion;
+    private String nombreRestaurante;
     
-    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado) {
+    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado,String st_platos, String direccion, String nombreRestaurante) {
         this.id = id;
         this.platos = platos;
         this.precio = precio;
         this.fecha = fecha;
         this.estado = estado;
+        this.st_platos=st_platos;
+        this.direccion=direccion;
+        this.nombreRestaurante=nombreRestaurante;
     }
     
     public Pedido(){}
@@ -71,7 +76,53 @@ public class Pedido {
         this.setPrecio(suma);
     }
 
+    public static String getSequenceName() {
+        return SEQUENCE_NAME;
+    }
 
+    public String getSt_platos() {
+        return st_platos;
+    }
+
+    public void setSt_platos(String st_platos) {
+        this.st_platos = st_platos;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getNombreRestaurante() {
+        return nombreRestaurante;
+    }
+    
+    
+
+
+    public void setNombreRestaurante(String nombreRestaurante) {
+        this.nombreRestaurante = nombreRestaurante;
+    }
+
+
+    //para no complicarnos un pedido contiene un solo restaurante
+    public String getRestaurante(ArrayList<Plato> platos) {
+         Plato plato = platos.get(0);
+         String st = plato.getNombreRestaurante();
+         this.nombreRestaurante = st;
+        return this.nombreRestaurante;
+    }
+    public String getStringPlatos(ArrayList <Plato> platos){
+        String st = "";
+        for (Plato p: platos){
+        st += p.getStringPlato();
+        }
+        return st;
+        }
+        
    
     
 }

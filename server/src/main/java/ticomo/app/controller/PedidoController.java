@@ -68,7 +68,9 @@ public class PedidoController {
                     .format(LocalDateTime.now());
 
 			pedido.setFecha((creacionP));  
-			pedido.setEstado("En preparación");
+			pedido.setEstado("Disponible");
+			pedido.setDireccion(jso.getString("direccion"));
+			pedido.setNombreRestaurante(jso.getString("nombreRestaurante"));
 		
 			pedidoService.crearPedido(pedido);
 
@@ -85,6 +87,10 @@ public class PedidoController {
         pedidoService.eliminarPedido(id);
     }
 
+	@GetMapping("/pedidosDisponibles")
+	public List<Pedido> getAllpedidosDisponibles() {
+		return pedidoService.getAllpedidosDisponibles();
+	}
 	@GetMapping(value="/id", produces = "application/json")
 	@ResponseBody
 	public List<Pedido> idMasAlto() throws CustomException{
