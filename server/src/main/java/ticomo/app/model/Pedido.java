@@ -22,10 +22,11 @@ public class Pedido {
     private String estado;
     private String st_platos;
     private String direccion;
+    private String nombreRestaurante;
     
 
     
-    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado, String st_platos, String direccion) {
+    public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado, String st_platos, String direccion, String  nombreRestaurante) {
         this.id = id;
         this.platos = platos;
         this.precio = precio;
@@ -33,6 +34,7 @@ public class Pedido {
         this.estado = estado;
         this.st_platos = st_platos;
         this.direccion= direccion;
+        this.nombreRestaurante = nombreRestaurante;
     }
     public String getStringPlatos(ArrayList <Plato> platos){
         String st = "";
@@ -41,16 +43,13 @@ public class Pedido {
         }
         return st;
     }
+    public String getRestauranteFromPlatos (ArrayList <Plato> platos){
+        Plato plato = platos.get(0);
+        String st = plato.getNombreRestaurante();        
+        return st;
+    }
 
-   /*  } //necesito hacer un string de los platos para visualizar pedidos 
-    public Pedido(long id, String  platos, double precio, String fecha, String estado) {
-        this.id = id;
-        this.st_platos = platos;
-        this.precio = precio;
-        this.fecha = fecha;
-        this.estado = estado;
-    } */
-    
+   
     public Pedido(){}
     
     public long getId() {
@@ -105,6 +104,16 @@ public class Pedido {
     }
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+    //para no complicarnos un pedido contiene un solo restaurante
+    public String getNombreRestaurante(ArrayList<Plato> platos) {
+        Plato plato = platos.get(0);
+        String st = plato.getNombreRestaurante();        
+        nombreRestaurante = st;
+        return nombreRestaurante;
+    }
+    public void setNombreRestaurante(String nombreRestaurante) {
+        this.nombreRestaurante = nombreRestaurante;
     }
 
 

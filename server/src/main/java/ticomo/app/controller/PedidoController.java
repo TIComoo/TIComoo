@@ -76,7 +76,8 @@ public class PedidoController {
 
 			pedido.setFecha((creacionP));  
 			pedido.setEstado(jso.getString("estado"));
-		
+			pedido.setDireccion(jso.getString("direccion"));
+			pedido.setNombreRestaurante(jso.getString("nombreRestaurante"));
 			pedidoService.crearPedido(pedido);
 
 

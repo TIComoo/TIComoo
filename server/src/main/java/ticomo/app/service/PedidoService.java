@@ -68,7 +68,7 @@ public class PedidoService {
 		for (Pedido pedido : pedidos) {
 			ArrayList<Plato> platos = pedido.getPlatos();
 			String s = pedido.getStringPlatos(platos);
-			Pedido ped = new Pedido(pedido.getId(), platos, pedido.getPrecio(), pedido.getFecha(), pedido.getEstado(), s );
+			Pedido ped = new Pedido(pedido.getId(), platos, pedido.getPrecio(), pedido.getFecha(), pedido.getEstado(), s, pedido.getDireccion(), pedido.getNombreRestaurante(platos) );
 			pedidos_aux.add(ped);
 
 		}
