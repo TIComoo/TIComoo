@@ -2,6 +2,7 @@ package ticomo.app.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -39,8 +41,9 @@ public class PedidoController {
 
 	}
     @PostMapping("/crearPedido")
-	public String crearPedido(@RequestBody Map<String, Object> info) throws Exception {
+	public String crearPedido(@RequestBody String info) throws Exception {
 		try {
+			
 			JSONObject jso = new JSONObject(info);
 			Pedido pedido = new Pedido();
 
@@ -65,7 +68,7 @@ public class PedidoController {
                     .format(LocalDateTime.now());
 
 			pedido.setFecha((creacionP));  
-			pedido.setEstado(jso.getString("estado"));
+			pedido.setEstado("En preparación");
 		
 			pedidoService.crearPedido(pedido);
 
@@ -74,10 +77,28 @@ public class PedidoController {
 			throw e;
 		}
 		return "Pedido creado";
+
 	}
 
 	@DeleteMapping("/{id}")
     public void eliminarPedido(@PathVariable Long id) throws CustomException{
         pedidoService.eliminarPedido(id);
     }
+
+	@GetMapping(value="/id", produces = "application/json")
+	@ResponseBody
+	public List<Pedido> idMasAlto() throws CustomException{
+
+		List<Pedido> pedido = pedidoService.getAllPedidos();
+		List<Pedido> p=new ArrayList<Pedido>();
+		Long aux=(long) 0;
+		for(int i =0;i<pedido.size();i++){
+			if(aux<pedido.get(i).getId()){
+				aux=pedido.get(i).getId();
+			}
+		}
+		p.add(pedidoService.buscarPedido(aux));
+		return p;
+
+	}
 }

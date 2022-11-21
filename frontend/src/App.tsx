@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Restaurante from './components/Restaurantes/ListaRestaurantes';
 // import Historial from './components/Rider/Historial';
 import Carta from './components/Carta/CartaComponente';
+import Pagar from './components/Pedidos/PagarPedido'
 // import Valoraciones from './components/Rider/Valoraciones';
 // import Salir from './components/Rider/Salir';
 
@@ -18,6 +19,7 @@ import Carta from './components/Carta/CartaComponente';
 
 
 export interface IPedido {
+    includes(val: IPedido): unknown;
     id: any
     platos : []
     precio: number
@@ -58,7 +60,7 @@ const App: React.FC = () => {
     const [restaurante, setRestaurante] = useState<IRestaurante[]>([])
     const [carta, setCarta] = useState<ICarta[]>([]) 
     const [platos, setPlatos] = useState<IPlato[]>([])   
-    let cartaElegida:any;
+    const [pedidos, setPedidos] = useState<IPedido[]>([])
  
     return (
         <div className="App">
@@ -67,10 +69,10 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path='/restaurante' element={<Restaurante restaurante={restaurante} setRestaurante={setRestaurante} carta={carta} setCarta={setCarta} />}/>
                     <Route path='/carta' element={<Carta platos={platos} setPlatos={setPlatos} carta={carta} setCarta={setCarta}/>}/>
-                    {/* <Route path='/cuenta' element={<Cuenta/>}/>
-                    <Route path='/valoraciones' element={<Valoraciones/>}/>
-                    <Route path='/salir' element={<Salir/>}/>
-                     */}
+                    <Route path='/pagar' element={<Pagar pedidos={pedidos} setPedidos={setPedidos}/>}/>
+                    {/* <Route path='/valoraciones' element={<Valoraciones/>}/>
+                    <Route path='/salir' element={<Salir/>}/> */}
+                     
                 </Routes>
             </BrowserRouter>
            {/* {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante} carta={carta} setCarta={setCarta}/>} */}
