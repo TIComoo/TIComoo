@@ -19,12 +19,19 @@ public class Carta {
     @NotBlank(message = ("Nombre restaurante requerido"))
     private String nombreRestaurante;
 
+    private String cartaElegida;
+
 
     public Carta( String nombreRestaurante) {
         this.nombreRestaurante = nombreRestaurante;
     }
     public Carta(){
         
+    }
+    public Carta( String nombreRestaurante, String cartaElegida) {
+        this.nombreRestaurante = nombreRestaurante;
+        this.cartaElegida = cartaElegida;
+
     }
 
     public long getId() {
@@ -50,6 +57,15 @@ public class Carta {
     @Override
     public String toString() {
         return "Carta [id=" + id + ", nombreRestaurante=" + nombreRestaurante  + "]";
+    }
+    public static String getSequenceName() {
+        return SEQUENCE_NAME;
+    }
+    public String getCartaElegida() {
+        return cartaElegida;
+    }
+    public void setCartaElegida(String cartaElegida) {
+        this.cartaElegida = cartaElegida;
     }
 
     

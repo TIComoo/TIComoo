@@ -45,5 +45,15 @@ public class CartaService {
 
 		return platoRepository.findByNombreRestaurante(nombreRestaurante);
 	}
+	public Carta leerCartaPorRestaurante(String cartaR) {
+        Carta carta= cartaRepository.findBynombreRestaurante(cartaR);
 
+        return carta;
+
+    }
+
+	public List<Carta> getAllCartas() {
+        
+        return cartaRepository.findAll();
+    }
 }
