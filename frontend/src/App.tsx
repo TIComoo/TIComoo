@@ -75,8 +75,6 @@ const App: React.FC = () => {
                      
                 </Routes>
             </BrowserRouter>
-           {/* {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante} carta={carta} setCarta={setCarta}/>} */}
-           {/* {<CartaComponente platos={platos} setPlatos={setPlatos}></CartaComponente>} */}
         </div>
     );
 }
