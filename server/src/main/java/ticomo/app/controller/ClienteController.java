@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import ticomo.app.model.Cliente;
 import ticomo.app.service.ClienteService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/cliente")
 public class ClienteController {
 
@@ -76,10 +78,11 @@ public class ClienteController {
 		return clientes;
 	}
 
-	@GetMapping(value = "/leerClientePorEmail", produces = "application/json")
-	@ResponseBody
-	public Cliente leerClientePorEmail(@RequestHeader String email) {
-		Cliente cliente = this.clienteService.leerClientePorEmail(email);
+	@PostMapping("/leerClientePorEmail")
+	public Cliente leerClientePorEmail(@RequestBody String email) {
+		JSONObject jso = new JSONObject(email);
+
+		Cliente cliente = this.clienteService.leerClientePorEmail(jso.getString("email"));
 		
 		return cliente;
 	}

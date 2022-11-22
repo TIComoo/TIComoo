@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Pedidos from '../../components/Rider/Pedidos';
 import Historial from '../../components/Rider/Historial';
-import Cuenta from '../../components/Rider/Cuenta';
+// import Cuenta from '../../components/Rider/Cuenta';
 import Valoraciones from '../../components/Rider/Valoraciones';
 import Salir from '../../components/Rider/Salir';
 

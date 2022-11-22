@@ -11,4 +11,6 @@ como al rider. */
 @Repository
 public interface ClienteRepository extends MongoRepository<Cliente, String> {
 
+    Cliente findByEmail(String email);
+
 }

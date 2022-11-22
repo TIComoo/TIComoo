@@ -12,7 +12,6 @@ import Cuenta from './components/Rider/Cuenta';
 import Valoraciones from './components/Rider/Valoraciones';
 import Salir from './components/Rider/Salir';
 
-import Login from './components/Login';
 import Restaurante from './components/Restaurantes/ListaRestaurantes';
 import Carta from './components/Carta/CartaComponente';
 import Pagar from './components/Pedidos/PagarPedido';

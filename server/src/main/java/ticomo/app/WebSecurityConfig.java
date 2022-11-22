@@ -40,7 +40,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(resources).permitAll()
-                .antMatchers("/","/carta/enviar", "/index","/carta/{id}","/pedido/id","/carta/eleccion","/carta/todas","/plato/platos","/plato/todos","/pedido/{id}","/pedido/todos" ,"/cliente/signup", "/admin/admin-view", "/rider/guardarRider",
+                .antMatchers("/","/carta/enviar", "/pedido/email","/index","/carta/{id}","/pedido/id","/carta/eleccion","/carta/todas","/plato/platos","/plato/todos","/pedido/{id}","/pedido/todos" ,"/cliente/signup", "/admin/admin-view", "/rider/guardarRider",
                         "/restaurantes/restauranteForm", "/restaurantes/crearRestaurante", "/editRestaurante/{nombre}", "/editRestaurante",
                         "/editRestaurante/crearRestaurante", "/deleteRestaurante/{nombre}", "/platoForm", "/crearPlato","/editPlato/{id}","/editPlato","/editPlato/crearPlato","/deletePlato/{id}",
                         "/admin/borrarAdminPorEmail/{email}","/pedido/crearPedido", "/rider/borrarRiderPorEmail/{email}", "/cliente/borrarClientePorEmail/{email}", "/rider/leerRiderPorEmail", "/rider/leerValoracionesPorEmail")
