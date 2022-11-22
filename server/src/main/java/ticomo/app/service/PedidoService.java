@@ -17,6 +17,8 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PedidoRepository clienteRepository;
 
 	public void crearPedido(Pedido pedido) throws CustomException {
 
@@ -55,6 +57,22 @@ public class PedidoService {
 	public List<Pedido> getAllPedidos() {
 		return pedidoRepository.findAll();
 	}
+
+	public List<Pedido> getAllPedidosEmail(String email) {
+		List<Pedido> pedidos=pedidoRepository.findAll();
+		List<Pedido> aux=new ArrayList<Pedido>();
+
+		for(int i=0; i<pedidos.size();i++){
+			if(pedidos.get(i).getCliente()!=null){
+				if(pedidos.get(i).getCliente().equalsIgnoreCase(email)){
+					aux.add(pedidos.get(i));
+				}
+			}
+			
+		}
+		return aux;
+	}
+
 
 	public Pedido buscarPedido(long id) throws CustomException {
 		return pedidoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del pedido no existe."));

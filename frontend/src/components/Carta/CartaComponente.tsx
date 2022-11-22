@@ -65,9 +65,12 @@ const CartaComponente: React.FC<IProps> = ({platos, setPlatos, carta, setCarta})
     function pagar(listaPlatos: IPlato[]){
 
         const p="platos";
-        const json="{ "+p+":"+JSON.stringify(listaPlatos)+"}";
-        window.location.href="/pagar";
+        const d="direccion";
+        const n="nombreRestaurante";
+        const json="{ "+p+":"+JSON.stringify(listaPlatos)+", "+d+":En tramite..., "+n+":"+cartaElegida+"}";
         pedidoService.enviarEleccion(json);
+
+        window.location.href="/pagar";
 
     }
 

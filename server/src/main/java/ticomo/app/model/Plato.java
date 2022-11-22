@@ -132,9 +132,6 @@ public class Plato {
                 + ", categoria=" + categoria + "]";
     }
 
-    public String getStringPlato() {
-        return nombre + " \n"
-                + precio + "  euros. ";
-    }
+
 
 }

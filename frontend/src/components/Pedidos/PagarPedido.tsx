@@ -3,7 +3,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { PedidoService } from '../../service/PedidoService';
 import { Button } from 'primereact/button';
-import { IPedido, IPlato } from '../../App';
+import { IPedido} from '../Pedidos/Menu';
+import { IPlato } from '../../App';
 import { Row } from 'react-bootstrap';
 
 interface IProps {
@@ -55,8 +56,12 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
     const row: any=-1;
     const actionBodyTemplate = (row: any) => {
         row++;
-        return <Button  type="button" icon="pi pi-times-circle" tabIndex={row} onClick={(e)=> handleClick(e)}></Button>;
+        return <Button  type="button" icon="pi pi-times-circle"  onClick={(e)=> handleClick(e)}></Button>;
 
+    }
+    function deleteP(){
+        pedidoService.deletePedido(pedidos.at(0)?.id);
+        window.location.href="/carta";
     }
     return (
         <div>
@@ -65,14 +70,15 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
                     <Column field="id" header="id"></Column>
                     <Column field="nombre" header="Nombre"></Column>
                     <Column field="precio" header="Precio"></Column>
-                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />    
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate(row)} />    
                 </DataTable>  
             </div>
             <br></br>
             <br></br>
             <div>
 
-                <Button>Pagar pedido</Button>
+                <Button>Pagar pedido</Button>                 <Button onClick={(e)=> deleteP()}>volver</Button>
+
             </div>
         </div>
     );

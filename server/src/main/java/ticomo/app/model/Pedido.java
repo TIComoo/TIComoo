@@ -1,7 +1,6 @@
 package ticomo.app.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -23,7 +22,7 @@ public class Pedido {
     private String st_platos;
     private String direccion;
     private String nombreRestaurante;
-    
+    private String cliente;
 
     
     public Pedido(long id, ArrayList <Plato> platos, double precio, String fecha, String estado, String st_platos, String direccion, String  nombreRestaurante) {
@@ -118,6 +117,12 @@ public class Pedido {
     public String getNombreRestaurante() {
         
         return nombreRestaurante;
+    }
+    public String getCliente() {
+        return cliente;
+    }
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
 

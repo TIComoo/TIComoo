@@ -7,18 +7,13 @@ import { DataTable, DataTableSelectParams } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { event } from "jquery";
 import { Toast } from 'primereact/toast';
+import { IPlato } from "../../App";
+import { IPedido } from "../Pedidos/Menu";
 
 
 
 
-export interface IPedido {
-    id?: any
-    st_platos?: any,
-    precio?: number,
-    estado?: string,
-    direccion?: string,
-    nombreRestaurante?: any
-}
+
 export interface Pedido {
     id: any
     platos: string,

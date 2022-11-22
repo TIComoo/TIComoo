@@ -2,6 +2,7 @@ package ticomo.app.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -36,6 +38,13 @@ public class PedidoController {
 	public List<Pedido> getAllPedidos() {
 		
 		return pedidoService.getAllPedidos();
+
+	}
+
+	@PostMapping("/email")
+	public List<Pedido> getAllPedidosEmail(@RequestBody String info) {
+		JSONObject jso = new JSONObject(info);
+		return pedidoService.getAllPedidosEmail(jso.getString("email"));
 
 	}
 	@GetMapping("/pedidosDisponibles")
@@ -78,6 +87,7 @@ public class PedidoController {
 			pedido.setEstado("Disponible");
 			pedido.setDireccion(jso.getString("direccion"));
 			pedido.setNombreRestaurante(jso.getString("nombreRestaurante"));
+			pedido.setCliente("andres@gmail.com");
 			pedidoService.crearPedido(pedido);
 
 
@@ -91,4 +101,21 @@ public class PedidoController {
     public void eliminarPedido(@PathVariable Long id) throws CustomException{
         pedidoService.eliminarPedido(id);
     }
+
+	@GetMapping(value="/id", produces = "application/json")
+	@ResponseBody
+	public List<Pedido> idMasAlto() throws CustomException{
+
+		List<Pedido> pedido = pedidoService.getAllPedidos();
+		List<Pedido> p=new ArrayList<Pedido>();
+		Long aux=(long) 0;
+		for(int i =0;i<pedido.size();i++){
+			if(aux<pedido.get(i).getId()){
+				aux=pedido.get(i).getId();
+			}
+		}
+		p.add(pedidoService.buscarPedido(aux));
+		return p;
+
+	}
 }

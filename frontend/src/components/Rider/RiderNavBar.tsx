@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Pedidos from '../../components/Rider/Pedidos';
 import Historial from '../../components/Rider/Historial';
-import Cuenta from '../../components/Rider/Cuenta';
+// import Cuenta from '../../components/Rider/Cuenta';
 import Valoraciones from '../../components/Rider/Valoraciones';
 import Salir from '../../components/Rider/Salir';
 
@@ -21,16 +21,16 @@ const Navigation = () => {
     return (
         <div>
             <header>
-            <BrowserRouter />
+            <BrowserRouter>
                 <Routes>
                     <Route path='/pedidos' element={<Pedidos/>}/>
                     <Route path='/historial' element={<Historial/>}/>
-                    <Route path='/cuenta/:email' element={<Cuenta/>}/>
+                    {/* <Route path='/cuenta/:email' element={<Cuenta/>}/> */}
                     <Route path='/valoraciones/{}' element={<Valoraciones/>}/>
                     <Route path='/salir' element={<Salir/>}/>
                     <Route path='/gps' element={<Salir/>}/>
-                    </Routes>
-                    </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
                 <nav>
                     <ul>
                         <Menubar model={navlist}/>

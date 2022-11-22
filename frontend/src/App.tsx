@@ -8,16 +8,16 @@ import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 
 
-import Login from './components/Login';
 import Restaurante from './components/Restaurantes/ListaRestaurantes';
 import Carta from './components/Carta/CartaComponente';
 import Pagar from './components/Pedidos/PagarPedido';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-/* import Pedidos from '../../components/Rider/Pedidos';
-import Historial from '../../components/Rider/Historial';
-import Cuenta from '../../components/Rider/Cuenta';
-import Valoraciones from '../../components/Rider/Valoraciones'; */
 import Salir from './components/Rider/Salir';
+import Pedidos from './components/Rider/Pedidos';
+import Historial from './components/Rider/Historial';
+// import Cuenta from './components/Rider/Cuenta';
+import Valoraciones from './components/Rider/Valoraciones';
+import Menu from './components/Pedidos/Menu';
 
 
 
@@ -63,10 +63,9 @@ const App: React.FC = () => {
    
     return (
         <div className="App">
-           {/*  <Menu></Menu>
-           {<ListaRestaurantes setRestaurante={setRestaurante} restaurante={restaurante}/>} */}
-           
-            <BrowserRouter>
+                      
+            <Menu></Menu>
+            {/* <BrowserRouter>
                 <Routes>
                 <Route path='/pedidos' element={<Pedidos/>}/>
                     <Route path='/historial' element={<Historial/>}/>
@@ -75,7 +74,7 @@ const App: React.FC = () => {
                     <Route path='/salir' element={<Salir/>}/>
                     <Route path='/gps' element={<Salir/>}/>
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter> */}
         </div>
     );
 }
