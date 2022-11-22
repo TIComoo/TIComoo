@@ -9,5 +9,5 @@ import ticomo.app.model.Rider;
 public interface RiderRepository extends MongoRepository<Rider, String> {
 
 	public Rider findByEmail(String email);
-
+	
 }

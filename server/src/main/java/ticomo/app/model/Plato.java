@@ -83,9 +83,6 @@ public class Plato {
 
     public String getAptoVeganos() {
         return aptoVeganos;
-    }public String getStringPlato() {
-        return nombre + " \n"
-                + precio + "  euros. ";
     }
 
 

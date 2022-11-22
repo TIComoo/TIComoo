@@ -1,10 +1,12 @@
 package ticomo.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ticomo.app.model.Rider;
+import ticomo.app.model.Valoracion;
 import ticomo.app.service.RiderService;
 
 @RestController
 @RequestMapping("/rider")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RiderController {
 
 	@Autowired
@@ -62,6 +66,17 @@ public class RiderController {
 		this.riderService.borrarRiderPorEmail(email);
 
 		return "/admin/admin-view";
+	}
+	@GetMapping(value = "/leerValoracionesPorEmail", produces = "application/json")
+	@ResponseBody
+	public String leerValoracionesPorEmail(@RequestHeader String email) {
+		Rider rider = this.riderService.leerRiderPorEmail(email);
+		String st = "";
+		ArrayList<Valoracion> valoraciones = rider.getValoraciones();
+		for(Valoracion v : valoraciones){
+			st += v.stringValoraciones();
+		}
+		return st;
 	}
 
 }

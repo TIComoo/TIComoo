@@ -73,7 +73,6 @@ const Pedidos = () => {
                     <Column field="st_platos" header="Platos del pedido"></Column>
                     <Column field="precio" header="Precio(euros)"></Column>
                     <Column field="fecha" header="Fecha"></Column>
-                    <Column field="estado" header="Estado"></Column> 
                     <Column field="direccion" header="Direccion"></Column>
                 </DataTable>
             </div>
