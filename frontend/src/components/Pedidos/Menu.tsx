@@ -4,7 +4,7 @@ import Restaurante from '../../components/Restaurantes/ListaRestaurantes';
 import Carta from '../../components/Carta/CartaComponente';
 import Pagar from '../../components/Pedidos/PagarPedido';
 import Historial from '../../components/Pedidos/HistorialPedidos';
-import Configuracion from '../Configuracion';
+//import Configuracion from '../Configuracion';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export interface IPedido {
@@ -131,9 +131,9 @@ const Menu = () => {
                     <Route path='/carta' element={<Carta platos={platos} setPlatos={setPlatos} carta={carta} setCarta={setCarta}/>}/>
                     <Route path='/pagar' element={<Pagar pedidos={pedidos} setPedidos={setPedidos}/>}/>
                     <Route path='/historial' element={<Historial pedidos={pedidos} setPedidos={setPedidos}/>}/>
-                    <Route path='/configuracion' element={<Configuracion clientes={clientes} setClientes={setClientes}/>}/>
+                   {/*  <Route path='/configuracion' element={<Configuracion clientes={clientes} setClientes={setClientes}/>}/>
 
-
+ */}
                     </Routes>
                     </BrowserRouter>  
                 </div>

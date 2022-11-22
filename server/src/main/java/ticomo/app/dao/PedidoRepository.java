@@ -1,6 +1,7 @@
 package ticomo.app.dao;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,7 +14,7 @@ public interface PedidoRepository extends MongoRepository<Pedido, String> {
 
 	Optional<Pedido> findById(long id);
 
-	Optional <Pedido> findByEstado(String estado);
+	List <Pedido> findByEstado(String estado);
 
     Optional <Pedido> findByFecha(Date fecha);
 

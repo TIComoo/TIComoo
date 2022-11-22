@@ -79,7 +79,7 @@ public class PedidoService {
 	}
 
 	public List<Pedido> getAllpedidosDisponibles() {
-		List<Pedido> pedidos = pedidoRepository.findAll();
+		List<Pedido> pedidos = (List<Pedido>)pedidoRepository.findByEstado("Disponible");
 		List<Pedido> pedidos_aux = new ArrayList<Pedido>();
 
 		// paso el arrayList de platos a string

@@ -83,9 +83,6 @@ public class Plato {
 
     public String getAptoVeganos() {
         return aptoVeganos;
-    }public String getStringPlato() {
-        return nombre + " \n"
-                + precio + "  euros. ";
     }
 
 
@@ -130,6 +127,12 @@ public class Plato {
         return "Plato [id=" + id + ", nombre=" + nombre + ", nombreRestaruante=" + nombreRestaurante + ", imagen="
                 + imagen + ", descripcion=" + descripcion + ", precio=" + precio + ", aptoVeganos=" + aptoVeganos
                 + ", categoria=" + categoria + "]";
+    }
+
+    public String getStringPlato() {
+        
+            return nombre + " \n"
+                    + precio + "  euros. ";    
     }
 
 

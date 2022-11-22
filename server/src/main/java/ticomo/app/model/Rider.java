@@ -1,6 +1,8 @@
 package ticomo.app.model;
 
 
+import java.util.ArrayList;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Rider")
@@ -25,6 +27,7 @@ public class Rider extends Usuario {
     private String matricula;
     private String carnet;
     private String tipoVehiculo;
+    private ArrayList<Valoracion> valoraciones;
     
     public Rider(String email, String nombre, String apellido, String pwd, String nif, String tipoVehiculo,
 			String matricula, String carnet) {
@@ -70,6 +73,14 @@ public class Rider extends Usuario {
 
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public ArrayList<Valoracion> getValoraciones() {
+        return valoraciones;
+    }
+
+    public void setValoraciones(ArrayList<Valoracion> valoraciones) {
+        this.valoraciones = valoraciones;
     }
 
 }
