@@ -7,6 +7,7 @@ import Historial from '../../components/Pedidos/HistorialPedidos';
 import Configuracion from '../Configuracion';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+
 export interface IPedido {
     id?: any
     platos: IPlato[],

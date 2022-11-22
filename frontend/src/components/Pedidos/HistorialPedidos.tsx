@@ -5,14 +5,18 @@ import { PedidoService } from '../../service/PedidoService';
 import { Button } from 'primereact/button';
 import { IPedido} from '../Pedidos/Menu';
 import { Row } from 'react-bootstrap';
-const email="andres@gmail.com";
+
 interface IProps {
     pedidos: IPedido[]
     setPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>
 }
 
+const email="andres@gmail.com";
+
+console.log(email);
 const m="email";
 const jso="{"+m+": "+JSON.stringify(email)+"}";
+
 const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
 
     const pedidoService = new PedidoService();
