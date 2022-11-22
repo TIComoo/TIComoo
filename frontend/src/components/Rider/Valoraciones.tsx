@@ -9,6 +9,7 @@ import { Column } from 'primereact/column';
 import { event } from "jquery";
 import { Toast } from 'primereact/toast';
 import axios from "axios";
+import { getData } from "../../resources/api-constants";
 
 
 export interface IValoraciones{
@@ -23,18 +24,7 @@ const riderService = new RiderService();
 
 
     useEffect(() => {
-        axios.get('http://localhost:8080/rider/leerValoracionesPorId',
-          {
-            headers: {
-              email: "victoria@gmail.com"
-            }
-          }
-    
-        ).then(res => res.data).then(data => {
-    
-          console.log(data);
-          setValoraciones(data.valoraciones);
-        })
+        
       }, []);
       return (
         <div>
@@ -42,7 +32,7 @@ const riderService = new RiderService();
             <div className="card">
                 <DataTable value={valoraciones} responsiveLayout="scroll">
                     {/*  <Column field="id" header="id"></Column> */}
-                    <Column field="valoraciones" header="Valoraciones"></Column>
+                    <Column field={":data"} header="Valoraciones"></Column>
                     
                 </DataTable>
             </div>
