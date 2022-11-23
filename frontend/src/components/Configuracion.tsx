@@ -24,15 +24,17 @@ const jso="{"+m+": "+JSON.stringify(email)+"}";
 
 const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
     
-    const [showMessage, setShowMessage] = useState(false);
-    const [formData, setFormData] = useState({});
-    const clienteService = new ClienteService();
     const defaultValues = {
         telefono: '',
         direccion:"",
         pwd:"",
         accept: false
     }
+
+    const [showMessage, setShowMessage] = useState(false);
+    const [formData, setFormData] = useState({defaultValues});
+    const clienteService = new ClienteService();
+    
 
     useEffect(() => {
         const fechDatos = async () =>{
@@ -46,20 +48,25 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
         const resultado =  fechDatos().catch(console.error);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    console.log(clientes);
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+    // console.log(clientes);
+    const { control, formState: { errors }, handleSubmit, reset} = useForm({ defaultValues });
 
-    const onSubmit: any = (data: any) => {
+    const onSubmit= (data: any) => {
         setFormData(data);
         setShowMessage(true);
-
-        reset();
+        cambiarD()
+        
+        // reset();
     };
 
-    function cambiarDatos(){
-        console.log("CLICK")
-        console.log(formData);
-        console.log(showMessage);
+
+    console.log(formData)
+    function cambiarD(){
+        
+        clientes.direccion=formData.defaultValues.telefono
+        
+        // window.location.href="/carta";
+
     }
 
     const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
@@ -89,21 +96,21 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
             <div className="flex justify-content-center">
                 <div className="card">
                     <h5 className="text-center">CONFIGURACION</h5>
-                    <form onSubmit={()=>handleSubmit(onSubmit)} className="p-fluid">
+                    <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="telefono" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })}/>
                                 )} />
-                                <label htmlFor="telefono" className={classNames({ 'p-error': errors.telefono })}>Telefono nuevo...</label>
+                                <label htmlFor="telefono" className={classNames({ 'p-error': errors.telefono })}>{clientes.telefono}</label>
                             </span>
                         </div>
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="direccion" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
-                                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })}/>
+                                    <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })}/>
                                 )} />
-                                <label htmlFor="direccion" className={classNames({ 'p-error': errors.direccion })}>Direccion nueva...</label>
+                                <label htmlFor="direccion" className={classNames({ 'p-error': errors.direccion })}>{clientes.direccion}</label>
                             </span>
                         </div>
                         <div className="field">
@@ -122,7 +129,7 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
                         </div>
                         <br></br>
                         <br></br>
-                        <Button type="submit" label="Cambiar" onClick={()=> cambiarDatos()} className="mt-2" />
+                        <Button type="submit" label="Cambiar" className="mt-2" />
                     </form>
                 </div>
             </div>

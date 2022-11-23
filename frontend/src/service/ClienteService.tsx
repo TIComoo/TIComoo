@@ -13,5 +13,13 @@ export class ClienteService{
     });
 }
 
+    getUpdate(json :string){
+        return fetch('http://localhost:8080/cliente/leerClientePorEmail',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: json
+    });
+}
+
 }
 
