@@ -25,14 +25,17 @@ const jso="{"+m+": "+JSON.stringify(email)+"}";
 const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
     
     const defaultValues = {
-        telefono: '',
+        telefono: "",
         direccion:"",
         pwd:"",
         accept: false
     }
 
     const [showMessage, setShowMessage] = useState(false);
-    const [formData, setFormData] = useState({defaultValues});
+    const [formData, setFormData] = useState({telefono: "",
+    direccion:"",
+    pwd:"",
+    accept: false});
     const clienteService = new ClienteService();
     
 
@@ -48,24 +51,37 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
         const resultado =  fechDatos().catch(console.error);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // console.log(clientes);
-    const { control, formState: { errors }, handleSubmit, reset} = useForm({ defaultValues });
+    const { control, formState: { errors }, handleSubmit,reset} = useForm({ defaultValues });
 
-    const onSubmit= (data: any) => {
+    const onSubmit= async (data: any) => {
+        setTimeout
         setFormData(data);
         setShowMessage(true);
-        cambiarD()
         
         // reset();
     };
 
+    if(formData?.accept===true){
+        console.log(formData)
+        cambiarD();
+    }
 
-    console.log(formData)
     function cambiarD(){
         
-        clientes.direccion=formData.defaultValues.telefono
+        if(formData?.telefono!=""){
+            clientes.telefono=formData.telefono!;
+        }    
+        if(formData?.direccion!=""){
+            clientes.direccion=formData.direccion;
+        }
+        if(formData?.pwd!=""){
+            clientes.pwd=formData.pwd;
+        }
         
-        // window.location.href="/carta";
+        console.log(JSON.stringify(clientes));
+        clienteService.getUpdate(JSON.stringify(clientes))
+        window.location.reload();
+
 
     }
 
@@ -86,7 +102,7 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
 
     return (
         <div className="form-demo">
-            <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+            <Dialog visible={showMessage}  onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     
@@ -99,7 +115,7 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                         <div className="field">
                             <span className="p-float-label">
-                                <Controller name="telefono" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
+                                <Controller name="telefono" control={control}  render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })}/>
                                 )} />
                                 <label htmlFor="telefono" className={classNames({ 'p-error': errors.telefono })}>{clientes.telefono}</label>
@@ -107,7 +123,7 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
                         </div>
                         <div className="field">
                             <span className="p-float-label">
-                                <Controller name="direccion" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
+                                <Controller name="direccion" control={control}  render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })}/>
                                 )} />
                                 <label htmlFor="direccion" className={classNames({ 'p-error': errors.direccion })}>{clientes.direccion}</label>
@@ -115,7 +131,7 @@ const Configuracion:  React.FC<IProps> = ({clientes,setClientes}) => {
                         </div>
                         <div className="field">
                             <span className="p-float-label">
-                                <Controller name="pwd" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
+                                <Controller name="pwd" control={control}  render={({ field, fieldState }) => (
                                     <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
                                 )} />
                                 <label htmlFor="pwd" className={classNames({ 'p-error': errors.pwd })}>Contraseña nueva...</label>
