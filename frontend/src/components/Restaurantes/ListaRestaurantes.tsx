@@ -70,9 +70,9 @@ const ListaRestaurantes: React.FC<IProps> = ({carta, setRestaurante, restaurante
       function seleccionRestaurante(selectedRestaurantes: IRestaurante, carta: ICarta[]){
         for(let i=0;i<carta.length;i++){
 
-            console.log(selectedRestaurantes.nombre+" AQUI");
             if( selectedRestaurantes.nombre == carta.at(i)?.nombreRestaurante ){
-                cartaService.enviarEleccion(selectedRestaurantes.nombre);
+                console.log(JSON.stringify(carta.at(i)));
+                cartaService.enviarEleccion(JSON.stringify(carta.at(i)));
                 window.location.href='/carta';
 
             }

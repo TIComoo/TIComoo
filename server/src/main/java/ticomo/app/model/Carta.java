@@ -19,7 +19,7 @@ public class Carta {
     @NotBlank(message = ("Nombre restaurante requerido"))
     private String nombreRestaurante;
 
-    private String cartaElegida;
+    private boolean cartaElegida;
 
 
     public Carta( String nombreRestaurante) {
@@ -28,7 +28,7 @@ public class Carta {
     public Carta(){
         
     }
-    public Carta( String nombreRestaurante, String cartaElegida) {
+    public Carta( String nombreRestaurante, boolean cartaElegida) {
         this.nombreRestaurante = nombreRestaurante;
         this.cartaElegida = cartaElegida;
 
@@ -61,10 +61,10 @@ public class Carta {
     public static String getSequenceName() {
         return SEQUENCE_NAME;
     }
-    public String getCartaElegida() {
+    public boolean getCartaElegida() {
         return cartaElegida;
     }
-    public void setCartaElegida(String cartaElegida) {
+    public void setCartaElegida(boolean cartaElegida) {
         this.cartaElegida = cartaElegida;
     }
 

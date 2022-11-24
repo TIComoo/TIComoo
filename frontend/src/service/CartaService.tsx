@@ -6,6 +6,11 @@ export class CartaService {
         return fetch('http://localhost:8080/carta/todas').then(res => res.json());
     }
 
+    inicializar() {
+
+        return fetch('http://localhost:8080/carta/inicializar');
+    }
+
     getCartaElegida() {
 
         return fetch('http://localhost:8080/carta/eleccion')

@@ -31,6 +31,7 @@ public class PlatoController {
     CartaService cartaService = new CartaService();
     @Autowired
     PlatoRepository platoRepository;
+    
     @GetMapping("/platos")
     public List<Plato> getPlato() {
         List<Carta> cartas = cartaService.getAllCartas();
@@ -38,12 +39,12 @@ public class PlatoController {
         Carta auxC = new Carta();
         List<Plato> aux = new ArrayList<>();
         for(int i=0;i<cartas.size();i++){
-            if(cartas.get(i).getCartaElegida()!=null){
+            if(cartas.get(i).getCartaElegida()!=false){
                 auxC=cartas.get(i);
             }
         }
         for(int i=0;i<platos.size();i++){
-            if(auxC.getCartaElegida().equalsIgnoreCase(platos.get(i).getNombreRestaurante())){
+            if(auxC.getNombreRestaurante().equalsIgnoreCase(platos.get(i).getNombreRestaurante())){
                 aux.add(platos.get(i));
             }
         }

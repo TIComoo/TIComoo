@@ -17,7 +17,7 @@ console.log(email);
 const m="email";
 const jso="{"+m+": "+JSON.stringify(email)+"}";
 
-const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
+const HistorialPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
 
     const pedidoService = new PedidoService();
 
@@ -56,6 +56,6 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
     );
 }
 
-export default PagarPedido;
+export default HistorialPedido;
 
 

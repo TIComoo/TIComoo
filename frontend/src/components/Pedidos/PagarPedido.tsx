@@ -6,6 +6,7 @@ import { Button } from 'primereact/button';
 import { IPedido} from '../Pedidos/Menu';
 import { IPlato } from '../../App';
 import { Row } from 'react-bootstrap';
+import CartaService from '../../service/CartaService';
 
 interface IProps {
     pedidos: IPedido[]
@@ -14,6 +15,8 @@ interface IProps {
 const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
 
     const pedidoService = new PedidoService();
+    const cartaService = new CartaService();
+
 
     useEffect(() => {
 
@@ -48,20 +51,21 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
         }
     }
 
-    function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        console.log('this is:', e);
-      }
     
 
     const row: any=-1;
     const actionBodyTemplate = (row: any) => {
         row++;
-        return <Button  type="button" icon="pi pi-times-circle"  onClick={(e)=> handleClick(e)}></Button>;
+        return <Button  type="button" icon="pi pi-times-circle" ></Button>;
 
     }
     function deleteP(){
         pedidoService.deletePedido(pedidos.at(0)?.id);
+        cartaService.inicializar();
         window.location.href="/carta";
+    }
+    function pagar(){
+        cartaService.inicializar();
     }
     return (
         <div>
@@ -77,7 +81,7 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
             <br></br>
             <div>
 
-                <Button>Pagar pedido</Button>                 <Button onClick={(e)=> deleteP()}>volver</Button>
+                <Button onClick={()=>pagar()}>Pagar pedido</Button>                 <Button onClick={(e)=> deleteP()}>volver</Button>
 
             </div>
         </div>
@@ -85,7 +89,3 @@ const PagarPedido: React.FC<IProps> = ({pedidos,setPedidos}) =>{
 }
 
 export default PagarPedido;
-
-function handleClick() {
-    throw new Error('Function not implemented.');
-}

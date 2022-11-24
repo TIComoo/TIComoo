@@ -52,7 +52,7 @@ const CartaComponente: React.FC<IProps> = ({platos, setPlatos, carta, setCarta})
 
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const cartaElegida=carta.at(0)?.cartaElegida;
+    const cartaElegida=carta.at(0)?.nombreRestaurante;
     
     const [contador,setContador]= useState(0);
 
@@ -68,6 +68,7 @@ const CartaComponente: React.FC<IProps> = ({platos, setPlatos, carta, setCarta})
         const d="direccion";
         const n="nombreRestaurante";
         const json="{ "+p+":"+JSON.stringify(listaPlatos)+", "+d+":En tramite..., "+n+":"+cartaElegida+"}";
+        console.log(listaPlatos);
         pedidoService.enviarEleccion(json);
 
         window.location.href="/pagar";

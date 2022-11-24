@@ -99,6 +99,8 @@ const Menu = () => {
         {
             label: 'Salir',
             icon: 'pi pi-fw pi-power-off',
+            command:()=>{ window.location.href="http://localhost:8080/login?logout"; }
+            
         }
     ];
 

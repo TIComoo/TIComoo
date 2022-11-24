@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -50,16 +51,42 @@ public class CartaController {
 
     }
 	@PostMapping("/enviar")
-    public Carta addEleccion(@RequestBody String content){
-        return cartaRepository.save(new Carta(" ",content));
+    public String addEleccion(@RequestBody String content) throws CustomException{
+
+		JSONObject jso = new JSONObject(content);
+
+		Carta aux=new Carta();
+
+		aux.setId(jso.getLong("id"));
+		aux.setNombreRestaurante(jso.getString("nombreRestaurante"));
+		aux.setCartaElegida(jso.getBoolean("cartaElegida"));
+
+		cartaService.actualizarCarta(aux);
+
+        return "Actualizado";
     }
-    @GetMapping("/eleccion")
+
+	@GetMapping("/inicializar")
+    public String inicializar() throws CustomException{
+
+
+		List<Carta> cartas = cartaService.getAllCartas();
+		for(int i=0; i<cartas.size();i++){
+			cartaService.actualizarCartaI(cartas.get(i));
+
+		}
+
+        return "Actualizado";
+    }
+
+
+    @PostMapping("/eleccion")
     public List<Carta> getEleccion() {
         
-        List<Carta> cartas = cartaService.getAllCartas();
+		List<Carta> cartas = cartaService.getAllCartas();
         List<Carta> aux = new ArrayList<>();
         for(int i=0;i<cartas.size();i++){
-            if(cartas.get(i).getCartaElegida()!=null){
+            if(cartas.get(i).getCartaElegida()!=false){
                 aux.add(cartas.get(i));
             }
         }

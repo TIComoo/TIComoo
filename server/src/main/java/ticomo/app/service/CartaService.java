@@ -53,9 +53,26 @@ public class CartaService {
 		protected void cambio(Carta origen, Carta destino) {
 	
 			destino.setCartaElegida(true);
+			destino.setNombreRestaurante(origen.getNombreRestaurante());
 
 	
 		}
+		public void actualizarCartaI(Carta carta_O) throws CustomException {
+
+			Carta carta_D = getCartaById(carta_O.getId());
+			cambioI(carta_O, carta_D);
+		
+			this.cartaRepository.save(carta_D);
+		
+			}
+	
+			protected void cambioI(Carta origen, Carta destino) {
+		
+				destino.setCartaElegida(false);
+				destino.setNombreRestaurante(origen.getNombreRestaurante());
+	
+		
+			}
 
 	public List<Plato> listarPlatos(String nombreRestaurante) throws CustomException {
 
