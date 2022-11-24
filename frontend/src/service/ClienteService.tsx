@@ -14,7 +14,7 @@ export class ClienteService{
 }
 
     getUpdate(json :string){
-        return fetch('http://localhost:8080/cliente/leerClientePorEmail',{
+        return fetch('http://localhost:8080/cliente/update',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: json

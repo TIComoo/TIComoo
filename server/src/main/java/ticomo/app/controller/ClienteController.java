@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import ticomo.app.exception.CustomException;
 import ticomo.app.model.Cliente;
 import ticomo.app.service.ClienteService;
 
@@ -44,7 +45,7 @@ public class ClienteController {
 		try {
 			JSONObject jso = new JSONObject(info);
 			Cliente cliente = new Cliente();
-			cliente.setApellido(jso.getString("email"));
+			cliente.setEmail(jso.getString("email"));
 			cliente.setNombre(jso.getString("nombre"));
 			cliente.setApellido(jso.getString("apellido"));
 			cliente.setPwd(jso.getString("pwd"));
@@ -85,6 +86,27 @@ public class ClienteController {
 		Cliente cliente = this.clienteService.leerClientePorEmail(jso.getString("email"));
 		
 		return cliente;
+	}
+
+	@PostMapping("/update")
+	public String actualizarCliente(@RequestBody String cliente) throws CustomException {
+		JSONObject jso = new JSONObject(cliente);
+
+		Cliente aux = new Cliente();
+
+		aux.setEmail(jso.getString("email"));
+		aux.setNombre(jso.getString("nombre"));
+		aux.setApellido(jso.getString("apellido"));
+		aux.setPwd(jso.getString("pwd"));
+		aux.setNif(jso.getString("nif"));
+		aux.setDireccion(jso.getString("direccion"));
+		aux.setTelefono(jso.getString("telefono"));
+
+
+
+		clienteService.actualizarCliente(aux);
+		
+		return "actualizado";
 	}
 
 	@GetMapping("/borrarClientePorEmail/{email}")

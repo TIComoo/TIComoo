@@ -1,5 +1,6 @@
 package ticomo.app.service;
 
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,7 @@ public class UsuarioService {
 		return usuarioRepository.findByEmail(email)
 				.orElseThrow(() -> new UsernameNotFound("El email del usuario no existe."));
 	}
+	
 
 	public String getLoggedUserRol() {
 		// Obtener el usuario logeado

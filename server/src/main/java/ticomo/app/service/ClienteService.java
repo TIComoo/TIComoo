@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ticomo.app.dao.ClienteRepository;
+import ticomo.app.exception.CustomException;
 import ticomo.app.model.Cliente;
 
 @Service
@@ -29,6 +30,29 @@ public class ClienteService {
 
 		return clientes;
 	}
+
+	public void actualizarCliente(Cliente cliente_O) throws CustomException {
+
+		Cliente cliente_D = buscarCliente(cliente_O.getEmail());
+		cambio(cliente_O, cliente_D);
+	
+		this.clienteRepository.save(cliente_D);
+	
+		}
+	
+		public Cliente buscarCliente(String email) throws CustomException {
+			return clienteRepository.findById(email).orElseThrow(() -> new CustomException("El Id del pedido no existe."));
+		}
+
+		protected void cambio(Cliente origen, Cliente destino) {
+	
+			destino.setTelefono(origen.getTelefono());
+			destino.setPwd(origen.getPwd());
+			destino.setDireccion(origen.getDireccion());
+
+	
+		}
+	
 
 	public Cliente leerClientePorEmail(String email) {
 		Optional<Cliente> clienteOptional = clienteRepository.findById(email);

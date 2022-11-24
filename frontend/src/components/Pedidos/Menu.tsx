@@ -59,6 +59,7 @@ export interface IPlato{
 export interface ICliente{
     
     email:string
+    nombre: string
     apellido:string
     pwd:string
     nif: string 
@@ -106,6 +107,7 @@ const Menu = () => {
     const c:ICliente ={
     
         email:"",
+        nombre:"",
         apellido:"",
         pwd:"",
         nif: "", 

@@ -34,25 +34,23 @@ public class PedidoService {
 
 	}
 
-	// Tengo dudas en actualizar, preguntar en la daily
+	public void actualizarPedido(Pedido pedido_O) throws CustomException {
 
-	// public void actualizarPedido(Pedido pedido_O) throws CustomException {
+	Pedido pedido_D = buscarPedido(pedido_O.getId());
+	cambio(pedido_O, pedido_D);
 
-	// Pedido pedido_D = buscarPedido(pedido_O.getId());
-	// cambio(pedido_O, pedido_D);
+	this.pedidoRepository.save(pedido_D);
 
-	// this.pedidoRepository.save(pedido_D);
+	}
 
-	// }
+	protected void cambio(Pedido origen, Pedido destino) {
 
-	// protected void cambio(Pedido origen, Pedido destino) {
+	destino.setPlatos(origen.getPlatos());
+	destino.setPrecio(origen.getPrecio());
+	destino.setFecha(origen.getFecha());
+	destino.setEstado(origen.getEstado());
 
-	// destino.setPlatos(origen.getPlatos());
-	// destino.setPrecio(origen.getPrecio());
-	// destino.setFecha(origen.getFecha());
-	// destino.setEstado(origen.getEstado());
-
-	// }
+	}
 
 	public List<Pedido> getAllPedidos() {
 		return pedidoRepository.findAll();
@@ -77,6 +75,7 @@ public class PedidoService {
 	public Pedido buscarPedido(long id) throws CustomException {
 		return pedidoRepository.findById(id).orElseThrow(() -> new CustomException("El Id del pedido no existe."));
 	}
+	
 
 	public List<Pedido> getAllpedidosDisponibles() {
 		List<Pedido> pedidos = pedidoRepository.findAll();
